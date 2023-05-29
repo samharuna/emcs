@@ -1,0 +1,41 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{{ block.super }}| {{ key }}
+{% endblock %}
+
+{% block body %}
+
+<!-- Start of Gallery -->
+    <div class="container filterable-portfolio">
+        <div class="section-title">
+        <h2>Recent Event</h2>
+        <hr class="center">
+        <p class="text-center">leap into electronic typesetting, remaining essentially unchanged</p>
+        </div>
+        <ul class="nav nav-pills center-pills portfolio-filter">
+        <li role="presentation" class="active"><a href="#" data-filter="*" class="mx-1 p-2">All</a></li>
+        {% for key in event %}
+        <li role="presentation"><a href="#" data-filter=".{{ key.name }}" class="mx-1 p-1">{{ key.name }}</a></li>
+        {% endfor %}
+        </ul>
+
+        <div class="row portfolio-items">
+        {% for key in gallery|slice:21 %}
+            <figure class="portfolio-item col-md-4 {{ key.title.name }}">
+                <div class="magnific-img">
+                <a class="image-popup-vertical-fit" href="{{ key.image.url }}">
+                    <img src="{{ key.image.url }}" alt="{{ key.title.name }}" class="img-thumbnail" />
+                </a>
+                </div>
+            </figure>
+        {% endfor %}
+        </div>
+
+       
+    
+    </div>
+<!-- End of Gallery -->
+{% endblock %}

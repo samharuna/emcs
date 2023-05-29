@@ -1,0 +1,225 @@
+{% extends 'backend/main.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{{ block.super }} | {{ key }}
+{% endblock %}
+
+{% block body %}
+    <div class="content-wrapper">
+        <!-- START PAGE CONTENT-->
+        <div class="page-heading">
+            <h1 class="page-title">Investment Application</h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item mr-2"><a href="{% url 'dashboard' %}"><i class="fa fa-home font-20"></i></a></li>
+                <li class="breadcrumb-item mr-2 text-info"><a href="{% url 'investor_investment' %}">View investments</a></li>
+                <li class="breadcrumb-item">Apply investment</li>
+            </ol>
+        </div>
+        <div class="page-content fade-in-up">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                            <strong>EMCS:</strong> {{ message}}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}
+                    <div class="ibox">
+                        <div class="ibox-head">
+                            <div class="ibox-title">Investment Application</div>
+                            <div class="ibox-tools">
+                                <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                                <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="{% url 'investor_investment' %}">View investments</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ibox-body">
+                            <form action="" method="POST" enctype="multipart/form-data" style="margin: 5px; padding: 10px; line-height: 10px;">
+                                {% csrf_token %}
+
+                                <fieldset class="border border-dark p-3 mb-3">
+                                    <legend class="w-auto h5">Applicant Information</legend>
+
+                                    <div class="form-row">
+                                        <div class="col-12 col-lg-2 form-group mb-2">
+                                            {{ p_form.title|as_crispy_field }}	
+                                        </div>
+                                        <div class="col-12 col-lg-4 form-group mb-2">
+                                            {{ u_form.last_name|as_crispy_field }}	
+                                        </div>
+                                        <div class="col-12 col-lg-3 form-group mb-2">
+                                            {{ u_form.first_name|as_crispy_field }}	
+                                        </div>
+                                        <div class="col-12 col-lg-3 form-group mb-2">
+                                            {{ p_form.middlename|as_crispy_field }}	
+                                        </div>
+                                    </div>	
+
+                                    <div class="form-row">
+                                        <div class="col-12 col-lg-3 form-group mb-2">
+                                            {{ p_form.dob|as_crispy_field }}	
+                                        </div>
+                                         <div class="col-12 col-lg-3 form-group mb-2">
+                                            {{ p_form.marital|as_crispy_field }}	
+                                        </div>
+                                        <div class="col-12 col-lg-3 form-group mb-2">
+                                            {{ p_form.gender|as_crispy_field }}	
+                                        </div>
+                                        <div class="col-12 col-lg-3 form-group mb-2">
+                                            {{ p_form.religion|as_crispy_field }}	
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col-12 col-lg-6 form-group mb-0">
+                                            {{ u_form.email|as_crispy_field }}	
+                                        </div>
+                                        <div class="col-12 col-lg-3 form-group mb-0">
+                                            {{ p_form.phonenumber|as_crispy_field }}	
+                                        </div>
+                                        <div class="col-12 col-lg-3 form-group mb-0">
+                                            {{ p_form.occupation|as_crispy_field }}	
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col-12 col-lg-12 form-group mb-2">
+                                            {{ form.bvn|as_crispy_field }}	
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col-12 col-lg-3 form-group mb-2">
+                                            {{ form.identity|as_crispy_field }}	
+                                        </div>
+                                        <div class="col-12 col-lg-3 form-group mb-2">
+                                            {{ form.cardnumber|as_crispy_field }}	
+                                        </div>
+                                        <div class="col-12 col-lg-3 form-group mb-2">
+                                            {{ form.cardissuer|as_crispy_field }}	
+                                        </div>
+                                        <div class="col-12 col-lg-3 form-group mb-2">
+                                            {{ form.cardexpiry|as_crispy_field }}	
+                                        </div>
+                                    </div>	
+                                    
+                                    <div class="form-row">
+                                        <div class="col-12 col-lg-8 form-group mb-2">
+                                            {{ p_form.address|as_crispy_field }}	
+                                        </div>
+                                        <div class="col-12 col-lg-4 form-group mb-2">
+                                            {{ p_form.busstop|as_crispy_field }}	
+                                        </div>
+                                    </div>	
+
+                                    <div class="form-row">
+                                        <div class="col-12 col-lg-8 form-group mb-2">
+                                            {{ p_form.office|as_crispy_field }}	
+                                        </div>
+                                        <div class="col-12 col-lg-4 form-group mb-2">
+                                            {{ form.spousephone|as_crispy_field }}	
+                                        </div>
+                                    </div>	
+                                    
+                                    <div class="form-row">
+                                        <div class="col-12 col-lg-3 form-group mb-2">
+                                            {{ p_form.country|as_crispy_field }}	
+                                        </div>
+                                        <div class="col-12 col-lg-3 form-group mb-2">
+                                            {{ p_form.state|as_crispy_field }}	
+                                        </div>
+                                        <div class="col-12 col-lg-3 form-group mb-2">
+                                            {{ p_form.lga|as_crispy_field }}	
+                                        </div>
+                                        <div class="col-12 col-lg-3 form-group mb-2">
+                                            {{ p_form.home|as_crispy_field }}	
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-12 col-lg-12 form-group mb-2">
+                                            {{ p_form.image|as_crispy_field }}	
+                                        </div>
+                                    </div>
+                                    
+                                </fieldset>
+
+                                <fieldset class="border border-dark p-3 mb-3">
+                                    <legend class="w-auto h5">Next of Kin Information</legend>	
+                                  
+                                    <div class="form-row">
+                                        <div class="col-12 col-lg-12 form-group mb-2">
+                                            {{ form.next_kin|as_crispy_field }}	
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-12 col-lg-4 form-group mb-2">
+                                            {{ form.next_kin_mobile|as_crispy_field }}	
+                                        </div>
+                                        <div class="col-12 col-lg-5 form-group mb-2">
+                                            {{ form.next_kin_email|as_crispy_field }}	
+                                        </div>
+                                        <div class="col-12 col-lg-3 form-group mb-2">
+                                            {{ form.next_kin_occupation|as_crispy_field }}	
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-12 col-lg-4 form-group mb-2">
+                                            {{ form.next_kin_address|as_crispy_field }}	
+                                        </div>
+                                        <div class="col-12 col-lg-4 form-group mb-2">
+                                            {{ form.next_kin_office|as_crispy_field }}	
+                                        </div>
+                                        <div class="col-12 col-lg-4 form-group mb-2">
+                                            {{ form.relationship|as_crispy_field }}	
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-12 col-lg-12 form-group mb-2">
+                                            {{ form.next_kin_image|as_crispy_field }}	
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset class="border border-dark p-3 mb-3">
+                                    <legend class="w-auto h5">Investment Information:</legend>	
+            
+                                    <div class="form-row">
+                                        <div class="col-12 col-lg-4 form-group mb-2">
+                                            {{ form.amount|as_crispy_field }}	
+                                        </div>
+                                        <div class="col-12 col-lg-8 form-group mb-2">
+                                            {{ form.words|as_crispy_field }}	
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col-12 col-lg-6 form-group mb-2">
+                                            {{ form.duration|as_crispy_field }}	
+                                        </div>
+                                        <div class="col-12 col-lg-6 form-group mb-2">
+                                            {{ form.interest|as_crispy_field }}	
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            
+                                <div class="form-row">
+                                    <input type="submit" value="Submit Investment Now" class="btn btn-primary btn-md btn-block col-12 col-lg-4">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                </div>
+            <div>
+        </div>
+    </div>
+        <!-- END PAGE CONTENT-->
+{% endblock %}

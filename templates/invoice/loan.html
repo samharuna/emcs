@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        {{ key }}
+        {% endblock %}
+    </title>
+    <style type="text/css">
+        body {
+            background-color: #fff;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 13px;
+            line-height: 1.1;
+            background-image: url('static/frontend/img/logo.png');
+        }
+        
+        p {
+            text-align: justify;
+            font-size: 14px;
+        }
+
+        .header {
+            font-size: 15px;
+            text-transform: uppercase;
+            text-decoration: underline;
+            font-weight: 500;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            margin: 0px 0px 3px 0px;
+        }
+
+        .table {
+            -pdf-keep-in-frame-mode: shrink;
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 100%;
+            font-size: 13px;
+            border: 1px solid #000;
+        }
+
+        .table th, td{
+            padding: 2px;
+            font-size: 13px;
+        }
+
+        @page {
+            size: A4 portrait;
+            @frame header_frame {
+                -pdf-frame-content: header_content;
+                left: 30pt; width: 530pt; top: 20pt; height: 100pt;
+            }
+            @frame content_frame {
+                left: 30pt; width: 540pt; top: 135pt; height: 635pt;
+            }
+            
+            @frame footer_frame {
+                -pdf-frame-content: footer_content;
+                left: 30pt; width: 530pt; top: 790pt; height: 20pt;
+            }
+        }
+
+
+        .img-placeholder {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 15px;
+        }
+
+        .snumber {
+            text-align: right;
+        }
+        
+        #footer_content {
+            text-align: right;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="header_content">
+        <div style="margin-bottom: 3px;">
+            <img src="media/images/logo.png" alt="" class="img-fluid" >
+        </div>
+        <div><span class="text-dark mr-2" style="font-weight: bold; font-size: 12px;">HEAD OFFICE:</span> Number 7, Abdul Razaq Afolabi Street, Off Ailegun Road, Ejigbo, Lagos State</div>
+        <div><span class="text-dark mr-2" style="font-weight: bold; font-size: 12px;">EMAIL ADDRESS:</span> empowermultipurposecooperative@gmail.com</div>
+        <div><span class="text-dark mr-2" style="font-weight: bold; font-size: 12px;">TELEPHONE:</span> 09031926026, 08033152762</div>
+        <div><span class="text-dark mr-2" style="font-weight: bold; font-size: 12px;">BRANCH OFFICE:</span> Shop 33, Rauf Aregbesola Model Market, Egbeda, Gowon Estate, Lagos State</div>
+        <hr>
+    </div>
+
+
+    <div id="footer_content">
+        [Empower Multipurpose Cooperative Society] - Page <pdf:pagenumber>
+    </div>
+
+    <div>
+        <div class="snumber">
+            Application Form Number: {{ loan.id }}
+        </div>
+        <div class="img-placeholder">
+            <img src="{{ loan.applicant.profile.image.path }}" alt="{{ loan.applicant.get_full_name }}">
+        </div>
+
+        <div class="header">PERSONAL INFORMATION:</div>
+        <table class="table1 table-striped table-dark">
+            <thead>
+                <tr>
+                    <th style="width: 30%; text-align: left;">Customer Name:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.applicant.get_full_name }}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">Date of Birth:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.applicant.profile.dob }}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">Email Address:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.applicant.email }}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">Mobile Number:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.applicant.profile.phonenumber }}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">Gender:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.applicant.profile.gender}}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">Religion:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.applicant.profile.religion }}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">Marital Status:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.applicant.profile.marital }}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">Spouse Mobile Number:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.spousephone }}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">Nearest Bus Stop:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.applicant.profile.busstop }}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">Residential Address:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.applicant.profile.address }}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">National ID:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.identity }}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">National ID Number:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.cardnumber }}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">National ID Issuer Date:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.cardissuer }}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">National ID Expiry Date:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.cardexpiry }}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">BVN:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.bvn }}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">Profession:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.applicant.profile.occupation }}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">Office Address:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.applicant.profile.office }}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">Country:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.applicant.profile.country }}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">State of Origin:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.applicant.profile.state }}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">L.G.A.:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.applicant.profile.lga }}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">Home Town:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.applicant.profile.home }}</td>
+                </tr>
+
+            </thead>
+        </table>
+
+        <div class="header" style="margin-top: 20px;">LOAN DETAILS:</div>
+        <table class="table1 table-striped table-dark">
+            <thead>
+                <tr>
+                    <th style="width: 30%; text-align: left;">Purpose of seeking Loan:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.purpose }}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">Amount Applying for [Figure]:</th>
+                    <td style="width: 70%; text-align: left;"><span style="text-decoration: line-through;">N</span>{{ loan.amount }}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">Amount Applying for [Words]:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.words }}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">Loan Cycle:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.duration }} Week{{ loan.duration.name|pluralize }}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">Loan Repayment Plan:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.plan }}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">Loan Interest:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.interest }}%</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">Date of Application:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.date_created }}</td>
+                </tr>
+            </thead>
+        </table>
+
+        <div class="header" style="margin-top: 20px;">GUARANTOR INFORMATION:</div>
+        <div class="img-placeholder">
+            <img src="{{ loan.guarantor_image.path }}" alt="{{ loan.applicant.get_full_name }}">
+        </div>
+        <table class="table1 table-striped table-dark">
+            <thead>
+                <tr>
+                    <th style="width: 30%; text-align: left;">Guarantor Name:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.guarantor }}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">Gender:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.guarantor_gender }}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">Marital Status:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.guarantor_marital }}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">Phone Number:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.guarantor_mobile }}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">Email Address:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.guarantor_email }}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">Occupation:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.guarantor_occupation }}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">Residential Address:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.guarantor_address }}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">Office Address:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.guarantor_office }}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">Country:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.guarantor_country }}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">State of Origin:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.guarantor_state }}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">LGA:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.guarantor_lga }}</td>
+                </tr>
+
+                <tr>
+                    <th style="width: 30%; text-align: left;">Home Town:</th>
+                    <td style="width: 70%; text-align: left;">{{ loan.guarantor_home }}</td>
+                </tr>
+
+                
+            </thead>
+        </table>
+
+        <div class="header" style="margin-top: 20px;">DECLARATION / UNDERTAKING:</div>
+        <div class="" style="text-align: justify;">
+                I declared that <span style="font-weight: bold; text-transform: uppercase;">{{ loan.applicant.last_name }}, {{ loan.applicant.first_name }} {{ loan.applicant.profile.middlename }}</span> 
+                has been known to me for {{ loan.years_known }} year{{ loan.years_known|pluralize }} as my {{ loan.relationship }} and to the best of my knowledge he/she is of good character and responsible and
+                thereby strongly recommend him/her for consideration in his/her loan assessment and I guaranteed that the principal loan granted and with the accrued interest
+                and do undertake to be held responsible for any default that may arise in the loan repayment from me as the guarantor of the loan granted.
+        </div>
+
+        <div style="margin-top: 80px;">
+            <span style="font-weight: bold;" class="mr-3"> ---------------------------------------------------- </span><br>
+            <span >Guarantor's Signature & Date</span><br>
+            <span style="font-weight: bold;">{{ loan.guarantor }}</span>
+        </div> 
+
+
+         <div>
+            <p style="margin-top: 80px;">
+                <span style="font-weight: bold;" class="mr-3"> ---------------------------------------------------- </span><br>
+                <span>Applicant's Signature & Date</span><br>
+                <span style="font-weight: bold; text-transform: uppercase;">{{ loan.applicant.last_name }}, {{ loan.applicant.first_name }} {{ loan.applicant.profile.middlename }}</span>
+            </p>
+        </div>
+    </div>  
+
+</body>
+</html>

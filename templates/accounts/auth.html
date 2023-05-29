@@ -1,0 +1,37 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>
+      {% block title %}
+      Authentication
+      {% endblock %}
+    </title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="{% static 'accounts/assets/vendors/mdi/css/materialdesignicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/assets/vendors/flag-icon-css/css/flag-icon.min.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/assets/vendors/css/vendor.bundle.base.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/assets/fontawesome/css/all.min.css' %}">
+    <link rel="shortcut icon" href="{% static 'accounts/assets/images/favicon.ico' %}" type="image/x-icon">
+  </head>
+  <body>
+
+   {% block body %}
+   {% endblock %}
+
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="{% static 'accounts/assets/vendors/js/vendor.bundle.base.js' %}"></script>
+    <script src="{% static 'accounts/assets/js/off-canvas.js' %}"></script>
+    <script src="{% static 'accounts/assets/js/hoverable-collapse.js' %}"></script>
+    <script src="{% static 'accounts/assets/js/misc.js' %}"></script>
+    <script src="{% static 'accounts/assets/js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'accounts/assets/fontawesome/js/all.min.js' %}"></script>
+    <!-- endinject -->
+  </body>
+</html>

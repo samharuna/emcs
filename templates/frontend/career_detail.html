@@ -1,0 +1,82 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{{ block.super }}| {{ key }}
+{% endblock %}
+
+{% block body %}
+    <section>
+        <div class="container">
+            <div class="row">
+              {% if career %}
+              <div class="col-12 col-sm-6 col-md-6 col-lg-8 col-xlg-8 mb-3">
+                <article class="blog-post-wrapper">
+                  <div class="blog-details">
+                    <a href="#" class="blog-images"><img src="{{ career.image.url }}" alt="{{ career.position }}" width="100%"></a>
+                    <div class="blog-content">
+                      <h2>Position: <span>{{ career.position }}</span></h2>
+                      <hr class="left">
+                      <p>{{ career.body }}</p>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              {% endif %}
+              <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xlg-4">
+                 <div class="left-head-blog right-side">
+                    <div class="left-blog-page">
+                        <!-- recent start -->
+                        <div class="left-blog">
+                            <h4>Trending Posts</h4>
+                            <div class="recent-post">
+                                <!-- start single post -->
+                                {% for key in trending|slice:4 %}
+                                <div class="recent-single-post">
+                                    <div class="post-img">
+                                        <a href="{% url 'post_detail' key.slug %}"><img src="{{ key.image.url }}" alt="{{ key.title }}"></a>
+                                    </div>
+                                    <div class="pst-content">
+                                        <p><a href="{% url 'post_detail' key.slug %}">{{ key.title|truncatechars:50 }} - [{{ key.category.name }}]</a></p>
+                                        <span class="admin-type">{{ key.author.username }}</span>
+                                        <span class="date-type">{{ key.date_created }}</span>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                <!-- End single post -->
+                            </div>
+                        </div>
+                        <!-- recent end -->
+                    </div>
+
+                    <div class="left-blog-page">
+                        <!-- recent start -->
+                        <div class="left-blog">
+                            <h4>Latest Posts</h4>
+                            <div class="recent-post">
+                                <!-- start single post -->
+                                {% for key in latest|slice:4 %}
+                                <div class="recent-single-post">
+                                    <div class="post-img">
+                                        <a href="{% url 'post_detail' key.slug %}"><img src="{{ key.image.url }}" alt="{{ key.title }}"></a>
+                                    </div>
+                                    <div class="pst-content">
+                                        <p><a href="{% url 'post_detail' key.slug %}">{{ key.title|truncatechars:50 }} - [{{ key.category.name }}]</a></p>
+                                        <span class="admin-type">{{ key.author.username }}</span>
+                                        <span class="date-type">{{ key.date_created }}</span>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                <!-- End single post -->
+                            </div>
+                        </div>
+                        <!-- recent end -->
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </section>
+    
+{% endblock %}

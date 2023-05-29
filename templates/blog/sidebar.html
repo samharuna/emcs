@@ -1,0 +1,123 @@
+{% load static %}
+    <div class="left-head-blog right-side">
+        <div class="left-blog-page">
+            <!-- search option start -->
+            <form action="{% url 'search' %}" method="GET">
+                <div class="blog-search-option">
+                    <input type="text" name="search" placeholder="Search the post content here">
+                    <button class="button" type="submit"> <i class="fa fa-search"></i></button>
+                </div>
+            </form>
+            <!-- search option end -->
+        </div>
+
+        <div class="left-blog-page">
+            <div class="left-blog blog-category">
+                <h4>categories</h4>
+                <ul>
+                {% for key in category %}
+                    <li><span>{{ key.category.count }}</span> <a href="{% url 'category' key.slug %}">{{ key.name }}</a></li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="left-blog-page">
+            <!-- recent start -->
+            <div class="left-blog">
+                <h4>Trending Posts</h4>
+                <div class="recent-post">
+                    <!-- start single post -->
+                    {% for key in trending|slice:5 %}
+                    <div class="recent-single-post">
+                        <div class="post-img">
+                            <a href="{% url 'post_detail' key.slug %}"><img src="{{ key.image.url }}" alt="{{ key.title }}"></a>
+                        </div>
+                        <div class="pst-content">
+                            <p><a href="{% url 'post_detail' key.slug %}">{{ key.title|truncatechars:55 }} - [{{ key.category.name }}]</a></p>
+                            <span class="admin-type"><a href="{% url 'blog_profile' key.author.username %}" target="_blank">{{ key.author.username }}</a></span>
+                            <span class="date-type">{{ key.date_created|date }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <!-- End single post -->
+                </div>
+            </div>
+            <!-- recent end -->
+        </div>
+
+        <div class="left-blog-page">
+            <!-- recent start -->
+            <div class="left-blog">
+                <h4>Latest Posts</h4>
+                <div class="recent-post">
+                    <!-- start single post -->
+                    {% for key in latest %}
+                    <div class="recent-single-post">
+                        <div class="post-img">
+                            <a href="{% url 'post_detail' key.slug %}"><img src="{{ key.image.url }}" alt="{{ key.title }}"></a>
+                        </div>
+                        <div class="pst-content">
+                            <p><a href="{% url 'post_detail' key.slug %}">{{ key.title|truncatechars:55 }} - [{{ key.category.name }}]</a></p>
+                            <span class="admin-type"><a href="{% url 'blog_profile' key.author.username %}" target="_blank">{{ key.author.username }}</a></span>
+                            <span class="date-type">{{ key.date_created|date }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <!-- End single post -->
+                </div>
+            </div>
+            <!-- recent end -->
+        </div>
+
+        <div class="left-blog-page">
+            <!-- recent start -->
+            <div class="left-blog">
+                <h4>Recently Viewed Posts</h4>
+                <div class="recent-post">
+                    {% for key in recently_view %}
+                    <div class="recent-single-post">
+                        <div class="post-img">
+                            <a href="{% url 'post_detail' key.slug %}"><img src="{{ key.image.url }}" alt="{{ key.title }}"></a>
+                        </div>
+                        <div class="pst-content">
+                            <p><a href="{% url 'post_detail' key.slug %}">{{ key.title|truncatechars:55 }} - [{{ key.category.name }}]</a></p>
+                            <span class="admin-type"><a href="{% url 'blog_profile' key.author.username %}" target="_blank">{{ key.author.username }}</a></span>
+                            <span class="date-type">{{ key.date_created|date }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <!-- recent end -->
+        </div>
+
+        <div class="left-blog-page">
+            <!-- recent start -->
+            <div class="left-blog">
+                
+                <div class="recent-post">
+                    {% for key in advert %}
+                    <div class="post-img">
+                        <img src="{{ key.image.url }}" alt="{{ key.title }}" height="400px" width="100%" title="{{ key.title }}">
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <!-- recent end -->
+        </div>
+
+        <div class="left-blog-page">
+            <div class="left-tags blog-tags">
+                <div class="popular-tag left-side-tags left-blog">
+                    <h4>popular tags</h4>
+                    <ul>
+                    {% for key in tags %}
+                        <li><a href="{% url 'tags' key.slug %}">{{ key.name }}</a></li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+

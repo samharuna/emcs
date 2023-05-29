@@ -1,0 +1,45 @@
+{% extends 'accounts/auth.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{{ block.super }}| {{ key }}
+{% endblock %}
+
+{% block body %}
+  <body>
+    <div class="container-scroller">
+      <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="content-wrapper d-flex align-items-center text-center error-page">
+          <div class="row flex-grow">
+            <div class="col-12 col-lg-12 mx-auto text-white">
+
+              <div class="row align-items-center d-flex flex-row">
+                <div class="col-12 col-lg-12 text-lg-center pl-lg-4">
+                  <h2 class="text-dark">Authorization Page!</h2>
+                  <h3 class="font-weight-light text-dark">Dear {{ request.user.get_full_name }} !!!, you are not authorized to view this web page</h3>
+                </div>
+              </div>
+
+              <div class="row my-3">
+                <div class="col-12 text-center mt-xl-2">
+                  <a class="text-info font-weight-medium mb-4" href="{% url 'dashboard' %}">Go back to the Dashboard<i class="fa fa-home ml-1"></i></a>
+                </div>
+              </div>
+
+              <div class="row mt-5">
+                <div class="col-12 mt-xl-2">
+                  <p class="text-dark font-weight-medium text-center">Copyright &copy; 2020 - <script>document.write(new Date().getFullYear())</script> <b>EMCS</b> - All rights reserved.</p>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- content-wrapper ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+  </body>
+{% endblock %}

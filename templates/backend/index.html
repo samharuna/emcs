@@ -1,0 +1,328 @@
+{% extends 'backend/main.html' %}
+{% load static %}
+
+{% block title %}
+{{ block.super }} | {{ key }}
+{% endblock %}
+
+{% block body %}
+<div class="content-wrapper">
+    <!-- START PAGE CONTENT-->
+    <div class="page-heading">
+        <h1 class="page-title " style="font-size: 20px;"><i class="fa fa-home mr-1"></i>Dashboard</h1>
+    </div>
+    <div class="page-content fade-in-up">
+    {% if request.user.is_staff %}
+        <div class="row">
+            <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xlg-3">
+                <div class="ibox bg-success color-white widget-stat">
+                    <div class="ibox-body">
+                        <h2 class="m-b-5 font-strong">{{ total_users }}</h2>
+                        <div class="m-b-5">TOTAL USERS</div><i class="fa fa-users widget-stat-icon"></i>
+                    </div>
+                    <div class="ibox-footer text-center">
+                        <a href="{% url 'view_user' %}" class="text-white">View Users</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xlg-3">
+                <div class="ibox bg-primary color-white widget-stat">
+                    <div class="ibox-body">
+                        <h2 class="m-b-5 font-strong">{{ total_loan }}</h2>
+                        <div class="m-b-5">TOTAL LOAN</div><i class="fa fa-piggy-bank widget-stat-icon"></i>
+                    </div>
+                    <div class="ibox-footer text-center">
+                        <a href="{% url 'view_loan' %}" class="text-white">View Loan</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xlg-3">
+                <div class="ibox bg-info color-white widget-stat">
+                    <div class="ibox-body">
+                        <h2 class="m-b-5 font-strong">{{ total_investment }}</h2>
+                        <div class="m-b-5">TOTAL INVESTMENT</div><i class="fa fa-money-bill widget-stat-icon"></i>
+                    </div>
+                    <div class="ibox-footer text-center">
+                        <a href="{% url 'view_investment' %}" class="text-white">View Investment</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xlg-3">
+                <div class="ibox bg-secondary color-white widget-stat">
+                    <div class="ibox-body">
+                        <h2 class="m-b-5 font-strong">{{ total_subscriber }}</h2>
+                        <div class="m-b-5">TOTAL SUBSCRIBERS</div><i class="fa fa-envelope widget-stat-icon"></i>
+                    </div>
+                    <div class="ibox-footer text-center">
+                        <a href="{% url 'view_newsletter' %}" class="text-white">View Subscribers</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        <strong>EMCS:</strong> {{ message}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+                <div class="ibox">
+                    <div class="ibox-head">
+                        <div class="ibox-title">Loan Application [{{ total_loan }}]</div>
+                    </div>
+                    <div class="ibox-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover table-bordered" id="example-table1">
+                                <thead>
+                                    <tr>
+                                        <th>Form/N:</th>
+                                        <th>Name:</th>
+                                        <th>Amount Applied:</th>
+                                        <th>Date Applied:</th>
+                                        <th class="text-center">Action:</th>
+                                        <th class="text-center">Action:</th>
+                                        <th class="text-center">Status:</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>Form/N:</th>
+                                        <th>Name:</th>
+                                        <th>Amount Applied:</th>
+                                        <th>Date Applied:</th>
+                                        <th class="text-center">Action:</th>
+                                        <th class="text-center">Action:</th>
+                                        <th class="text-center">Status:</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                {% for key in loan %}
+                                    <tr>
+                                        <td>{{ key.id }}</td>
+                                        <td>{{ key.applicant.get_full_name }}</td>
+                                        <td>{{ key.amount }}</td>
+                                        <td>{{ key.date_created }}</td>
+
+                                        <td class="text-center">
+                                            {% if key.status == 0 %}
+                                            <a href="" class="btn btn-sm btn-primary disabled">Loan Pending</a>
+                                            {% elif key.status == 1 %}
+                                                <a href="{% url 'generate_loanpdf' key.id %}" class="btn btn-sm btn-info"><i class="fa fa-download fa-1x mr-1"></i>Loan Form</a>
+                                            {% else %}
+                                            <a href="" class="btn btn-sm btn-danger disabled">Disapproved<i class="fa fa-times fa-1x ml-1"></i></a>
+                                            {% endif %}
+                                        </td>
+
+                                        <td class="text-center">
+                                            {% if key.status == 0 %}
+                                            <a href="" class="btn btn-sm btn-secondary disabled">Action Pending</a>
+                                            {% elif key.status == 1 %}
+                                            <a href="{% url 'generate_loanpaymentpdf' key.id %}" class="btn btn-sm btn-secondary"><i class="fa fa-download fa-1x mr-1"></i>Payment Advice</a>
+                                            {% else %}
+                                            <a href="" class="btn btn-sm btn-danger disabled">Disapproved<i class="fa fa-times fa-1x ml-1"></i></a>
+                                            {% endif %}
+                                        </td>
+
+                                        <td class="text-center">
+                                            {% if key.status == 0 %}
+                                            <a href="" class="btn btn-sm btn-info disabled">Pending Approval</a>
+                                            {% elif key.status == 1 %}
+                                            <a href="" class="btn btn-sm btn-success disabled">Approved<i class="fa fa-check fa-1x ml-1"></i></a>
+                                            {% else %}
+                                            <a href="" class="btn btn-sm btn-danger disabled">Disapproved<i class="fa fa-times fa-1x ml-1"></i></a>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% empty %}
+                                <p class="alert alert-info p-2 m-2">No content yet!</p>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+          {% if request.user.is_active and not request.user.is_staff %}
+            <div class="row justify-content-center">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xlg-6">
+                    <div class="ibox widget-stat loan-app">
+                        <div class="ibox-footer text-center bg-loan">
+                            <a href="{% url 'add_loan' %}">For Loan Application please click here</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xlg-6">
+                    <div class="ibox widget-stat investment-app">
+                        <div class="ibox-footer text-center bg-investment">
+                            <a href="{% url 'add_investment' %}">For Investment Application please click here</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+                    <div class="ibox">
+                        <div class="ibox-head">
+                            <div class="ibox-title">Loan Application [{{ applicant_loan.count }}]</div>
+                        </div>
+                        <div class="ibox-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover table-bordered" id="example-table2">
+                                    <thead>
+                                        <tr>
+                                            <th>Form/N:</th>
+                                            <th>Name:</th>
+                                            <th>Guarantor Name:</th>
+                                            <th>Amount Applied:</th>
+                                            <th class="text-center">Date Applied:</th>
+                                            <th class="text-center">Action:</th>
+                                            <th class="text-center">Action:</th>
+                                            <th class="text-center">Status:</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Form/N:</th>
+                                            <th>Name:</th>
+                                            <th>Guarantor Name:</th>
+                                            <th>Amount Applied:</th>
+                                            <th class="text-center">Date Applied:</th>
+                                            <th class="text-center">Action:</th>
+                                            <th class="text-center">Action:</th>
+                                            <th class="text-center">Status:</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                    {% for key in applicant_loan %}
+                                        <tr>
+                                            <td>{{ key.id }}</td>
+                                            <td>{{ key.applicant.get_full_name }}</td>
+                                            <td>{{ key.guarantor }}</td>
+                                            <td>{{ key.amount }}</td>
+                                            <td class="text-center">{{ key.date_created|date }}</td>
+                                            <td class="text-center">
+                                                {% if key.status == 0 %}
+                                                <a href="{% url 'update_loan' key.slug %}" class="btn btn-sm btn-info">Edit Loan Applied</a>
+                                                {% elif key.status == 1 %}
+                                                 <a href="{% url 'generate_loanpdf' key.id %}" class="btn btn-sm btn-primary"><i class="fa fa-download fa-1x mr-1"></i>Loan Form</a>
+                                                {% else %}
+                                                <a href="" class="btn btn-sm btn-danger disabled">Disapproved<i class="fa fa-times fa-1x ml-1"></i></a>
+                                                {% endif %}
+                                            </td>
+
+                                            <td class="text-center">
+                                                {% if key.status == 0 %}
+                                                <a href="" class="btn btn-sm btn-info disabled">Action Pending</a>
+                                                {% elif key.status == 1 %}
+                                                <a href="{% url 'generate_loanpaymentpdf' key.id %}" class="btn btn-sm btn-secondary"><i class="fa fa-download fa-1x mr-1"></i>Payment Advice</a>
+                                                {% else %}
+                                                <a href="" class="btn btn-sm btn-danger disabled">Disapproved<i class="fa fa-times fa-1x ml-1"></i></a>
+                                                {% endif %}
+                                            </td>
+
+                                            <td class="text-center">
+                                                {% if key.status == 0 %}
+                                                <a href="" class="btn btn-sm btn-warning disabled">Approval Pending</a>
+                                                {% elif key.status == 1 %}
+                                                <a href="" class="btn btn-sm btn-success disabled">Approved<i class="fa fa-check fa-1x ml-1"></i></a>
+                                                {% else %}
+                                                <a href="" class="btn btn-sm btn-danger disabled">Disapproved<i class="fa fa-times fa-1x ml-1"></i></a>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% empty %}
+                                    <p class="alert alert-info p-2 m-2">No content yet!</p>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+                    <div class="ibox">
+                        <div class="ibox-head">
+                            <div class="ibox-title">Investment Application [{{ applicant_investment.count }}]</div>
+                        </div>
+                        <div class="ibox-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover table-bordered" id="example-table1">
+                                    <thead>
+                                        <tr>
+                                            <th>Form/N:</th>
+                                            <th>Name:</th>
+                                            <th>Next of Kin Name:</th>
+                                            <th>Amount Invested:</th>
+                                            <th class="text-center">Date Invested:</th>
+                                            <th class="text-center">Action:</th>
+                                            <th class="text-center">Status:</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Form/N</th>
+                                            <th>Name:</th>
+                                            <th>Next of Kin Name:</th>
+                                            <th>Amount Invested:</th>
+                                            <th class="text-center">Date Invested:</th>
+                                            <th class="text-center">Action:</th>
+                                            <th class="text-center">Status:</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                    {% for key in applicant_investment %}
+                                        <tr>
+                                            <td>{{ key.id }}</td>
+                                            <td>{{ key.investor.get_full_name }}</td>
+                                            <td>{{ key.next_kin }}</td>
+                                            <td>{{ key.amount }}</td>
+                                            <td class="text-center">{{ key.date_created|date }}</td>
+                                            <td class="text-center">
+                                                {% if key.status == 0 %}
+                                                 <a href="{% url 'update_investment' key.slug %}" class="btn btn-sm btn-primary"><i class="fa fa-edit fa-1x mr-1"></i>Edit Investment</a>
+                                                {% elif key.status == 1 %}
+                                                <a href="{% url 'generate_investmentpdf' key.id %}" class="btn btn-sm btn-secondary"><i class="fa fa-download fa-1x mr-1"></i>Investment Form</a>
+                                                {% else %}
+                                               <a href="" class="btn btn-sm btn-danger disabled">Disapproved<i class="fa fa-times fa-1x ml-1"></i></a>
+                                                {% endif %}
+                                            </td>
+
+                                            <td class="text-center">
+                                                {% if key.status == 0 %}
+                                                <a href="" class="btn btn-sm btn-info disabled">Approval Pending</a>
+                                                {% elif key.status == 1 %}
+                                                <a href="" class="btn btn-sm btn-success disabled">Approved<i class="fa fa-check fa-1x ml-1"></i></a>
+                                                {% else %}
+                                                <a href="" class="btn btn-sm btn-danger disabled">Disapproved<i class="fa fa-times fa-1x ml-1"></i></a>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% empty %}
+                                    <p class="alert alert-info p-2 m-2">No content yet!</p>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        {% endif %}
+
+        <div>
+    </div>
+</div>
+    <!-- END PAGE CONTENT-->
+{% endblock %}

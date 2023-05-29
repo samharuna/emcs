@@ -1,0 +1,75 @@
+{% extends 'blog/page.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{{ block.super }}| {{ key }}
+{% endblock %}
+
+{% block body %}
+      <section>
+        <div class="container">
+            <div class="row">
+              
+              <div class="col-12">
+                <div class="card mb-4 p-2 text-white">
+                    <a href="{% url 'blog_form' %}">To create a new post click here</a>
+                </div>
+              </div>
+
+              <div class="col-12 col-lg-12">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                  <strong>EMCS: </strong> {{ message }}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                {% endfor %}
+              </div>
+              
+            {% for key in post %}
+              <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xlg-4">
+                <div class="single-blog">
+                    <div class="blog-image">
+                        <a class="image-scale" href="{% url 'post_detail' key.slug %}"><img src="{{ key.image.url }}" alt="{{ key.title }}" width="100%"></a>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="admin-type"><i class="fa fa-user icons"></i> <a href="{% url 'blog_profile' key.author.username %}" target="_blank">{{ key.author.username }}</a></span>
+                            <span class="date-type"><i class="fa fa-calendar icons"></i> {{ key.date_created|date }}</span>
+                            <span class="comments-type"><i class="fa fa-tag icons"></i> {{ key.tags }}</span>
+                        </div>
+
+                        <a href="{% url 'post_detail' key.slug %}">
+                            <h4>{{ key.title }}</h4>
+                        </a>
+                        <p>{{ key.description }}</p>
+                        <a class="post-btn" href="{% url 'post_detail' key.slug %}"> Read more</a>
+                    </div>
+                  {% if key.author == request.user %}
+                    <div class="blog-footer">
+                      <span><a href="{% url 'blog_edit' key.slug %}"><i class="fa fa-edit text-primary"></i></a></span> 
+                      <span><a href="{% url 'blog_delete' key.slug %}"><i class="fa fa-trash text-danger"></i></a></span>
+                      <span>
+                        {% if key.status == 0 %}
+                          <button disabled="disabled" class="bg-info text-white">Pending</button>
+                        {% elif key.status == 1 %}
+                          <button disabled="disabled" class="bg-success text-white">Approved</button>
+                        {% else %}
+                           <button disabled="disabled" class="bg-danger text-white">Disaspproved</button>
+                        {% endif %}
+                      </span>
+                    </div>
+                  {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+            </div>
+            <div class="text-center">
+              {% include 'frontend/pagination.html' %}
+            </div>
+        </div>
+    </section>
+    
+{% endblock %}

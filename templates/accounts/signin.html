@@ -1,0 +1,67 @@
+{% extends 'blog/page.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{{ block.super }}| {{ key }}
+{% endblock %}
+
+{% block body %}
+      <section>
+        <div class="container mb-5">
+            <div class="row justify-content-center">
+              <div class="col-12 col-sm-8 col-md-8 col-lg-5 col-xlg-5">
+                <div class="card signinForm">
+                  <h2 class="card-title text-center m-0 pt-3">Log In</h2>
+                  <p class="text-center m-0">Login an existing account here</p>
+                  <hr class="center">
+                  <div class="card-body m-0">
+                    <form action="" method="POST" enctype="multipart/form-data" id="accountForm">
+                      {% csrf_token %}
+                      {{ signinForm|crispy }}
+                      
+                      <div class="eye" onclick="MyFunction()">
+                        <span id="hide1"><i class="fa fa-toggle-on mr-1"></i><span style="font-size: 18px;">Hide Password</span></span>
+                        <span id="hide2"><i class="fa fa-toggle-off mr-1"></i><span style="font-size: 18px;">Show Password</span></span>
+                      </div>
+
+                      <div class="text-right">
+                        <span class="text m-0 text-danger">Forgot password? <a href="{% url 'reset_pass' %}">click here</a></span>
+                      </div>
+                      
+                      <div class="text-center my-2">
+                        <input type="submit" value="Log In" class="home-btn btn-block text-white">
+                      </div>
+                    </form>
+                    <div class="my-2">
+                      <p class="text-center">To create a new account <a href="{% url 'signup' %}">click here</a></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+      function MyFunction() {
+        var x = document.getElementById("password")
+        var y = document.getElementById("hide1")
+        var z = document.getElementById("hide2")
+
+        if(x.type === "password"){
+          x.type = "text"
+          y.style.display = "block"
+          z.style.display = "none"
+        }
+        else{
+          x.type = "password"
+          y.style.display = "none"
+          z.style.display = "block"
+        }
+      }
+    </script>
+    
+{% endblock %}
+
+  

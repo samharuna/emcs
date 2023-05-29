@@ -1,0 +1,77 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{{ block.super }}| {{ key }}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+        {% if team %}
+          <div class="col-12 col-sm-6 col-md-6 col-lg-8 col-xlg-8">
+             <div class="team-description">
+                 <figure class="team-pic"><img src="{{ team.team.profile.image.url }}" alt="{{ team.team.get_full_name }}" class="img-fluid img-thumbnail"></figure>
+                
+                 <div class="tabs">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                      <li class="nav-item active">
+                        <a class="nav-link" id="overview-tab" data-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="false">Overview</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="team-detail-tab" data-toggle="tab" href="#team-detail" role="tab" aria-controls="team-detail" aria-selected="false">{{ team.team.get_full_name }}'s Profile</a>
+                      </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                      <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+                          <p>{{ team.body }}</p> 
+                      </div>
+                      <div class="tab-pane fade" id="team-detail" role="tabpanel" aria-labelledby="team-detail-tab">
+                          <h2>{{ team.team.profile.title }} {{ team.team.last_name }}, {{ team.team.first_name }} {{ team.team.profile.middlename }}</h2>
+                          <h3>Position: <span>{{ team.team.profile.occupation }}</span></h3>
+                          <h4>Gender: <span>{{ team.team.profile.gender }}</span></h4>
+                          <h4>Religion: <span>{{ team.team.profile.religion }}</span></h4>
+                          <h4>Email Address: <span>{{ team.team.email}}</span></h4>
+                          <h4>Mobile Number: <span>{{ team.team.profile.phonenumber}}</span></h4>
+                          <h4>Country: <span>{{ team.team.profile.country}}</span></h4>
+                          <h4>State: <span>{{ team.team.profile.state}}</span></h4>
+                          <h4>LGA: <span>{{ team.team.profile.lga}}</span></h4>
+                          <h6>
+                            <span><a href="{{ team.team.profile.facebook }}" target="_blank"><i class="fab fa-facebook"></i></a></span>
+                            <span><a href="{{ team.team.profile.twitter }}" target="_blank"><i class="fab fa-twitter"></i></a></span>
+                            <span><a href="{{ team.team.profile.instagram }}" target="_blank"><i class="fab fa-instagram text-danger"></i></a></span>
+                            <span><a href="{{ team.team.profile.youtube }}" target="_blank"><i class="fab fa-youtube text-danger"></i></a></span>
+                          </h6>
+                      </div>
+                  
+                    </div>
+                 </div>
+             </div>
+          </div>
+        {% endif %}
+
+
+          <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xlg-4">
+            <aside class="services">
+                <div class="inner-sidebar">
+                  <h5>Recent News</h5>
+                  <hr class="left">
+                  <div class="media-list">
+                  {% for key in latest|slice:"5" %}
+                    <div class="media-post">
+                        <figure class="media-thumb"><a href="{% url 'post_detail' key.slug %}"><img src="{{ key.image.url }}" alt="{{ key.title|truncatechars:20 }}"></a></figure>
+                      <div class="media-caption">
+                        <h5><a href="{% url 'post_detail' key.slug %}">{{ key.title|truncatechars:50 }}</a></h5> 
+                        <p>{{ key.date_created|date }}</p>
+                      </div>
+                    </div>
+                  {% endfor %}
+                  </div>
+                </div>
+            </aside> 
+          </div>
+          
+        </div>
+    </div>  
+{% endblock %}

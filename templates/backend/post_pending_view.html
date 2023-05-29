@@ -1,0 +1,141 @@
+{% extends 'backend/main.html' %}
+{% load static %}
+
+{% block title %}
+{{ block.super }} | {{ key }}
+{% endblock %}
+
+
+{% block body %}
+<div class="content-wrapper">
+    <!-- START PAGE CONTENT-->
+    <div class="page-heading">
+        <h1 class="page-title">Post</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item mr-2"><a href="{% url 'dashboard' %}"><i class="fa fa-home font-20"></i></a></li>
+            <li class="breadcrumb-item mr-2 text-info"><a href="{% url 'add_post' %}">Add Post</a></li>
+            <li class="breadcrumb-item">Pending Posts</li>
+        </ol>
+    </div>
+    <div class="page-content fade-in-up">
+        <div class="row">
+            <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xlg-3">
+                <div class="ibox bg-info color-white widget-stat">
+                    <div class="ibox-body">
+                        <h2 class="m-b-5 font-strong">{{ post_total }}</h2>
+                        <div class="m-b-5">TOTAL BLOG POSTS</div><i class="fab fa-blogger widget-stat-icon"></i>
+                    </div>
+                    <div class="ibox-footer text-center">
+                        <a href="{% url 'view_post' %}" class="text-white">View Posts</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xlg-3">
+                <div class="ibox bg-warning color-white widget-stat">
+                    <div class="ibox-body">
+                        <h2 class="m-b-5 font-strong">{{ post_pending }}</h2>
+                        <div class="m-b-5">BLOG PENDING</div><i class="fab fa-blogger widget-stat-icon"></i>
+                    </div>
+                    <div class="ibox-footer text-center">
+                        <a href="{% url 'pending_post_view' %}" class="text-white">View Posts</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xlg-3">
+                <div class="ibox bg-success color-white widget-stat">
+                    <div class="ibox-body">
+                        <h2 class="m-b-5 font-strong">{{ post_approve }}</h2>
+                        <div class="m-b-5">BLOG APPROVED</div><i class="fab fa-blogger widget-stat-icon"></i>
+                    </div>
+                    <div class="ibox-footer text-center">
+                        <a href="{% url 'approve_post_view' %}" class="text-white">View Approved Posts</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xlg-3">
+                <div class="ibox bg-danger color-white widget-stat">
+                    <div class="ibox-body">
+                        <h2 class="m-b-5 font-strong">{{ post_disapprove }}</h2>
+                        <div class="m-b-5">BLOG DISAPPROVED</div><i class="fab fa-blogger widget-stat-icon"></i>
+                    </div>
+                    <div class="ibox-footer text-center">
+                        <a href="{% url 'disapprove_post_view' %}" class="text-white">View Posts</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+            <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                <strong>EMCS:</strong> {{ message}}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {% endfor %}
+                        <div class="ibox">
+                            <div class="ibox-head">
+                                <div class="ibox-title">Posts [{{ post_pending }}]</div>
+                                <div class="ibox-tools">
+                                    <a href="{% url 'add_post' %}" class="btn btn-sm btn-secondary text-white">Add Post <i class="fa fa-plus-circle"></i></a>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <div class="ibox-body">
+                                    <table class="table table-striped table-bordered table-hover" id="example-table2" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Post Image</th>
+                                                <th>Post Details</th>
+                                                <th class="text-center">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Post Image</th>
+                                                <th>Post Details</th>
+                                                <th class="text-center">Status</th>
+                                            </tr>
+                                        </tfoot>
+                                        
+                                        <tbody>
+                                        {% for key in post %}
+                                            <tr>
+                                                <td><img src="{{ key.image.url }}" alt="{{ key.title }}" height="70px" width="140px"></td>
+                                                <td>
+                                                    <h6 class="text-justify"><span class="text-info mr-2">Post Title:</span>{{ key.title }}</h6>
+                                                    <p class="text-left">
+                                                        Posted by: <a href="{% url 'view_profile' key.author.username %}" target="_blank">{{ key.author.username }}</a>
+                                                        <span class="ml-2 text-warning">Created on: {{ key.date_updated|date }}</span>
+                                                        <span class="ml-2">Updated on: {{ key.date_updated }}</span>
+                                                    </p>
+                                                </td>
+                                                <td class="text-center">
+                                                    {% if key.status == 0 %}
+                                                    <a href="" class="btn btn-sm btn-success disabled">No pending post yet</a>
+                                                    {% elif key.status == 1 %}
+                                                    <a href="" class="btn btn-sm btn-success disabled">Approved</a>
+                                                    {% else %}
+                                                    <a href="" class="btn btn-sm btn-danger disabled">Disapproved</a>
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                        {% empty %}
+                                        <p class="alert alert-info p-2 m-2">No content yet!</p>
+                                        {% endfor %} 
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div>
+
+        </div>
+    </div>
+    <!-- END PAGE CONTENT-->
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'blog/page.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{{ block.super }}| {{ key }}
+{% endblock %}
+
+{% block body %}
+      <section>
+        <div class="container mt-2 mb-5">
+            <div class="row justify-content-center">
+              <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xlg-5">
+
+                <div class="card signupForm">
+                  <h2 class="card-title text-center m-0 pt-3">Register</h2>
+                  <p class="text-center m-0">Create a new account here</p>
+                  <hr class="center">
+                  <div class="card-body m-0">
+                    <form action="" method="POST" enctype="multipart/form-data" id="accountForm" class="m-0">
+                      {% csrf_token %}
+                      
+                      <div class="form-group m-0">
+                        {{ signupForm.username|as_crispy_field }}
+                      </div>
+
+                      <div class="form-row">
+                        <div class="form-group m-0 col-6">
+                          {{ signupForm.first_name|as_crispy_field }}
+                        </div>
+                        <div class="form-group m-0 col-6">
+                          {{ signupForm.last_name|as_crispy_field }}
+                        </div>
+                      </div>
+
+                      <div class="form-group m-0">
+                        {{ signupForm.email|as_crispy_field }}
+                      </div>
+
+                      <div class="form-row">
+                        <div class="form-group m-0 col-6">
+                          {{ signupForm.password1|as_crispy_field }}
+                        </div>
+                        <div class="form-group m-0 col-6">
+                          {{ signupForm.password2|as_crispy_field }}
+                        </div>
+                      </div>
+
+                      <div class="text-center">
+                         <input type="submit" value="Register Now" class="post-btn btn-block text-white">
+                      </div>
+                    </form>
+                    <div class="my-2">
+                      <p class="text-center">Already have a blog account? <a href="{% url 'signin' %}">click here</a></p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+        </div>
+    </section>
+    
+{% endblock %}
+
+  

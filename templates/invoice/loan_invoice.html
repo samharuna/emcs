@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        {{ key }}
+        {% endblock %}
+    </title>
+    <style type="text/css">
+        body {
+            background-color: #fff;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 13px;
+            line-height: 1.1;
+            background-image: url('static/frontend/img/logo.png');
+        }
+        
+        p {
+            text-align: justify;
+            font-size: 14px;
+        }
+
+        .header {
+            font-size: 15px;
+            text-transform: uppercase;
+            text-decoration: underline;
+            font-weight: 500;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            margin: 0px 0px 3px 0px;
+        }
+
+        .table {
+            -pdf-keep-in-frame-mode: shrink;
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 100%;
+            font-size: 13px;
+            border: 1px solid #000;
+        }
+
+        .table th, td{
+            padding: 2px;
+            font-size: 13px;
+        }
+
+        @page {
+            size: A4 portrait;
+            @frame header_frame {
+                -pdf-frame-content: header_content;
+                left: 30pt; width: 530pt; top: 20pt; height: 100pt;
+            }
+            @frame content_frame {
+                left: 30pt; width: 540pt; top: 135pt; height: 635pt;
+            }
+            
+            @frame footer_frame {
+                -pdf-frame-content: footer_content;
+                left: 30pt; width: 530pt; top: 790pt; height: 20pt;
+            }
+        }
+
+        .img-placeholder {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 15px;
+        }
+
+        .snumber {
+            text-align: right;
+        }
+
+        #footer_content {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="header_content">
+        <div style="margin-bottom: 3px;">
+            <img src="media/images/logo.png" alt="" class="img-fluid" >
+        </div>
+        <div><span class="text-dark mr-2" style="font-weight: bold; font-size: 12px;">HEAD OFFICE:</span> Number 7, Abdul Razaq Afolabi Street, Off Ailegun Road, Ejigbo, Lagos State</div>
+        <div><span class="text-dark mr-2" style="font-weight: bold; font-size: 12px;">EMAIL ADDRESS:</span> empowermultipurposecooperative@gmail.com</div>
+        <div><span class="text-dark mr-2" style="font-weight: bold; font-size: 12px;">TELEPHONE:</span> 09031926026, 08033152762</div>
+        <div><span class="text-dark mr-2" style="font-weight: bold; font-size: 12px;">BRANCH OFFICE:</span> Shop 33, Rauf Aregbesola Model Market, Egbeda, Gowon Estate, Lagos State</div>
+        <hr>
+    </div>
+
+
+    <div id="footer_content">
+        [EMCS] - Page <pdf:pagenumber>
+    </div>
+
+
+    <div>
+        <div class="header">LOAN GRANTED ANALYSIS:</div>
+        <table class="table table-striped table-dark" repeat="1">
+
+            <thead>
+                <tr>
+                    <th style="width: 100px; text-align: left;">Form ID:</th>
+                    <th style="width: 300px; text-align: left;">Customer Name</th>
+                    <th style="width: 250px; text-align: left;">Mobile Number</th>
+                    <th style="width: 140px; text-align: center;">Principal</th>
+                    <th style="width: 140px;">Interest 10%</th>
+                    <th style="width: 140px;">Total Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for key in loan %}
+                <tr>
+                    <td style="text-align: left;">{{ key.id }}</td>
+                    <td style="text-align: left;">{{ key.applicant.last_name }}, {{ key.applicant.first_name }} {{ key.applicant.profile.middlename }}</td>
+                    <td style="text-align: left;">{{ key.applicant.profile.phonenumber }}</td>
+                    <td style="text-align: center;"><span style="text-decoration: line-through;">N</span>{{ key.amount }}</td>
+                    <td style="text-align: center;"><span style="text-decoration: line-through;">N</span>{{ key.get_interest }}</td>
+                    <td style="text-align: center;"><span style="text-decoration: line-through;">N</span>{{ key.total_amount }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>  
+</body>
+</html>

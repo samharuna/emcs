@@ -1,0 +1,54 @@
+{% extends 'blog/page.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{{ block.super }}| {{ key }}
+{% endblock %}
+
+{% block body %}
+      <section>
+        <div class="container">
+            <div class="row">
+
+              <div class="col-12 col-sm-6 col-md-8 col-lg-8 col-xlg-8">
+                {% for key in post %}
+                  <!-- Start single blog -->
+                  <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+                      <div class="single-blog ">
+                          <div class="blog-image">
+                              <a class="image-scale" href="{% url 'post_detail' key.slug %}"><img src="{{ key.image.url }}" alt="{{ key.title }}" width="100%"></a>
+                          </div>
+                          <div class="blog-content">
+                              <div class="blog-meta">
+                                  <span class="admin-type"><i class="fa fa-user icons"></i> <a href="{% url 'blog_profile' key.author.username %}" target="_blank">{{ key.author.username }}</a></span>
+                                  <span class="date-type"><i class="fa fa-calendar icons"></i> {{ key.date_created }}</span>
+                                  <span class="comments-type"><i class="fa fa-comments icons"></i> {{key.post.count }} Comment{{key.post.count|pluralize }}</span>
+                                  <span class="comments-type"><i class="fa fa-eye icons"></i> {{ key.view_count }} View{{key.view_count|pluralize }}</span>
+                                  <span class="comments-type"><i class="fa fa-tag icons"></i> {{ key.tags }}</span>
+                              </div>
+
+                              <a href="{% url 'post_detail' key.slug %}">
+                                  <h4>{{ key.title }} - [{{ key.category }}]</h4>
+                              </a>
+                              <p>{{ key.description }}</p>
+                              <a class="post-btn" href="{% url 'post_detail' key.slug %}"> Read More</a>
+                          </div>
+                      </div>
+                  </div>
+                  <!-- End single blog -->
+                  <hr>
+                {% endfor %}
+              </div>
+
+              <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xlg-4">
+                {% include 'blog/sidebar.html' %}
+              </div>
+            </div>
+
+            {% include 'frontend/pagination.html' %}
+
+        </div>
+    </section>
+    
+{% endblock %}

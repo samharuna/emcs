@@ -1,0 +1,147 @@
+{% extends 'backend/main.html' %}
+{% load static %}
+
+{% block title %}
+{{ block.super }} | {{ key }}
+{% endblock %}
+
+
+{% block body %}
+<div class="content-wrapper">
+    <!-- START PAGE CONTENT-->
+    <div class="page-heading">
+        <h1 class="page-title">User Page</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item mr-2"><a href="{% url 'dashboard' %}"><i class="fa fa-home font-20"></i></a></li>
+            <li class="breadcrumb-item mr-2 text-info"><a href="{% url 'view_user' %}">View Users</a></li>
+            <li class="breadcrumb-item">Regular Users</li>
+        </ol>
+    </div>
+    <div class="page-content fade-in-up">
+        <div class="row">
+            <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xlg-3">
+                <div class="ibox bg-success color-white widget-stat">
+                    <div class="ibox-body">
+                        <h2 class="m-b-5 font-strong">{{ total_users }}</h2>
+                        <div class="m-b-5">TOTAL USERS</div><i class="fa fa-users widget-stat-icon"></i>
+                    </div>
+                    <div class="ibox-footer text-center">
+                        <a href="{% url 'view_user' %}" class="text-white">View Users</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xlg-3">
+                <div class="ibox bg-info color-white widget-stat">
+                    <div class="ibox-body">
+                        <h2 class="m-b-5 font-strong">{{ total_superusers }}</h2>
+                        <div class="m-b-5">SUPER USERS</div><i class="fa fa-users widget-stat-icon"></i>
+                    </div>
+                    <div class="ibox-footer text-center">
+                        <a href="{% url 'super_user' %}" class="text-white">View Users</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xlg-3">
+                <div class="ibox bg-info color-white widget-stat">
+                    <div class="ibox-body">
+                        <h2 class="m-b-5 font-strong">{{ total_staffusers }}</h2>
+                        <div class="m-b-5">STAFF USERS</div><i class="fa fa-users widget-stat-icon"></i>
+                    </div>
+                    <div class="ibox-footer text-center">
+                        <a href="{% url 'staff_user' %}" class="text-white">View Users</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xlg-3">
+                <div class="ibox bg-danger color-white widget-stat">
+                    <div class="ibox-body">
+                        <h2 class="m-b-5 font-strong">{{ total_bannedusers }}</h2>
+                        <div class="m-b-5">BANNED USERS</div><i class="fa fa-users widget-stat-icon"></i>
+                    </div>
+                    <div class="ibox-footer text-center">
+                        <a href="{% url 'banned_user' %}" class="text-white">View Users</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+            <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                <strong>EMCS:</strong> {{ message}}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {% endfor %}
+                        <div class="ibox">
+                            <div class="ibox-head">
+                                <div class="ibox-title">Regular Users [{{ total_activeusers }}]</div>
+                                <div class="ibox-tools">
+                                    <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                                    <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="{% url 'add_user' %}">Add User</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <div class="ibox-body">
+                                    <table class="table table-striped table-bordered table-hover" id="example-table2" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Image</th>
+                                                <th>Username</th>
+                                                <th>Full Name</th>
+                                                <th>Gender</th>
+                                                <th>Date Registered</th>
+                                                <th>Last Login</th>
+                                                <th class="text-center">Action</th>
+                                                <th class="text-center">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Image</th>
+                                                <th>Username</th>
+                                                <th>Full Name</th>
+                                                <th>Gender</th>
+                                                <th>Date Registered</th>
+                                                <th>Last Login</th>
+                                                <th class="text-center">Action</th>
+                                                <th class="text-center">Action</th>
+                                            </tr>
+                                        </tfoot>
+                                        
+                                        <tbody>
+                                        {% for key in activeuser %}
+                                            <tr>
+                                                <td><img src="{{ key.profile.image.url }}" alt="{{ key.get_full_name }}" height="40px" width="40px" class="rounded-circle"></td>
+                                                <td><a href="{% url 'view_profile' key.username %}">{{ key.username }}</a></td>
+                                                <td>{{ key.get_full_name }}</td>
+                                                <td>{{ key.profile.gender }}</td>
+                                                <td>{{ key.date_joined }}</td>
+                                                <td>{{ key.last_login }}</td>
+                                                <td class="text-center"><a href="{% url 'update_user' key.id %}" class="btn btn-sm btn-primary">Update</a></td>
+                                                <td class="text-center"><a href="{% url 'delete_user' key.id %}" class="btn btn-sm btn-danger">Delete</a></td>
+                                            </tr>
+                                        {% empty %}
+                                        <p class="alert alert-info p-2 m-2">No content yet!</p>
+                                        {% endfor %} 
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div>
+
+        </div>
+    </div>
+    <!-- END PAGE CONTENT-->
+{% endblock %}

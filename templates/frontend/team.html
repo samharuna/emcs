@@ -1,0 +1,95 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{{ block.super }}| {{ key }}
+{% endblock %}
+
+{% block body %}
+        
+    <section>
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Team</h2>
+                <hr class="center">
+                <p class="text-center">leap into electronic typesetting, remaining essentially unchanged</p>
+            </div>
+            <div class="row">
+            {% for key in team %}
+                <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xlg-4">
+                    <div class="team-card-3">
+                        <figure class="team-photo"><a href="{% url 'team_detail' key.slug %}"><img src="{{ key.team.profile.image.url }}" alt="{{ key.team.get_full_name }}" class="img-fluid"></a></figure>
+                        <div class="caption">
+                            <h3>{{ key.team.get_full_name }} [{{ key.team.profile.occupation }}]</h3>
+                            <p>{{ key.description|truncatechars:70 }}</p>
+                            <a href="{% url 'team_detail' key.slug %}" class="home-btn text-white">Read More</a>
+                        </div> 
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+
+            <div class="mt-4 text-center">
+                <div class="pagination-box">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-start">
+
+                            <li class="page-item">
+                                {% if team.has_previous %}
+                                <a class="page-link" href="?page={{ team.previous_page_number }}" tabindex="-1">Previous</a>
+                                {% endif %}
+                            </li>
+                            
+                            <li class="page-item"><a class="page-link" href="#">
+                                Page {{ team.number }} of {{ team.paginator.num_pages }}
+                            </a></li>
+
+                            <li class="page-item">
+                                {% if team.has_next %}
+                                <a class="page-link" href="?page={{ team.next_page_number }}">Next</a>
+                                {% endif %}
+                            </li>
+                        
+                        </ul>
+                    </nav> 
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Start of How It Work -->
+    <div class="works_area background-section" style="background-image: url({% static 'frontend/img/newsletter.jpg' %});">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xlg-4">
+                    <div class="single_works wow fadeInUp" data-wow-duration="1s" data-wow-delay=".4s">
+                        <span>01</span>
+                        <h3>Apply for loan</h3>
+                        <p>We will customize a loan based on the amount of cash your company need term <br>
+                        <a href="{% url 'log_up' %}" target="_blank" class="btn general-btn">Create Account</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xlg-4">
+                    <div class="single_works wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">
+                        <span>02</span>
+                        <h3>Application review</h3>
+                        <p>We will customize a loan based on the amount of cash your company need term</p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xlg-4">
+                    <div class="single_works wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
+                        <span>03</span>
+                        <h3>Get funding fast</h3>
+                        <p>We will customize a loan based on the amount of cash your company need term</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of How It Work -->
+    
+{% endblock %}

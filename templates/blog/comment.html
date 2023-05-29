@@ -1,0 +1,128 @@
+{% load static %}
+{% load crispy_forms_tags %} 
+ 
+ <div class="comments-area">
+    <div class="comments-heading">
+        <h3>{{ post.post.count }} comment{{ post.post.count|pluralize }}</h3>
+    </div>
+
+    <div class="comments-list">
+        <ul>
+        {% for comment in post.post.all %}
+        <li>
+            <div class="comments-details">
+            <div class="comments-list-img">
+                <img src="{{ comment.commenter.profile.image.url }}" alt="{{ comment.commenter.username }}" width="60px">
+            </div>
+            <div class="comments-content-wrap">
+                <span>
+                <b><a href="#">{{ comment.commenter.username }}</a></b>
+                <span class="post-time">{{ comment.date_created }}</span>
+                <button type="button" name="button" title="Click to Reply Comment" class="reply-btn">Reply</button>
+                </span>
+                <p>
+                {{ comment.body }}
+                </p>
+
+                <div class="footer">
+                    <form action="{% url 'likes_comment' comment.id %}" method="POST" class="commentlikes-form">
+                        {% csrf_token %}
+                        <button type="submit" class="likes-btn" name="commentlikes_id" value="{{ comment.id }}">
+                        {% if user not in comment.comment_likes.all %}
+                        <i class="fa fa-thumbs-up text-secondary likes-icon"></i>
+                        {% else %}
+                        <i class="fa fa-thumbs-up text-success likes-icon"></i>
+                        {% endif %}
+                        </button>
+                        <span class="likes-count">{{ comment.comment_likes.count }}</span>
+                    </form>
+
+                    <form action="{% url 'dislikes_comment' comment.id %}" method="POST" class="commentdislikes-form">
+                        {% csrf_token %}
+                        <button type="submit" class="dislikes-btn" name="commentdislike_id" value="{{ comment.id }}">
+                        {% if user not in comment.comment_dislikes.all %}
+                        <i class="fa fa-thumbs-down text-secondary dislikes-icon"></i>
+                        {% else %}
+                        <i class="fa fa-thumbs-down text-danger dislikes-icon"></i>
+                        {% endif %}
+                        </button>
+                        <span class="dislikes-count">{{ comment.comment_dislikes.count }}</span>
+                    </form>
+                </div>
+            </div>
+            </div>
+
+            <li class="threaded-comments" style="display: none;">
+            {% for reply in comment.comment.all %}
+            <div class="comments-details mb-3">
+                <div class="comments-list-img">
+                <img src="{{ reply.replier.profile.image.url }}" alt="{{ reply.replier.username }}" class="img-fluid" width="60px">
+                </div>
+                <div class="comments-content-wrap">
+                <span>
+                    <b><a href="#">{{ reply.replier.username }}</a></b>
+                    <span class="post-time">{{ reply.date_created }}</span>
+                </span>
+                <p>{{ reply.body }}</p>
+                <div class="footer">
+                    <form action="{% url 'likes_reply' reply.id %}" method="POST" class="replylikes-form">
+                    {% csrf_token %}
+                    <button type="submit" class="replylikes-btn" name="replylikes_id" value="{{ reply.id }}">
+                        {% if user not in reply.reply_likes.all %}
+                        <i class="fa fa-thumbs-up text-secondary replylikes-icon"></i>
+                        {% else %}
+                        <i class="fa fa-thumbs-up text-success replylikes-icon"></i>
+                        {% endif %}
+                    </button>
+                    <span class="replylikes-count">{{ reply.reply_likes.count }}</span>
+                    </form>
+
+                    <form action="{% url 'dislikes_reply' reply.id %}" method="POST" class="replydislikes-form">
+                    {% csrf_token %}
+                    <button type="submit" class="dislikes-reply-btn" name="dislikesreply_id" value="{{ reply.id }}">
+                        {% if user not in reply.reply_dislikes.all %}
+                        <i class="fa fa-thumbs-down text-secondary dislikesreply-icon"></i>
+                        {% else %}
+                        <i class="fa fa-thumbs-down text-danger dislikesreply-icon"></i>
+                        {% endif %}
+                    </button>
+                    <span class="replydislikes-count">{{ reply.reply_dislikes.count }}</span>
+                    </form>
+                </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            <div class="comment-respond" style="padding-left: 75px;">
+                <form action="{% url 'add_reply' post.id comment.id %}" method="POST">
+                {% csrf_token %}
+                {{ replyForm|crispy }}
+                {% if request.user.is_authenticated %}
+                <input type="submit" class="home-btn"  value="Reply Comment" />
+                {% else %}
+                <a href="{% url 'loginapp' %}" class="post-btn">Login to Reply</a>
+                {% endif %}
+                </form>
+            </div>
+            </li>
+
+        </li>
+        <hr>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<div class="comment-respond">
+<h3 class="comment-reply-title">Leave a Post Comment </h3>
+
+<form action="." method="POST">
+    {% csrf_token %}
+    {{ commentForm|crispy }}
+    {% if request.user.is_authenticated %}
+    <input type="submit" class="home-btn" value="Post Comment" />
+    {% else %}
+    <a href="{% url 'loginapp' %}" class="post-btn">Login to Comment</a>
+    {% endif %}
+</form>
+</div>

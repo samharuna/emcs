@@ -1,0 +1,134 @@
+{% extends 'blog/page.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{{ block.super }}| {{ key }}
+{% endblock %}
+
+{% block body %}
+      <section>
+        <div class="container">
+            <div class="row">
+
+              <div class="col-12 col-sm-6 col-md-8 col-lg-8 col-xlg-8">
+                  <!-- Start single blog -->
+                  <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+                      <div class="single-blog px-3 py-2">
+                        <div class="row">
+                          <div class="col-3 col-sm-12 col-md-3 col-lg-3 col-xlg-3">
+                            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                              <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Overview</a>
+                              <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Edit Data</a>
+                              <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Post</a>
+                            </div>
+                          </div>
+                          <div class="col-9 col-sm-12 col-md-9 col-lg-9 col-xlg-9">
+                            <div class="tab-content" id="v-pills-tabContent">
+
+                              <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                <div class="row">
+                                  <div class="col-6 col-sm-12 col-md-6 col-lg-3 col-xlg-3 username-label text-center">
+                                    <figure class="figure">
+                                      <img src="{{ profile.profile.image.url }}" class="figure-img img-fluid rounded" alt="{{ profile.get_full_name }}">
+                                    </figure>
+                                    <h6>{{ profile.username }}</h6>
+                                    <div class="social-detail">
+                                      <span><a href="{{ profile.profile.facebook }}"><i class="fab fa-facebook"></i></a></span>
+                                      <span><a href="{{ profile.profile.twitter }}"><i class="fab fa-twitter"></i></a></span>
+                                      <span><a href="{{ profile.profile.instagram }}"><i class="fab fa-instagram text-danger"></i></a></span>
+                                      <span><a href="{{ profile.profile.youtube }}"><i class="fab fa-youtube text-danger"></i></a></span>
+                                    </div>
+                                  </div>
+
+                                  <div class="col-12 col-sm-12 col-md-12 col-lg-9 col-xlg-9 profile-detail">
+                                    <label for="">Name:</label>
+                                    <h4>{{ profile.profile.title }} {{ profile.last_name }}, {{ profile.first_name }}</h4>
+                                    
+                                    <label for="">Date of Birth:</label>
+                                    <h6>{{ profile.profile.dob }}</h6>
+
+                                    <label for="">Religion:</label>
+                                    <h6>{{ profile.profile.religion }}</h6>
+
+                                    <label for="">Email Address:</label>
+                                    <h6>{{ profile.email }}</h6>
+
+                                    <label for="">Mobile Number:</label>
+                                    <h6>{{ profile.profile.phonenumber }}</h6>
+
+                                    <label for="">Biography:</label>
+                                    <h6>{{ profile.profile.bio }}</h6>
+
+                                    <label for="">Country:</label>
+                                    <h6>{{ profile.profile.country }}</h6>
+
+                                    <label for="">State:</label>
+                                    <h6>{{ profile.profile.state }}</h6>
+
+                                    <label for="">L.G.A:</label>
+                                    <h6>{{ profile.profile.lga }}</h6>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <form action="{% url 'blog_viewprofile' %}" method="POST" enctype="multipart/form-data" style="font-size: 15px;" id="blogForm" class="m-0">
+                                          {% csrf_token %}
+                                          {{ profile_form|crispy }}
+                                          <div class="mt-3">
+                                            <input type="submit" value="Edit Profile"  class="home-btn">
+                                          </div>
+                                        </form>
+                                        
+                                    </div>
+                                </div>
+                              </div>
+
+                              <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                                  <div class="row">
+                                  {% for key in post %}
+                                    <div class="col-12 col-lg-12 col-xlg-12">
+                                      <div class="media">
+                                        <img class="mr-3 img-fluid" src="{{ key.image.url }}" alt="{{ key.author.username }}" width="170px">
+                                        <div class="media-body">
+                                          <h6 class="mt-0"><a href="{% url 'post_detail' key.slug %}" target="_blank">{{ key.title }} - [{{ key.category }}]</a></h6>
+                                          <p style="font-size: 13px;" >
+                                            <span class="mr-2"><i class="fa fa-user mr-1"></i> {{ key.author.username }}</span> | <span class="ml-2"><i class="fa fa-clock mr-1"></i> {{ key.date_created|date }}</span>
+                                          </p>
+                                          <p>
+                                            <span class="mr-2"><a href=""><i class="fa fa-edit text-primary" title="Click to Edit"></i></a></span> <span> <a href=""><i class="fa fa-trash text-danger" title="Click to Delete"></i></a></span>
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <hr>
+                                  {% endfor %}
+                                  <div class="text-center">
+                                    {% include 'frontend/pagination.html' %}
+                                  </div>
+                                  </div>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+                         
+                        
+                          
+                      </div>
+                  </div>
+                  <!-- End single blog -->
+              </div>
+
+              <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xlg-4">
+                {% include 'blog/sidebar.html' %}
+              </div>
+            </div>
+
+        </div>
+    </section>
+    
+{% endblock %}

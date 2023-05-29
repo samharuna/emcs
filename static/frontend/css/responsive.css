@@ -1,0 +1,477 @@
+/* ==========================================================================
+   	MEDIA QUERIES.
+   ========================================================================== */
+
+@media (max-width:1200px) { 
+
+.front-options{
+    margin-top: 20px;
+}
+    
+.front-options h4{
+    margin-bottom: 4px;
+}
+
+.front-options .row .col-md-6{
+    padding: 0px 10px;
+}
+
+.border-icon{
+    width: 55px;
+    height: 55px;
+    border: solid 1px #14213D;
+    position: relative;
+    float: left;
+    margin-right: 10px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.border-icon:hover{
+    border: solid 1px #9BC53D;
+    background: #9BC53D;
+}
+
+figure.icon-center{
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+}
+    
+}
+
+
+@media (max-width:992px) { 
+html {
+    font-size: 20px;
+}  
+    
+.container{
+    max-width: 95%;
+}
+    
+.top-header{
+    height: 35px;  
+}
+    
+header .container{
+    margin: 0px auto;
+    padding: 20px 0px;
+}
+    
+figure.brand{
+    width: 180px;
+}
+    
+.top-location{
+    float: right;
+    padding: 10px 0px;
+}
+    
+.email, .address, .phone{
+    display: inline-block;
+    margin-right: 10px;
+    width: 180px;
+    background: #fff;
+}
+    
+.address-icon, .mail-icon, .phone-icon{
+    width: 30px;
+    float: left;
+    margin-right: 10px;
+}
+    
+.carousel, .carousel-inner {
+    height: 700px;
+}
+    
+.carousel-caption{
+    top: 40%;
+}  
+        
+footer{
+    padding: 5px 0px 80px 0px;
+}
+    
+.footer-col{
+    padding: 20px 0px;
+} 
+    
+.last-col{
+    padding-bottom: 0px;
+}
+    
+.location-phone{
+    padding: 0px;
+}
+    
+.footer-col h5{
+    margin-bottom: 10px;
+} 
+
+.front-section{
+    margin-bottom: 20px;
+}
+
+.front-options .row .col-md-6{
+    padding: 10px;
+}
+    
+.center-div{
+    margin: 30px 0px;
+}
+    
+p.quote{
+    padding: 0px 100px;
+}  
+    
+.our-team{
+    margin-bottom: 30px;
+}
+    
+.about{
+    margin-bottom: 35px;
+}
+    
+.aside.services{
+    margin-bottom: 30px;
+}
+    
+.blog-right-side{
+    margin-top: 20px;
+}
+    
+.faq-side{
+    margin-top: 40px;
+    margin-bottom: 0px;
+}
+    
+.comments{
+    margin: 40px 0px;
+}
+    
+.careers-parallax{ 
+    height: 100%; 
+    padding: 30px 0px 30px 0px;
+}
+    
+.careers-pic{
+    margin-top: 30px;
+}
+    
+.error-page{
+    height: 768px; 
+}
+    
+.error-page .middle {
+    top: 55%;
+}
+    
+.bottom-box{
+    margin: 0px;
+}
+    
+.responsive-center{
+    margin: 25px 0px;
+}
+    
+.contact-left{ 
+    padding: 40px 20px;
+}
+    
+.contact-form{
+    padding: 0px 10px;
+    margin-top: 50px;
+}
+    
+.benefits{
+    padding: 20px;
+}
+     
+}
+
+@media (max-width:850px) { 
+.top-header, header{
+    display: none;
+} 
+
+.container{
+    max-width: 100%;
+}
+
+.maps::after{ 
+    width: 100%;
+	height:50%;
+	position: absolute;
+	content: "";
+	top: 0px;
+	left: 0px;
+    z-index:1;
+    display:block;
+    transition:all .3s ease;
+    background: -moz-linear-gradient(bottom, rgba(0,0,0,0) 4%, rgba(0,0,0,50) 100%); 
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.9))); 
+}
+    
+.sections::after{ 
+    width: 100%;
+	height:50%;
+	position: absolute;
+	content: "";
+	top: 0px;
+	left: 0px;
+    z-index:1;
+    display:block;
+    transition:all .3s ease;
+    background: -moz-linear-gradient(bottom, rgba(0,0,0,0) 4%, rgba(0,0,0,50) 100%); 
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.9))); 
+}
+    
+.btn-nav{
+    display: none;
+} 
+    
+.tags-lists .btn-nav{
+    display: inherit;
+}
+ 
+}
+
+@media (max-width:768px) { 
+footer{
+    padding: 2px 0px 0px 0px;
+}
+
+figure.footer-logo{
+    width: 170px;
+}
+    
+.footer-col{
+    padding: 15px 0px;
+} 
+  
+hr.footer{
+    margin: 10px auto 30px auto;
+}  
+
+.copytight{
+    float: none; 
+}
+    
+.social-footer{
+    float: none;
+    margin-top: 0px;
+    margin-top: 0px;
+    width: 175px;
+    margin: auto;
+}
+    
+.copytight p{
+    text-align: center;
+}
+    
+p.quote{
+    padding: 0px 70px;
+} 
+    
+.tabs .nav-tabs .nav-link {
+    padding: 15px;
+    margin: 0px 5px;
+}
+    
+.center-table{
+    margin: 30px 0px;
+}
+    
+.responsive-center{
+    margin: 0px;
+}
+    
+.all-services{
+    margin-bottom: 30px;
+}
+    
+.last-box{
+    margin-bottom: 0px;
+}
+    
+.tabs .tab-content .thumbnail-tab{
+    width: 100%;
+   float: none;
+   margin: 0px 0px 20px 0px;
+}
+    
+    
+.front-options .row .col-md-6{
+    padding: 5px;
+}
+      
+    
+.about-services .row .col-md-6{
+    padding: 15px;
+}
+    
+
+@media (max-width:576px) { 
+.carousel, .carousel-inner {
+    height: 670px;
+} 
+    
+.sections{
+    height: 300px; 
+}
+    
+.sections:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: linear-gradient(to bottom right, #000, #000);
+  opacity: 0.2;
+}
+    
+.pages-title{
+    bottom: 10px;
+    color: #FFF;
+}  
+    
+.pages-title h1{
+    margin-bottom: 5px;
+}
+    
+.pages-title p{
+    color: #FFF;
+}
+    
+p.quote{
+    padding: 0px 15px;
+    color: #808080;
+    font-size: 13px;
+} 
+    
+.counter-parallax{
+    height: 600px;
+    padding: 10px 0px;
+}
+    
+.counter-statistics{
+    padding: 5px 0px;
+}
+    
+.testimonials-box{
+    background: #FFF;
+    margin-top: 0px;
+    z-index: 2;
+    position: relative;
+    padding: 0px;
+}
+
+h3.autor{
+    text-align: center;
+    line-height: 2;
+    color: #333;
+    margin: 5px 0px;
+}
+
+h6.testimonial-title{
+    text-align: center;
+    color: #333
+}
+    
+.flickity-page-dots .dot{
+    width: 15px;
+    height: 15px;
+    background: #808080; 
+}
+    
+.front-thumbnail .figure-caption{
+    padding: 20px 20px 30px 20px;
+}
+    
+.error-page{
+    height: 600px; 
+}
+    
+.error-page .middle {
+    top: 50%;
+    left: 0%;
+    transform: translate(-0%, -0%);
+    padding: 0px 25px;
+}
+    
+}
+
+@media (max-width:480px) { 
+html {
+    font-size: 18px;
+}
+    
+p {
+  font-size: 14px;
+} 
+    
+.carousel-caption {
+  position: absolute;
+  right: 5%;
+  left: 5%;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+    
+.carousel-caption{
+    top: 45%;
+}
+    
+.carousel-caption h5{
+    text-transform: uppercase;
+    margin: 15px 0px 20px 0px;
+}
+    
+.bottom-footer{
+    padding: 0px 15px;
+}
+    
+.counter-parallax{
+    height: 535px;
+    padding: 5px 0px;
+}
+    
+.nav-pills a {
+    padding: 8px 15px;
+    line-height: 3.5;
+    margin: 5px;
+    font-size: 14px;
+}
+    
+.date-label{
+    padding: 10px 20px;
+}
+    
+hr.left{
+	width: 70px;
+    border-top: 3px solid #9BC53D;
+    margin: 15px 0px 15px 0px;
+}
+    
+.benefits{
+    padding: 15px;
+}
+    
+.careers-parallax{ 
+    padding: 10px 0px 10px 0px;
+}
+    
+.inner-color{
+   padding: 10px 0px;
+}
+
+
+    
+}

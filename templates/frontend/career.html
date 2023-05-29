@@ -1,0 +1,31 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{{ block.super }}| {{ key }}
+{% endblock %}
+
+{% block body %}
+    <section>
+        <div class="container">
+            <div class="section-title">
+                <h2>Open Positions</h2>
+                <hr class="center">
+                <p class="text-center">leap into electronic typesetting, remaining essentially unchanged</p>
+            </div>
+            <div class="row">
+            {% for key in career %}
+               <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xlg-4">
+                <div class="card position-box"> 
+                    <h4>{{ key.position }}</h4>
+                    <hr class="left">
+                    <p>{{ key.description }}</p>
+                    <h6><a href="{% url 'career_detail' key.slug %}" class="home-btn text-white">Read More</a></h6>
+                </div>
+              </div>
+            {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

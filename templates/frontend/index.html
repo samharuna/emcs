@@ -1,0 +1,315 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+
+{% block title %}
+{{ block.super }} | {{ key }}
+{% endblock %}
+
+{% block body %}
+    <!-- Start of Home Page -->
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">  
+        <ol class="carousel-indicators">
+        {% for key in home|slice:4 %}
+        {% if forloop.first %}
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>  
+        {% else %}
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li> 
+        {% endif %} 
+        {% endfor %}
+
+        </ol>  
+        <div class="carousel-inner">  
+        {% for key in home|slice:4 %}
+          {% if forloop.first %}
+            <div class="carousel-item active">  
+              <div class="carousel-img">
+                 <img src="{{ key.image.url}}" alt="{{ key.title }}" /> 
+              </div>
+                <div class="carousel-caption">  
+                    <h1>{{ key.title }}</h1>  
+                    <h5>{{ key.description }}</h5>
+                    <p class="my-4"><a href="{% url 'post_detail' key.slug %}" class="home-btn text-white">Read More</a></p>
+                </div>  
+            </div>
+          {% else %}
+            <div class="carousel-item">  
+              <div class="carousel-img">
+                 <img src="{{ key.image.url}}" alt="{{ key.title }}" /> 
+              </div>
+                <div class="carousel-caption">  
+                    <h1>{{ key.title }}</h1>  
+                    <h5>{{ key.description }}</h5>
+                    <p class="my-4"><a href="{% url 'post_detail' key.slug %}" class="home-btn text-white">Read More</a></p>
+                </div> 
+            </div>
+          {% endif %}
+        {% endfor %}
+        </div>  
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">  
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>  
+            <span class="sr-only">Previous</span>  
+        </a>  
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">  
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>  
+            <span class="sr-only">Next</span>  
+        </a>  
+    </div> 
+    <!-- End of Home Page -->
+    
+    <section>
+      <!-- Start of Services -->
+      <div class="container">
+          <div class="section-title">
+              <h2>Our Services</h2>
+              <hr class="center">
+              <p class="text-center">leap into electronic typesetting, remaining essentially unchanged</p>
+          </div>
+          <div class="row">
+          {% for key in service %}
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xlg-4 mb-2">
+                <div class="front-thumbnail">
+                    <figure class="box-pic"><a href="#"><img src="{{ key.image.url }}" alt="{{ key.title.name }}"></a></figure> 
+                    <div class="figure-caption">
+                        <h4>{{ key.title.name }}</h4>
+                        <hr class="center mb-3">
+                        <p>{{ key.description }}</p>
+                        <p><a href="{% url 'service_detail' key.slug %}" class="home-btn text-white">Read More</a></p>
+                    </div>
+                </div>
+            </div>
+          {% endfor %}
+          </div>
+      </div>
+      <!-- End of Services -->
+
+      <!-- Start of How It Work -->
+      <div class="works_area background-section" style="background-image: url({% static 'frontend/img/newsletter.jpg' %});">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xlg-4">
+                    <div class="single_works wow fadeInUp" data-wow-duration="1s" data-wow-delay=".4s">
+                        <span>01</span>
+                        <h3>Apply for loan</h3>
+                        <p>We will customize a loan based on the amount of cash your company need term</p>
+                        <a href="{% url 'log_up' %}" target="_blank" class="apply-btn text-dark">Create Account</a>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xlg-4">
+                    <div class="single_works wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">
+                        <span>02</span>
+                        <h3>Application review</h3>
+                        <p>We will customize a loan based on the amount of cash your company need term</p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xlg-4">
+                    <div class="single_works wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
+                        <span>03</span>
+                        <h3>Get funding fast</h3>
+                        <p>We will customize a loan based on the amount of cash your company need term</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      <!-- End of How It Work -->
+
+     
+    
+      <!-- Start of Statistic Counter -->
+      <div class="container-fluid background-section p-4" style="background-image: url({% static 'frontend/img/newsletter.jpg' %});">
+          
+          <div class="row">
+
+              <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xlg-3">
+                  <div class="statistic-counter">
+                      <div class="counter-icon">
+                          <i class="fa fa-users"></i>
+                      </div>
+                      <span class="counter-value">{{ total_users }}</span>
+                      <h3>Client{{ total_users|pluralize }}</h3>
+                  </div>
+              </div>
+
+              <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xlg-3">
+                  <div class="statistic-counter">
+                      <div class="counter-icon">
+                          <i class="fa fa-briefcase"></i>
+                      </div>
+                      <span class="counter-value">{{ total_loan_approved }}</span>
+                      <h3>Loan{{ total_loan_approved|pluralize }}</h3>
+                  </div>
+              </div>
+              <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xlg-3">
+                  <div class="statistic-counter">
+                      <div class="counter-icon">
+                          <i class="fa fa-piggy-bank"></i>
+                      </div>
+                      <span class="counter-value">{{ total_investment_approved }}</span>
+                      <h3>Investment{{ total_investment_approved|pluralize }}</h3>
+                  </div>
+              </div>
+              <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xlg-3">
+                  <div class="statistic-counter">
+                      <div class="counter-icon">
+                          <i class="fa fa-users"></i>
+                      </div>
+                      <span class="counter-value">{{ total_team }}</span>
+                      <h3>Staff</h3>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- End of Statistic Counter -->
+
+      <!-- Start of Blog Post -->
+      <div class="container">
+            <div class="section-title">
+              <h2>Recent Posts</h2>
+              <hr class="center">
+              <p class="text-center">leap into electronic typesetting, remaining essentially unchanged</p>
+            </div>
+          <div class="row">
+            {% for key in latest_post|slice:3 %}
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xlg-4">
+                <div class="single-blog ">
+                    <div class="blog-image">
+                        <a class="image-scale" href="{% url 'post_detail' key.slug %}"><img src="{{ key.image.url }}" alt="{{ key.title }}" width="100%"></a>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="admin-type"><i class="fa fa-user icons"></i> <a href="{% url 'blog_profile' key.author.username %}" target="_blank">{{ key.author.username }}</a></span>
+                            <span class="date-type"><i class="fa fa-calendar icons"></i> {{ key.date_created|date }}</span>
+                            <span class="comments-type"><i class="fa fa-tag icons"></i> {{ key.tags }}</span>
+                        </div>
+
+                        <a href="{% url 'post_detail' key.slug %}">
+                            <h4>{{ key.title }}</h4>
+                        </a>
+                        <p>{{ key.description }}</p>
+                        <a class="post-btn text-white" href="{% url 'post_detail' key.slug %}"> Read more</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+          </div>
+      </div>
+      <!-- End of Blog Post -->
+
+      <!-- Start of Frequent Asked Question -->
+      <div class="container">
+          <div class="section-title">
+            <h2>Frequent Asked Questions</h2>
+            <hr class="center">
+            <p class="text-center">leap into electronic typesetting, remaining essentially unchanged</p>
+          </div>
+        <div class="row">
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+            <div class="accordion" id="accordionExample">
+            {% for key in faq %}
+            {% if forloop.counter == 1 %}
+              <div class="card mb-1">
+                <div class="card-header" id="heading-1">
+                  <h5 class="mb-0 card-header-title"> <a class="btn-link text-left collapsed" role="button" data-toggle="collapse" data-target="#collapse-1" aria-expanded="fa" aria-controls="collapse-1">{{ key.title }}</a> </h5>
+                </div>
+                <div id="collapse-1" class="collapse" data-parent="#accordionExample" aria-labelledby="heading-1">
+                  <div class="card-body body-card">{{ key.body }} </div>
+                </div>
+              </div>
+            {% endif %}
+            {% endfor %}
+            
+            {% for key in faq %}
+            {% if forloop.counter == 2 %}
+              <div class="card mb-1">
+                <div class="card-header" id="heading-2">
+                  <h5 class="mb-0 card-header-title"> <a class="btn-link text-left collapsed" role="button" data-toggle="collapse" data-target="#collapse-2" aria-expanded="false" aria-controls="collapse-2">{{ key.title }}</a> </h5>
+                </div>
+                <div id="collapse-2" class="collapse" data-parent="#accordionExample" aria-labelledby="heading-2">
+                  <div class="card-body body-card">{{ key.body }}</div>
+                </div>
+              </div>
+            {% endif %}
+            {% endfor %}
+
+            {% for key in faq %}
+            {% if forloop.counter == 3 %}
+              <div class="card mb-1">
+                <div class="card-header" id="heading-3">
+                  <h5 class="mb-0 card-header-title"> <a class="btn-link text-left collapsed" role="button" data-toggle="collapse" data-target="#collapse-3" aria-expanded="false" aria-controls="collapse-3">{{ key.title }}</a> </h5>
+                </div>
+                <div id="collapse-3" class="collapse" data-parent="#accordionExample" aria-labelledby="heading-3">
+                  <div class="card-body body-card">{{ key.body }}</div>
+                </div>
+              </div>
+            {% endif %}
+            {% endfor %}
+
+            {% for key in faq %}
+            {% if forloop.counter == 4 %}
+              <div class="card mb-1">
+                <div class="card-header" id="heading-4">
+                  <h5 class="mb-0 card-header-title"> <a class="btn-link text-left collapsed" role="button" data-toggle="collapse" data-target="#collapse-4" aria-expanded="false" aria-controls="collapse-4">{{ key.title }}</a> </h5>
+                </div>
+                <div id="collapse-4" class="collapse" data-parent="#accordionExample" aria-labelledby="heading-4">
+                  <div class="card-body body-card">{{ key.body }}</div>
+                </div>
+              </div>
+            {% endif %}
+            {% endfor %}
+
+            {% for key in faq %}
+            {% if forloop.counter == 5 %}
+              <div class="card mb-1">
+                <div class="card-header" id="heading-5">
+                  <h5 class="mb-0 card-header-title"> <a class="btn-link text-left collapsed" role="button" data-toggle="collapse" data-target="#collapse-5" aria-expanded="false" aria-controls="collapse-5">{{ key.title }}</a> </h5>
+                </div>
+                <div id="collapse-5" class="collapse" data-parent="#accordionExample" aria-labelledby="heading-5">
+                  <div class="card-body body-card">{{ key.body }}</div>
+                </div>
+              </div>
+            {% endif %}
+            {% endfor %}
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End of Frequent Asked Question -->
+
+      <!-- Start of Testimonial -->
+      <div class="section-bg style-1 mt-4" style="background-image: url({% static 'frontend/img/testifer.jpg' %});">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xlg-7 text-center mx-auto">
+              <div class="section-title">
+                  <h2>Testimonial</h2>
+                  <hr class="center">
+                  <p class="text-center  text-white">Happy Clients</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="owl-slide owl-carousel owl-testimonial">
+          {% for key in testimony|slice:10 %}
+            <div class="ftco-testimonial-1">
+              <div class="ftco-testimonial-vcard d-flex align-items-center mb-4">
+                <img src="{{ key.image.url }}" alt="{{ key.name }}" class="img-fluid mr-3">
+                <div>
+                  <h3>{{ key.name }}</h3>
+                  <span>{{ key.occupation }}</span>
+                </div>
+              </div>
+              <div>
+                <p class="text-white text-justify">&ldquo;{{ key.body }}&rdquo;</p>
+              </div>
+            </div>
+          {% endfor %}
+          </div>
+        </div>
+      </div>
+      <!-- End of Testimonial -->
+    </section>
+{% endblock %}

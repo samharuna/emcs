@@ -1,0 +1,71 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{{ block.super }}| {{ key }}
+{% endblock %}
+
+{% block body %}
+    <section>
+        <!-- Start of Services -->
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Services</h2>
+                <hr class="center">
+                <p class="text-center">leap into electronic typesetting, remaining essentially unchanged</p>
+            </div>
+            <div class="row">
+               {% for key in service %} 
+                <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xlg-4 all-services mt-3">
+                    <div class="front-thumbnail">
+                        <figure class="box-pic"><a href="{% url 'service_detail' key.slug %}"><img src="{{ key.image.url }}" alt="{{ key.title.name }}" width="100%"></a></figure> 
+                        <div class="figure-caption">
+                            <h4>{{ key.title.name }}</h4>
+                            <hr class="center mb-3">
+                            <p>{{ key.description }}</p>
+                            <p><a href="{% url 'service_detail' key.slug %}" class="home-btn text-white">Read More</a></p>
+                        </div>
+                    </div>
+                </div>
+               {% endfor %} 
+            </div>
+        </div>
+        <!-- End of Services -->
+        
+        <!-- Start of How It Work -->
+        <div class="works_area background-section" style="background-image: url({% static 'frontend/img/newsletter.jpg' %});">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xlg-4">
+                        <div class="single_works wow fadeInUp" data-wow-duration="1s" data-wow-delay=".4s">
+                            <span>01</span>
+                            <h3>Apply for loan</h3>
+                            <p>We will customize a loan based on the amount of cash your company need term</p>
+                            <a href="{% url 'log_up' %}" target="_blank" class="apply-btn mt-2">Create Account</a>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xlg-4">
+                        <div class="single_works wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">
+                            <span>02</span>
+                            <h3>Application review</h3>
+                            <p>We will customize a loan based on the amount of cash your company need term</p>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xlg-4">
+                        <div class="single_works wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
+                            <span>03</span>
+                            <h3>Get funding fast</h3>
+                            <p>We will customize a loan based on the amount of cash your company need term</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of How It Work -->
+        
+    </section>
+    
+{% endblock %}

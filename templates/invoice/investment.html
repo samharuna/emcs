@@ -1,0 +1,160 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+    {% block title %}
+       {{ key }}
+    {% endblock %}
+    </title>
+    <link rel="shortcut icon" href="{% static 'backend/assets/img/favicon.ico' %}" type="image/x-icon">
+    <link href="{% static 'invoice/css/bootstrap.min.css' %}" rel="stylesheet" />
+    <style type="text/css">
+      
+
+        body{
+            background-color: #fff;
+            line-height: 17px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 15px;
+        }
+
+        @page{
+            size: A4 portrait;
+            margin-top: 1cm;
+            margin-bottom: 1.5cm;
+            margin-left: 1.8cm;
+            margin-right: 1.8cm;
+        }
+
+        .card {
+            border: #3d405c;
+            border: none;
+            -webkit-box-shadow: 0px 1px 2px 1px rgba(154, 154, 204, 0.22);
+            -moz-box-shadow: 0px 1px 2px 1px rgba(154, 154, 204, 0.22);
+            box-shadow: 0px 1px 2px 1px rgba(154, 154, 204, 0.22);
+        }
+
+        .card-header {
+            background-color: #fff;
+            border-bottom: 1px solid #e6e6f2;
+            padding: 20px;
+        }
+
+        .name{
+            font-size: 18px;
+            font-weight: bolder;
+            text-transform: uppercase;
+            margin-top: 20px;
+        }
+
+        .snumber {
+            text-align: right;
+        }
+    </style>
+    
+</head>
+<body>
+     <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12 padding">
+                <div class="card border-info p-4">
+                    <div class="card-body">
+                        <div class="row my-3">
+                            <div class="mb-3" style="font-size: 13px;">
+                                <div style="margin-bottom: 3px;">
+                                    <img src="media/images/logo.png" alt="" class="img-fluid" >
+                                </div>
+                                <div><span class="text-dark mr-2" style="font-weight: bold; font-size: 10px;">HEAD OFFICE:</span> Number 7, Abdul Razaq Afolabi Street, Off Ailegun Road, Ejigbo, Lagos State</div>
+                                <div><span class="text-dark mr-2" style="font-weight: bold; font-size: 10px;">EMAIL ADDRESS:</span> empowermultipurposecooperative@gmail.com</div>
+                                <div><span class="text-dark mr-2" style="font-weight: bold; font-size: 10px;">TELEPHONE:</span> 09031926026, 08033152762</div>
+                                <div><span class="text-dark mr-2" style="font-weight: bold; font-size: 10px;">BRANCH OFFICE:</span> Shop 33, Rauf Aregbesola Model Market, Egbeda, Gowon Estate, Lagos State</div>
+                            </div>
+
+                            <hr style="margin-top: 5px; margin-bottom: 5px;">
+
+                            <div class="snumber">
+                                <p><span class="text-dark mr-2" style="font-weight: bold;">Application Form Number:</span> {{ investment.id }}</p>
+                            </div>
+
+                            <div class="mb-1">
+                                <p><img src="{{ investment.investor.profile.image.path }}" alt="{{ investment.investor.get_full_name }}" width="200px" height="200px"></p>
+                                <div class="text-dark mb-1 mr-2 name" style="font-weight: bold; text-transform: uppercase;">{{ investment.investor.profile.title }} {{ investment.investor.last_name }}, {{ investment.investor.first_name }} {{ investment.investor.profile.middlename }}</div>
+                                <div class="mt-2"><span class="text-dark mr-2" style="font-weight: bold;">Date of Birth:</span> {{ investment.investor.profile.dob }}</div>
+                                <div><span class="text-dark mb-1 mr-2" style="font-weight: bold;">Email Address:</span> {{ investment.investor.email }}</div>
+                                <div><span class="text-dark mb-1 mr-2" style="font-weight: bold;">Phone Number:</span> {{ investment.investor.profile.phonenumber }}</div>
+                                <div><span class="text-dark mb-1 mr-2" style="font-weight: bold;">Gender:</span> {{ investment.investor.profile.gender }}</div>
+                                <div><span class="text-dark mb-1 mr-2" style="font-weight: bold;">Religion:</span> {{ investment.investor.profile.religion }}</div>
+                                <div><span class="text-dark mb-1 mr-2" style="font-weight: bold;">Marital Status:</span> {{ investment.investor.profile.marital }}</div>
+                                <div><span class="text-dark mb-1 mr-2" style="font-weight: bold;">Spouse Phone Number:</span> {{ investment.spousephone }}</div>
+                                <div><span class="text-dark mb-1 mr-2" style="font-weight: bold;">Nearest Bus Stop:</span> {{ investment.investor.profile.busstop }}</div>
+                                <div><span class="text-dark mb-1 mr-2" style="font-weight: bold;">Residential Address:</span> {{ investment.investor.profile.address }}</div>
+                                <div><span class="text-dark mb-1 mr-2" style="font-weight: bold;">National Identity Card:</span> {{ investment.identity }}</div>
+                                <div><span class="text-dark mb-1 mr-2" style="font-weight: bold;">National Identity Card Number:</span> {{ investment.cardnumber }}</div>
+                                <div><span class="text-dark mb-1 mr-2" style="font-weight: bold;">National Identity Card Issuer Date:</span> {{ investment.cardissuer }}</div>
+                                <div><span class="text-dark mb-1 mr-2" style="font-weight: bold;">National Identity Card Expiry Date:</span> {{ investment.cardexpiry }}</div>
+                                <div><span class="text-dark mb-1 mr-2" style="font-weight: bold;">BVN:</span> {{ investment.bvn }}</div>
+                                <div><span class="text-dark mb-1 mr-2" style="font-weight: bold;">Occupation:</span> {{ investment.investor.profile.occupation }}</div>
+                                <div><span class="text-dark mb-1 mr-2" style="font-weight: bold;">Office Address:</span> {{ investment.investor.profile.office }}</div>
+                                <div><span class="text-dark mb-1 mr-2" style="font-weight: bold;">Country:</span> {{ investment.investor.profile.country }}</div>
+                                <div><span class="text-dark mb-1 mr-2" style="font-weight: bold;">State:</span> {{ investment.investor.profile.state }}</div>
+                                <div><span class="text-dark mb-1 mr-2" style="font-weight: bold;">LGA:</span> {{ investment.investor.profile.lga }}</div>
+                                <div><span class="text-dark mb-1 mr-2" style="font-weight: bold;">Home Town:</span> {{ investment.investor.profile.home }}</div>
+                            </div>
+
+                            <hr style="margin-top: 20px; margin-bottom: 20px;">
+
+                            <div class="mb-3">
+                                <p style="margin-bottom: 5px; font-weight: bold; text-decoration:underline;">INVESTMENT INFORMATION:</p>
+                                <div><span class="text-dark mb-1 mr-2" style="font-weight: bold;">Amount Investing for (Figure):</span><span style="text-decoration: line-through;">N</span>{{ investment.amount }}</div>
+                                <div><span class="text-dark mb-1 mr-2" style="font-weight: bold;">Amount Investing for (Words):</span> {{ investment.words }}</div>
+                                <div><span class="text-dark mb-1 mr-2" style="font-weight: bold;">Investment Cycle:</span> {{ investment.duration }} Months</div>
+                                <div><span class="text-dark mb-1 mr-2" style="font-weight: bold;">Investment Interest:</span> {{ investment.interest }}%</div>
+                                <div><span class="text-dark mb-1 mr-2" style="font-weight: bold;">Date Applied:</span> {{ investment.date_created }}</div>
+                                <div><span class="text-dark mb-1 mr-2" style="font-weight: bold;">Date Invested:</span> {{ investment.investment_starts }}</div>
+                                <div><span class="text-dark mb-1 mr-2" style="font-weight: bold;">Maturity Date:</span> {{ investment.investment_ends }}</div>
+                            </div>
+
+                            <hr style="margin-top: 20px; margin-bottom: 20px;">
+
+                            <div class="mb-5">
+                                <p style="margin-bottom: 5px; font-weight: bold; text-decoration:underline;">NEXT OF KIN'S INFORMATION:</p>
+                                <p><img src="{{ investment.next_kin_image.path }}" alt="{{ investment.guarantor }}" width="200px" height="200px"></p>
+                                <div><span class="text-dark mb-1 mr-2" style="font-weight: bold;">Full Name:</span> {{ investment.next_kin }}</div>
+                                <div><span class="text-dark mb-1 mr-2" style="font-weight: bold;">Phone Number:</span> {{ investment.next_kin_mobile }}</div>           
+                                <div><span class="text-dark mb-1 mr-2" style="font-weight: bold;">Email Address:</span> {{ investment.next_kin_email }}</div>           
+                                <div><span class="text-dark mb-1 mr-2" style="font-weight: bold;">Relationship with Next of Kin:</span> {{ investment.relationship}}</div>           
+                                <div><span class="text-dark mb-1 mr-2" style="font-weight: bold;">Occupation:</span> {{ investment.next_kin_occupation }}</div>  
+                                <div><span class="text-dark mb-1 mr-2" style="font-weight: bold;">Residential Address:</span> {{ investment.next_kin_address }}</div>           
+                                <div><span class="text-dark mb-1 mr-2" style="font-weight: bold;">Office Address:</span> {{ investment.next_kin_office }}</div>           
+                                
+
+                                <p style="margin-top: 100px;">
+                                    <span style="font-weight: bold;" class="mr-3"> ---------------------------------------------------- </span><br>
+                                    <span>Applicant's Signature & Date</span><br>
+                                    <span style="font-weight: bold; text-transform: uppercase;">{{ investment.investor.last_name }}, {{ investment.investor.first_name }} {{ investment.investor.profile.middlename }}</span>
+                                </p>
+                                       
+                            </div>
+
+                            <div>
+                                <p style="margin-top: 100px;">
+                                    <span style="font-weight: bold;" class="mr-3"> ---------------------------------------------------- </span><br>
+                                    <span >Next of Kin's Signature & Date</span><br>
+                                    <span style="font-weight: bold;">{{ investment.next_kin }}</span>
+                                </p>  
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+    <script src="{% static 'invoice/js/bootstrap.bundle.min.js' %}"  type="text/javascript"></script>
+    <script src="{% static 'invoice/js/jquery.min.js' %}"  type="text/javascript"></script>
+</html>

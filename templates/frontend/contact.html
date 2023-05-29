@@ -1,0 +1,95 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{{ block.super }}| {{ key }}
+{% endblock %}
+
+{% block body %}
+    <section class="section">
+        <div class="container">
+            <div class="col-12 col-lg-12">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    <strong>EMCS: {{ message }}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endfor %}
+            </div>
+        {% for key in detail %}
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-12 col-xlg-12">
+                    <div class="section-title text-center">
+                        <h2>Get In Touch</h2>
+                        <hr class="center">
+                        <div class="spacer-15"></div>
+                        <p class="text-muted mt-3 text-center">{{ key.title }}</p>
+                        <div class="spacer-30"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xlg-4">
+                    <div class="contact-page">
+                        <h4>Office Address:</h4>
+                        <hr class="center">
+                        <div class="contact-info">
+                            <span><i class="fa fa-map-marker-alt fa-1x mr-2"></i>{{ key.branch }}</span>
+                        </div>
+                       
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xlg-4">
+                    <div class="contact-page">
+                        <h4>Email Address:</h4>
+                        <hr class="center">
+                        <div class="contact-info">
+                            <span style="font-size: 20px;"><i class="fa fa-envelope mr-2"></i><a href="mailto:{{ key.email }}">{{ key.email }}</a></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xlg-4">
+                    <div class="contact-page">
+                        <h4>Call Office:</h4>
+                        <hr class="center">
+                        <div class="contact-info">
+                            <span><i class="fa fa-phone-alt fa-1x mr-2"></i><a href="tel:{{ key.phone }}">{{ key.phone }}</a>, <a href="tel:{{ key.mobile }}">{{ key.mobile }}</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+            <div class="row mt-4">
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xlg-6">
+                    <div class="map video-app-box mt-30">
+                        <iframe src="{{ key.map_url }}" style="border: 0" allowfullscreen width="100%" height="415px" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+        {% endfor %}
+                <!-- col end -->
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xlg-6">
+                    <div class="custom-form mt-30">
+                        <form method="POST" action="." name="contact-form" id="contact-form">
+                            {% csrf_token %}
+                            {{ contactForm|crispy }}
+
+                            <div class="row">
+                                <div class="col-sm-12 mt-3">
+                                    <button type="submit" class="home-btn">Send Message <i class="fa fa-envelope"></i> </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+    </section>
+
+{% endblock %}

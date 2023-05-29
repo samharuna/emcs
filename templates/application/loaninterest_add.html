@@ -1,0 +1,63 @@
+{% extends 'backend/main.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{{ block.super }} | {{ key }}
+{% endblock %}
+
+{% block body %}
+    <div class="content-wrapper">
+        <!-- START PAGE CONTENT-->
+        <div class="page-heading">
+            <h1 class="page-title">Loan Interest Application</h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item mr-2"><a href="{% url 'dashboard' %}"><i class="fa fa-home font-20"></i></a></li>
+                <li class="breadcrumb-item mr-2"><a href="{% url 'view_loaninterest' %}">View loan interest</a></li>
+                <li class="breadcrumb-item">Add loan interest</li>
+            </ol>
+        </div>
+        <div class="page-content fade-in-up">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                            <strong>EMCS:</strong> {{ message}}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}
+                    <div class="ibox">
+                        <div class="ibox-head">
+                            <div class="ibox-title">Loan Interest</div>
+                        </div>
+                        <div class="ibox-body">
+                            <form action="" method="POST" enctype="multipart/form-data" style="margin: 5px; padding: 10px; line-height: 10px;">
+                                {% csrf_token %}
+
+                                <fieldset class="border border-dark p-3 mb-3">
+                                    <legend class="w-auto h5">Loan Interest Form</legend>
+
+                                    <div class="form-row">
+                                        <div class="col-12 col-lg-12 form-group mb-2">
+                                            {{ form|crispy }}	
+                                        </div>
+                                    </div>	
+                                </fieldset>
+                            
+                                <div class="form-row">
+                                    <input type="submit" value="Submit Now" class="btn btn-primary btn-md btn-block col-12 col-lg-2">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                </div>
+            <div>
+        </div>
+    </div>
+        <!-- END PAGE CONTENT-->
+{% endblock %}

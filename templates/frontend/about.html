@@ -1,0 +1,171 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{{ block.super }}| {{ key }}
+{% endblock %}
+
+{% block body %}
+    <section>
+        <!-- Start of Our History -->
+        <div class="container">
+            <div class="section-title">
+                <h2>Our History</h2>
+                <hr class="center">
+                {% for key in about %}
+                <p class="text-center">{{ key.title }}</p>
+                {% endfor %}
+            </div>
+            <div class="row">
+            {% for key in about %}
+              <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xlg-6">
+                <div class="about"> 
+                    <h2>{{ key.description }}</h2>
+                    <hr class="left">
+                    <p>
+                        {{ key.body }}
+                    </p>
+                </div>  
+              </div>
+              <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xlg-6">
+                <figure class="about-pic"><img src="{{ key.image.url }}" alt="{{ key.title }}"></figure> 
+              </div>
+            {% endfor %}
+            </div>
+        </div>
+        <!-- End of Our History -->
+
+        <!-- Start of Statement -->
+        <div class="container">
+            <div class="row">
+            {% for key in statement %}
+                <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xlg-4">
+                    <div class="about-mission">
+                        <div class="figure-caption">
+                            <h4>{{ key.purpose.name }}</h4>
+                            <hr class="center">
+                            <p>
+                                {{ key.body }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+        <!-- End of Statement -->
+
+        <!-- Start of Statistic Counter -->
+        <div class="container-fluid background-section p-5" style="background-image: url({% static 'frontend/img/newsletter.jpg' %});">
+            <div class="row">
+
+                <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xlg-3">
+                    <div class="statistic-counter">
+                        <div class="counter-icon">
+                            <i class="fa fa-users"></i>
+                        </div>
+                        <span class="counter-value">{{ total_users }}</span>
+                        <h3>Client{{ total_users|pluralize }}</h3>
+                    </div>
+                </div>
+
+                <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xlg-3">
+                    <div class="statistic-counter">
+                        <div class="counter-icon">
+                            <i class="fa fa-briefcase"></i>
+                        </div>
+                        <span class="counter-value">{{ total_loan_approved }}</span>
+                        <h3>Loan{{ total_loan_approved|pluralize }}</h3>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xlg-3">
+                    <div class="statistic-counter">
+                        <div class="counter-icon">
+                            <i class="fa fa-piggy-bank"></i>
+                        </div>
+                        <span class="counter-value">{{ total_investment_approved }}</span>
+                        <h3>Investment{{ total_investment_approved|pluralize }}</h3>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xlg-3">
+                    <div class="statistic-counter">
+                        <div class="counter-icon">
+                            <i class="fa fa-users"></i>
+                        </div>
+                        <span class="counter-value">{{ total_team }}</span>
+                        <h3>Staff</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of Statistic Counter -->
+
+        <!-- Start of How It Work -->
+        <div class="works_area background-section" style="background-image: url({% static 'frontend/img/newsletter.jpg' %});">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xlg-4">
+                        <div class="single_works wow fadeInUp" data-wow-duration="1s" data-wow-delay=".4s">
+                            <span>01</span>
+                            <h3>Apply for loan</h3>
+                            <p>We will customize a loan based on the amount of cash your company need term</p>
+                            <a href="{% url 'log_up' %}" target="_blank" class="apply-btn text-dark">Create Account</a>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xlg-4">
+                        <div class="single_works wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">
+                            <span>02</span>
+                            <h3>Application review</h3>
+                            <p>We will customize a loan based on the amount of cash your company need term</p>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xlg-4">
+                        <div class="single_works wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
+                            <span>03</span>
+                            <h3>Get funding fast</h3>
+                            <p>We will customize a loan based on the amount of cash your company need term</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of How It Work -->
+
+        <!-- Start of Testimonial -->
+         <div class="section-bg style-1 mt-4" style="background-image: url({% static 'frontend/img/testifer.jpg' %});">
+            <div class="container">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xlg-7 text-center mx-auto">
+                <div class="section-title">
+                    <h2>Testimonial</h2>
+                    <hr class="center">
+                    <p class="text-center  text-white">Happy Clients</p>
+                </div>
+                </div>
+            </div>
+
+            <div class="owl-slide owl-carousel owl-testimonial">
+            {% for key in testimony|slice:"10" %}
+                <div class="ftco-testimonial-1">
+                <div class="ftco-testimonial-vcard d-flex align-items-center mb-4">
+                    <img src="{{ key.image.url }}" alt="{{ key.name }}" class="img-fluid mr-3">
+                    <div>
+                    <h3>{{ key.name }}</h3>
+                    <span>{{ key.occupation }}</span>
+                    </div>
+                </div>
+                <div>
+                    <p class="text-white text-justify">&ldquo;{{ key.body }}&rdquo;</p>
+                </div>
+                </div>
+            {% endfor %}
+            </div>
+            </div>
+        </div>
+        <!-- End of Testimonial -->
+        
+    </section>
+{% endblock %}

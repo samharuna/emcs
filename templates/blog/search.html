@@ -1,0 +1,82 @@
+{% extends 'blog/page.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{{ block.super }}| {{ key }}
+{% endblock %}
+
+{% block body %}
+  <section>
+    <div class="container">
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+          <strong><span style="font-size: 14px; font-weight:800;">SEARCH RESULT!:</span></strong> {{ post.count }} result{{ post.count|pluralize }} containing "{{ search }}" were found in the post
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="row">
+
+          <div class="col-12 col-sm-6 col-md-8 col-lg-8 col-xlg-8">
+            {% for key in post %}
+              <!-- Start single blog -->
+              <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+                  <div class="single-blog ">
+                      <div class="blog-image">
+                          <a class="image-scale" href="{% url 'post_detail' key.slug %}"><img src="{{ key.image.url }}" alt="{{ key.title }}" width="100%"></a>
+                      </div>
+                      <div class="blog-content">
+                          <div class="blog-meta">
+                              <span class="admin-type"><i class="fa fa-user icons"></i> <a href="{% url 'blog_profile' key.author.username %}" target="_blank">{{ key.author.username }}</a></span>
+                              <span class="date-type"><i class="fa fa-calendar icons"></i> {{ key.date_created }}</span>
+                              <span class="comments-type"><i class="fa fa-comments icons"></i> 13</span>
+                              <span class="comments-type"><i class="fa fa-eye icons"></i> {{ key.view_count }}</span>
+                          </div>
+
+                          <a href="{% url 'post_detail' key.slug %}">
+                              <h4>{{ key.title }} - [{{ key.category }}]</h4>
+                          </a>
+                          <p>{{ key.description }}</p>
+                          <a class="post-btn" href="{% url 'post_detail' key.slug %}"> Read more</a>
+                      </div>
+                  </div>
+              </div>
+              <!-- End single blog -->
+              <hr>
+            {% endfor %}
+          </div>
+
+          <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xlg-4">
+            {% include 'blog/sidebar.html' %}
+          </div>
+        </div>
+
+        <div class="pagination-box">
+          <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-start">
+
+                  <li class="page-item">
+                      {% if post.has_previous %}
+                      <a class="page-link" href="?search={{ search }}&page={{ post.previous_page_number }}" tabindex="-1">Previous</a>
+                      {% endif %}
+                  </li>
+                  
+                  <li class="page-item"><a class="page-link" href="#">
+                      Page {{ post.number }} of {{ post.paginator.num_pages }}
+                  </a></li>
+
+                  <li class="page-item">
+                      {% if post.has_next %}
+                      <a class="page-link" href="?search={{ search }}&page={{ post.next_page_number }}">Next</a>
+                      {% endif %}
+                  </li>
+              
+              </ul>
+          </nav> 
+        </div>
+
+    </div>
+  </section>
+    
+{% endblock %}

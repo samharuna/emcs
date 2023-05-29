@@ -1,0 +1,61 @@
+{% extends 'backend/main.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{{ block.super }} | {{ key }}
+{% endblock %}
+
+{% block body %}
+    <div class="content-wrapper">
+        <!-- START PAGE CONTENT-->
+       <div class="page-heading">
+            <h1 class="page-title">Team Post</h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item mr-2"><a href="{% url 'dashboard' %}"><i class="fa fa-home font-20"></i></a></li>
+                <li class="breadcrumb-item mr-2 text-info"><a href="{% url 'view_team' %}">View Teams</a></li>
+                <li class="breadcrumb-item">Update Team</li>
+            </ol>
+        </div>
+        <div class="page-content fade-in-up">
+            <div class="row">
+                <div class="col-12 col-sm-10 col-md-12 col-lg-12 col-xlg-12">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                            <strong>EMCS:</strong> {{ message}}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}
+                    <div class="ibox">
+                        <div class="ibox-head">
+                            <div class="ibox-title">Update Team Post</div>
+                            <div class="ibox-tools">
+                                <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                                <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="{% url 'view_team' %}">View Team</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ibox-body">
+                            <form action="" method="POST" enctype="multipart/form-data" style="margin: 10px; padding: 10px; line-height: 10px;">
+                                {% csrf_token %}
+                                {{ form|crispy }}
+
+                                <div class="text-left my-3">
+                                    <input type="submit" value="Update Now" class="btn btn-primary btn-md">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                </div>
+            <div>
+        </div>
+    </div>
+        <!-- END PAGE CONTENT-->
+{% endblock %}

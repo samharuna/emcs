@@ -1,0 +1,79 @@
+{% extends 'accounts/auth.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{{ block.super }}| {{ key }}
+{% endblock %}
+
+{% block body %}
+  <div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+      <div class="content-wrapper d-flex align-items-center auth">
+        <div class="row flex-grow">
+          <div class="col-11 col-sm-8 col-md-6 col-lg-4 col-xlg-4 mx-auto">
+           
+            <div class="auth-form-light text-left p-4">
+              <div class="brand-logo ml-2">
+                {% for key in header %}
+                <img src="{{ key.image.url }}" height="30px" width="100%" alt="{{ key.name }}">
+                {% endfor %}
+              </div>
+              <h6 class="font-weight-light ml-2">Sign in to Dashboard.</h6>
+               {% for message in messages %}
+                  <p class="alert alert-{{ message.tags }} py-2 mx-2">
+                    {{ message }}
+                  </p>
+                {% endfor %}
+              <form action="" method="POST" class="pt-2" style="margin: 5px; padding: 5px; line-height: 2px;">
+                {% csrf_token %}
+                
+                {{ form|crispy }}
+
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="eye-show" onclick="MyFunction()">
+                    <span id="show1"><i class="fa fa-toggle-on mr-1"></i><span style="font-size: 14px;">Hide Password</span></span>
+                    <span id="show2"><i class="fa fa-toggle-off mr-1"></i><span style="font-size: 14px;">Show Password</span></span>
+                  </div>
+
+
+                  <a href="{% url 'reset' %}" class="auth-link text-danger">Forgot password?</a>
+                </div>
+
+                <div class="text-center">
+                  <input type="submit" value="Sign In">
+                </div>
+                
+                <div class="form-format text-success"><a href="{% url 'log_up' %}" class="text-info">Don't have an account? click here</a></div>
+                <div class="form-format2"><a href="{% url 'home' %}">To our home page click here</a></div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- content-wrapper ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <script>
+    function MyFunction() {
+      var a = document.getElementById("password")
+      var b = document.getElementById("show1")
+      var c = document.getElementById("show2")
+
+      if(a.type === "password"){
+        a.type = "text"
+        b.style.display = "block"
+        c.style.display = "none"
+      }
+      else{
+        a.type = "password"
+        b.style.display = "none"
+        c.style.display = "block"
+      }
+    }
+  </script>
+{% endblock %}
+
+  

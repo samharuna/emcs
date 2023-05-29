@@ -1,0 +1,46 @@
+{% extends 'blog/page.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{{ block.super }}| {{ key }}
+{% endblock %}
+
+{% block body %}
+      <section>
+        <div class="container">
+            <div class="row justify-content-center">
+
+               <div class="col-12 col-lg-12">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                  <strong>EMCS: </strong> {{ message }}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                {% endfor %}
+              </div>
+              
+              <div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xlg-8">
+                <div class="card">
+                  <p class="text-center mt-3 m-0">Delete an existing post here</p>
+                  <hr class="center">
+                  <div class="card-body">
+                    <p class="text-center mx-3 mt-0">Are you sure you want to delete <b>"{{ item }}"</b> from the posts?</p>
+                    <form action="" method="POST" id="blogForm">
+                      {% csrf_token %}
+                     
+                      <div class="text-center">
+                        <input type="submit" value="Confirm" class="btn btn-sm btn-primary col-3">
+                        <a href="{% url 'blog_view' %}" class="btn btn-sm btn-danger col-3">Cancel</a>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </section>
+    
+{% endblock %}

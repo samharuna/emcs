@@ -1,0 +1,70 @@
+{% extends 'accounts/auth.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{{ block.super }}| {{ key }}
+{% endblock %}
+
+{% block body %}
+  <div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+      <div class="content-wrapper d-flex align-items-center auth">
+        <div class="row flex-grow">
+          <div class="col-11 col-sm-8 col-md-6 col-lg-4 col-xlg-5 mx-auto">
+            {% for message in messages %}
+              <p class="alert alert-{{ message.tags }} p-2">
+                {{ message }}
+              </p>
+            {% endfor %}
+            <div class="auth-form-light text-sleft pt-4 pb-3 px-3 mb-4">
+              <div class="brand-logo ml-0">
+                {% for key in header %}
+                <img src="{{ key.image.url }}" height=30px" width="100%" alt="{{ key.name }}">
+                {% endfor %}
+              </div>
+              <h6 class="font-weight-light ml-0">Signing up is easy. It only takes a few steps</h6>
+              <form action="" method="POST" class="pt-2" style="margin: 0px; padding: 0px; line-height: 2px;">
+                {% csrf_token %}
+               
+                <div class="form-group">
+                  {{ form.username|as_crispy_field }}
+                </div>
+                
+                <div class="form-row">
+                  <div class="form-group col-6 col-lg-6 m-0">
+                    {{ form.first_name|as_crispy_field }}
+                  </div>
+
+                  <div class="form-group col-6 col-lg-6 m-0">
+                    {{ form.last_name|as_crispy_field }}
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  {{ form.email|as_crispy_field }}
+                </div>
+
+                <div class="form-group">
+                  {{ form.password1|as_crispy_field }}
+                </div>
+
+                <div class="form-group">
+                  {{ form.password2|as_crispy_field }}
+                </div>
+               
+                <div class="text-center">
+                  <input type="submit" value="Sign Up">
+                </div>
+                <div class="form-format"><a href="{% url 'log_in' %}" class="text-info">Already have an account? Login Here</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- content-wrapper ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+{% endblock %}

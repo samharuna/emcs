@@ -1,0 +1,116 @@
+{% extends 'backend/main.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{{ block.super }} | {{ key }}
+{% endblock %}
+
+{% block body %}
+    <div class="content-wrapper">
+        <!-- START PAGE CONTENT-->
+        <div class="page-heading">
+            <h1 class="page-title">Loan Application</h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item mr-2"><a href="{% url 'dashboard' %}"><i class="fa fa-home font-20"></i></a></li>
+                <li class="breadcrumb-item mr-2"><a href="{% url 'view_loan' %}">View loan applied</a></li>
+                <li class="breadcrumb-item">Loan payment details</li>
+            </ol>
+        </div>
+        <div class="page-content fade-in-up">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                            <strong>EMCS:</strong> {{ message}}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}
+                    <div class="ibox">
+                        <div class="ibox-head">
+                            <div class="ibox-title">Loan payment details</div>
+                        </div>
+                        <div class="ibox-body">
+                            <form action="" method="POST" style="margin: 5px; padding: 10px; line-height: 10px;">
+                                {% csrf_token %}
+                                <fieldset class="border border-dark p-3 mb-3">
+                                    <legend class="w-auto h5"> Loan Payment Information: </legend>	
+                                    <div class="form-row">
+                                        <div class="col-12 col-lg-12 form-group mb-2">
+                                            {{ form.applicant|as_crispy_field }}	
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col-12 col-lg-12 form-group mb-2">
+                                            {{ form.amount|as_crispy_field }}	
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col-12 col-lg-12 form-group mb-2">
+                                            {{ form.interest|as_crispy_field }}	
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col-12 col-lg-12 form-group mb-2">
+                                            {{ form.plan|as_crispy_field }}	
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col-12 col-lg-12 form-group mb-2">
+                                            {{ form.status|as_crispy_field }}	
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col-12 col-lg-12 form-group mb-2">
+                                            {{ form.total_amount|as_crispy_field }}	
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col-12 col-lg-12 form-group mb-2">
+                                            {{ form.repayment|as_crispy_field }}	
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col-12 col-lg-12 form-group mb-2">
+                                            {{ form.payment_period|as_crispy_field }}	
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col-12 col-lg-12 form-group mb-2">
+                                            {{ form.payment_starts|as_crispy_field }}	
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col-12 col-lg-12 form-group mb-2">
+                                            {{ form.payment_ends|as_crispy_field }}	
+                                        </div>
+                                    </div>
+
+                                </fieldset>
+
+                                <div class="form-row">
+                                    <input type="submit" value="Submit Payment Advice" class="btn btn-primary btn-md btn-block col-12 col-lg-4">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                </div>
+            <div>
+        </div>
+    </div>
+        <!-- END PAGE CONTENT-->
+{% endblock %}

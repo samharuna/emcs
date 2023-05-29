@@ -1,0 +1,339 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+{% load crispy_forms_tags %}
+	
+<head>
+		<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="description" content="EMCS - is the loan company, Business Website.">
+    <meta name="keywords" content="Financial Website, Loan, Personal Loan, Daily Savings, Investment, Cooperative">
+    <meta name="author" content="EMCS">
+        
+		<!-- ==============================================
+		TITLE AND META TAGS
+		=============================================== -->
+		<title>
+      {% block title %}
+      EMCS
+      {% endblock %}
+    </title>  
+		<!-- ==============================================
+		FAVICON
+		=============================================== -->  
+        <link rel="shortcut icon" href="{% static 'frontend/img/favicon.ico' %}" type="image/x-icon">
+		<!-- ==============================================
+		CSS
+		=============================================== -->  
+        <link rel="stylesheet" href="{% static 'frontend/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'frontend/css/responsive.css' %}">
+        <link rel="stylesheet" href="{% static 'frontend/css/navbar.css' %}">
+        <link rel="stylesheet" href="{% static 'frontend/testimonial/owl.carousel.min.css' %}">
+        <link rel="stylesheet" href="{% static 'frontend/testimonial/owl.theme.default.css' %}">
+        <link rel="stylesheet" href="{% static 'frontend/css/animate.min.css' %}">
+        <link rel="stylesheet" href="{% static 'frontend/fontawesome/css/all.min.css' %}">
+        <link rel="stylesheet" href="{% static 'frontend/css/stylesheet.css' %}">
+        <link rel="stylesheet" href="{% static 'frontend/css/custom.css' %}">
+        <link rel="stylesheet" href="{% static 'frontend/dataTable/css/jquery.dataTables.min.css' %}">
+	</head>
+    
+<body>
+    
+<!-- LOADER -->
+<div id="loader-wrapper">
+    <div id="loader"></div>
+</div>
+<!-- LOADER -->
+    
+    <div class="top-header">
+        <div class="container-fluid">
+            <div class="top-header-left">
+                <div class="inner-header-left"><p><a href="{% url 'career' %}">Career</a> </p></div>
+                <div class="inner-header-left"><p><a href="{% url 'faq' %}">FAQ</a> </p></div>
+                <div class="inner-header-left"><p><a href="{% url 'contact_us' %}">Contact Us</a> </p></div>
+                <div class="inner-header-left"><p><a href="#">{{ current_datetime }}</a> </p></div>
+            </div>
+            <div class="top-header-social">
+              {% for key in detail %}
+                <div class="social-items"><a href="{{ key.facebook }}" target="_blank"><div class="icon-fa"><i class="fab fa-facebook" aria-hidden="true"></i></div></a></div>
+                <div class="social-items"><a href="{{ key.twitter }}" target="_blank"><div class="icon-fa"><i class="fab fa-twitter" aria-hidden="true"></i></div></a></div>
+                <div class="social-items"><a href="{{ key.instagram }}" target="_blank"><div class="icon-fa"><i class="fab fa-instagram" aria-hidden="true"></i></div></a></div>
+                <div class="social-items"><a href="{{ key.youtube }}" target="_blank"><div class="icon-fa"><i class="fab fa-youtube" aria-hidden="true"></i></div></a></div>
+              {% endfor %}
+            </div>
+        </div>
+    </div>
+    
+  <!--  -->
+    <nav>
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+              <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="navbar-brand" href="{% url 'home' %}">
+                {% for key in header %}
+                  <img src="{{ key.image.url }}" alt="{{ key.name }}" height="40px" width="203px">
+                {% endfor %}
+                </a>	
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'home' %}"><i class="fa fa-home mr-1"></i>Home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'post' %}">Post</a>
+                    </li>
+                  {% if request.user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                      <a class="nav-link  dropdown-toggle" href="#" data-toggle="dropdown" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        My Posts
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a href="{% url 'blog_form' %}" class="dropdown-item">Add New Post</a>                 
+                        <a href="{% url 'blog_view' %}" class="dropdown-item">View Posts</a>                 
+                      </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link  dropdown-toggle" href="#" data-toggle="dropdown" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <img src="{{ request.user.profile.image.url }}" alt="" width="22px" class="rounded mr-1 mt-0">
+                        {{ request.user.username }}
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a href="{% url 'blog_viewprofile' %}" class="dropdown-item">Profile</a>
+                        <a href="{% url 'blog_editname' %}" class="dropdown-item">Edit Name</a>
+                        <a href="{% url 'blog_changepassword' %}" class="dropdown-item">Change Password</a>                     
+                      </div>
+                    </li>
+
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'logoutapp' %}">Logout</a>
+                    </li>
+                  {% else %}
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'loginapp' %}"><i class="fa fa-user-lock mr-1"></i>Login</a>
+                    </li>
+                  {% endif %}
+                  </ul>
+                </div>
+              </nav>		
+            </div>
+        </div>
+      </div>
+    </nav>
+  <!--  -->
+    {% block body %}
+
+    {% endblock %}
+    <!-- Start of Register Modal -->
+    
+    <!-- End of Register Modal -->
+
+<!-- Start of Subscriber -->
+    <div class="site-section  background-section" style="background-image: url({% static 'frontend/img/newsletter.jpg' %});">
+      <div class="container">
+        <h3></h3>
+        <div class="row align-items-center">
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xlg-6">
+            <h2>NEWSLETTER</h2>
+            <p>Subscribe to our newsletter and get the latest updates to your inbox!</p>
+          </div>
+          
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xlg-6">
+            <form action="{% url 'newsletter' %}" method="POST" class="d-flex" id="newsletterForm">
+              {% csrf_token %}
+              <input type="email" name="email" id="email" class="newsletter-input" placeholder="Enter your Email Address to Subscribe" required>
+              <button type="submit" class="newsletter-btn text-white">Subscribe</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div> 
+<!-- End of Subscriber -->
+
+    <footer>
+        <div class="container">
+            <div class="row">
+              <div class="col-12 col-sm-5 col-md-5 col-lg-5 col-xlg-5">
+                <div class="footer-col">
+                    <figure class="footer-logo"><a href="{% url 'home' %}">
+                    {% for key in footer %}
+                      <img src="{{ key.image.url }}" alt="{{ key.name }}" height="40px" width="203px">
+                    {% endfor %}
+                    </a></figure>
+                  {% for key in about %}
+                  <p>{{ key.description }}</p>
+                  <p><a href="{% url 'about' %}" target="_blank" class="home-btn text-white">Read More</a></p>
+                  {% endfor %}
+                </div>  
+              </div>
+              <div class="col-12 col-sm-2 col-md-2 col-lg-2 col-xlg-2">
+                <div class="footer-col">  
+                    <h5>USEFUL LINKS</h5> 
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><i class="fa fa-angle-right" aria-hidden="true"></i>  &nbsp; <a href="{% url 'home' %}">Home</a></li>
+                        <li class="list-group-item"><i class="fa fa-angle-right" aria-hidden="true"></i>  &nbsp; <a href="{% url 'service' %}">Our Services</a></li>
+                        <li class="list-group-item"><i class="fa fa-angle-right" aria-hidden="true"></i>  &nbsp; <a href="{% url 'post' %}">Our Post</a></li>
+                        <li class="list-group-item"><i class="fa fa-angle-right" aria-hidden="true"></i>  &nbsp; <a href="{% url 'contact_us' %}">Contact Us</a></li>
+                        <li class="list-group-item"><i class="fa fa-angle-right" aria-hidden="true"></i>  &nbsp; <a href="{% url 'log_in' %}">Admin</a></li>
+                    </ul>
+                </div>
+              </div>
+              <div class="col-12 col-sm-5 col-md-5 col-lg-5 col-xlg-5">
+                    <div class="footer-col"> 
+                        <h5 class="text-uppercase mb-2">Contact Us</h5>
+                        {% for key in detail %}
+                          <h6 class="text-white mt-4"><i class="fa fa-map-marker-alt"></i><span class="ml-2">{{ key.address }}</span></h6>
+                          <h6 class="text-white mt-3"><i class="fa fa-map-marker-alt"></i><span class="ml-2">{{ key.branch }}</span></h6>
+                          <h6 class="text-white mt-3"><i class="fa fa-phone-alt"></i><span class="ml-2"><a href="tel:{{ key.phone }}" class="text-white">{{ key.phone }}</a>, <a href="tel:{{ key.mobile }}" class="text-white">{{ key.mobile }}</a></span> </h6>
+                          <h6 class="text-white mt-3"><i class="fa fa-envelope"></i><span class="ml-2"><a href="mailto:{{ key.email }}" class="text-white">{{ key.email }}</a></span> </h6>
+                        {% endfor %}
+                    </div>
+                </div>  
+                <div class="col-12 col-lg-12 mt-3">
+                  <div class="footer-col">
+                    <div style="font-size: 14px; color: #fff;">Copyright &copy; 2020 - <script>document.write(new Date().getFullYear())</script> <b>EMCS</b> - All rights reserved.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </footer>
+   
+    <a href="#0" class="cd-top">Top</a>
+    
+	<!-- ==============================================
+	JAVASCRIPTS
+	=============================================== -->
+    <script src="{% static 'frontend/js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'frontend/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'frontend/js/loader.js' %}"></script>
+    <script src="{% static 'frontend/js/comment.js' %}"></script>
+    <script src="{% static 'frontend/js/newsletter.js' %}"></script>
+    <script src="{% static 'frontend/js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'frontend/fontawesome/js/all.min.js' %}"></script>
+    <script src="{% static 'frontend/js/top.js' %}"></script>
+    <script src="{% static 'frontend/js/jquery.isotope.pkgd.js' %}"></script>
+    <script src="{% static 'frontend/js/filter.js' %}"></script>
+    <script src="{% static 'frontend/js/owl.js' %}"></script>
+    <script src="{% static 'frontend/js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'frontend/js/magnific.popup.gallery.js' %}"></script>
+    <script src="{% static 'frontend/js/counter.js' %}"></script>    
+    <script src="{% static 'frontend/js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'frontend/js/jquery.counterup.js' %}"></script>
+    <script src="{% static 'frontend/js/flickity.pkgd.min.js' %}"></script> 
+    <script src="{% static 'frontend/js/testimonials.js' %}"></script>
+    <script src="{% static 'frontend/js/modernizr-custom.js' %}"></script>
+    <script src="{% static 'frontend/testimonial/owl.carousel.js' %}"></script>
+    <script src="{% static 'frontend/dataTable/js/jquery.dataTables.min.js' %}"></script>
+    
+
+
+    <script>
+      $(document).ready(function () {
+        $(".carousel").carousel({ interval: 8000 });  
+
+        // Enable Carousel Controls  
+        $(".carousel-control-prev").click(function () {  
+            $(".carousel").carousel("prev");  
+        });  
+        $(".carousel-control-next").click(function () {  
+            $(".carousel").carousel("next");  
+        });  
+
+        $('#myTable').DataTable();
+
+        });
+
+      $(document).ready(function () {
+          var silder = $(".owl-carousel");
+          silder.owlCarousel({
+              autoplay: true,
+              autoplayTimeout: 7000,
+              autoplayHoverPause: false,
+              items: 1,
+              stagePadding: 20,
+              center: true,
+              nav: false,
+              margin: 50,
+              dots: true,
+              loop: true,
+              responsive: {
+                  0: { items: 2 },
+                  480: { items: 2 },
+                  575: { items: 2 },
+                  768: { items: 2 },
+                  991: { items: 2 },
+                  1200: { items: 3 }
+              }
+          });
+      });
+      
+      $(document).ready(function () {
+        $('.counter-value').each(function(){
+            $(this).prop('Counter',0).animate({
+                Counter: $(this).text()
+            },{
+                duration: 9000,
+                easing: 'swing',
+                step: function (now){
+                    $(this).text(Math.ceil(now));
+                }
+            });
+        });
+      });
+
+      
+      $('.reply-btn').click(function() {
+          $(this).parent().parent().parent().parent().next('.threaded-comments').fadeToggle()
+      });
+
+      $(document).ready( function () {
+        $('#myTable').DataTable();
+      });
+
+      var siteCarousel = function () {
+        if ( $('.owl-slide').length > 0 ) {
+          $('.owl-slide').owlCarousel({
+            center: false,
+            items: 1,
+            loop: true,
+            stagePadding: 0,
+            margin: 40,
+            autoplay: true,
+            nav: true,
+            navText: ['<span class="fab fa-angle-double-left">', '<span class="fab fa-angle-double-right">'],
+            responsive:{
+              600:{
+                nav: true,
+                items: 2
+              },
+
+              1000:{
+                stagePadding: 0,
+                nav: true,
+                items: 2
+              },
+
+              1200:{
+                stagePadding: 0,
+                nav: true,
+                items: 2
+              }
+            }
+          });
+        }
+      };
+      siteCarousel();autoplayHoverPause
+
+   
+    </script>
+    
+    </body>
+    
+</html>

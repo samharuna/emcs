@@ -1,0 +1,100 @@
+{% extends 'backend/main.html' %}
+{% load static %}
+
+{% block title %}
+{{ block.super }} | {{ key }}
+{% endblock %}
+
+
+{% block body %}
+<div class="content-wrapper">
+    <!-- START PAGE CONTENT-->
+    <div class="page-heading">
+        <h1 class="page-title">Team Post</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item mr-2"><a href="{% url 'dashboard' %}"><i class="fa fa-home font-20"></i></a></li>
+            <li class="breadcrumb-item mr-2 text-info"><a href="{% url 'add_team' %}">Add Team</a></li>
+            <li class="breadcrumb-item">View Teams</li>
+        </ol>
+    </div>
+    <div class="page-content fade-in-up">
+        
+        <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                            <strong>EMCS:</strong> {{ message}}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}
+                    <div class="ibox">
+                        <div class="ibox-head">
+                            <div class="ibox-title">Total Team Member{{ total_team|pluralize }} [{{ total_team }}]</div>
+                            <div class="ibox-tools">
+                            {% if request.user.is_superuser %}
+                                <a href="{% url 'add_team' %}" class="btn btn-sm btn-secondary text-white">Add Team <i class="fa fa-plus-circle"></i></a>
+                            {% endif %}
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <div class="ibox-body">
+                                <table class="table table-striped table-bordered table-hover" id="example-table2" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Image</th>
+                                            <th>Team Details</th>
+                                            <th class="text-center">Action</th>
+                                            {% if request.user.is_superuser %}
+                                            <th class="text-center">Action</th>
+                                            {% endif %}
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Image</th>
+                                            <th>Team Details</th>
+                                            <th class="text-center">Action</th>
+                                            {% if request.user.is_superuser %}
+                                            <th class="text-center">Action</th>
+                                            {% endif %}
+                                        </tr>
+                                    </tfoot>
+                                    
+                                    <tbody>
+                                    {% for key in team %}
+                                        <tr>
+                                            <td><img src="{{ key.team.profile.image.url }}" alt="{{ key.team.get_full_name }}" height="70px" width="100px"></td>
+                                            <td>
+                                                <h6 class="text-justify"><span class="text-info mr-2">Full Name:</span>{{ key.team.get_full_name }}</h6>
+                                                <h6 class="text-justify"><span class="text-info mr-2">Position:</span>{{ key.team.profile.occupation }}</h6>
+                                                <p class="text-left">
+                                                    <h6 class="text-justify"><span class="text-info mr-2">Job's Description:</span>{{ key.description }}</h6>
+                                                    <span class="text-warning">Created on: {{ key.date_updated|date }}</span>
+                                                    <span class="ml-2">Updated on: {{ key.date_updated }}</span>
+                                                </p>
+                                            </td>
+                                            {% if key.team == request.user %}
+                                            <td class="text-center"><a href="{% url 'update_team' key.slug %}" class="btn btn-sm btn-primary">Update</a></td>
+                                            {% endif %}
+                                            {% if request.user.is_superuser %}
+                                            <td class="text-center"><a href="{% url 'delete_team' key.slug %}" class="btn btn-sm btn-danger">Delete</a></td>
+                                            {% endif %}
+                                        </tr>
+                                    {% empty %}
+                                    <p class="alert alert-info p-2 m-2">No content yet!</p>
+                                    {% endfor %} 
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <div>
+
+    </div>
+</div>
+    <!-- END PAGE CONTENT-->
+{% endblock %}

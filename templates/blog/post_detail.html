@@ -1,0 +1,72 @@
+{% extends 'blog/page.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{{ block.super }}| {{ key }}
+{% endblock %}
+
+{% block body %}
+    <section>
+        <div class="container">
+            <div class="row">
+              {% if post %}
+              <div class="col-12 col-sm-6 col-md-6 col-lg-8 col-xlg-8 mb-3">
+                <article class="blog-post-wrapper">
+                  <div class="blog-details">
+                    <a href="#" class="blog-images"><img src="{{ post.image.url }}" alt="{{ post.title }}" width="100%"></a>
+                    <div class="blog-content">
+                      <div class="blog-meta">
+                          <span class="admin-type"><i class="fa fa-user icons"></i> <a href="{% url 'blog_profile' post.author.username %}" target="_blank">{{ post.author.username }}</a></span>
+                          <span class="date-type"><i class="fa fa-calendar icons"></i> {{ post.date_created|date }}</span>
+                          <span class="comments-type"><i class="fa fa-comments icons"></i> {{ post.post.count }} Comment{{ post.post.count|pluralize }}</span>
+                          <span class="comments-type"><i class="fa fa-eye icons"></i> {{ post.view_count }} View{{ post.view_count|pluralize }}</span>
+                          <span class="comments-type"><i class="fa fa-tag icons"></i> {{ post.tags }}</span>
+                      </div>
+                      <h4>{{ post.title }} - [{{ post.category.name }}]</h4>
+                      <p>{{ post.body }}</p>
+                    </div>
+                  </div>
+                </article>
+
+                <div class="clear"></div>
+                <div class="related-post">
+                    <div class="comments-heading">
+                        <h3>Related post</h3>
+                    </div>
+                    <div class="related-post-list">
+                      <div class="row">
+                        {% for key in related|slice:3 %}
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xlg-4">
+                          <div class="post-img">
+                              <a href="{% url 'post_detail' key.slug %}"><img src="{{ key.image.url }}" alt="{{ key.title }}" width="100%"></a>
+                              <div class="pst-content">
+                                  <p><a href="{% url 'post_detail' key.slug %}">{{ key.title|truncatechars:40 }} - [{{ key.category.name }}]</a></p>
+                                  <span class="admin-type"><a href="{% url 'blog_profile' key.author.username %}" target="_blank">{{ key.author.username }}</a></span>
+                                  <span class="date-type">{{ key.date_created|date }}</span>
+                              </div>
+                          </div>
+                        </div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+
+              {% if not post.restricted %}
+                <div class="single-post-comments">
+                 {% include 'blog/comment.html' %}
+                </div>
+              {% endif %}
+
+              </div>
+              {% endif %}
+
+              <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xlg-4">
+                {% include 'blog/sidebar.html' %}
+              </div>
+            </div>
+        </div>
+    </section>
+    
+{% endblock %}
