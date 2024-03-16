@@ -1,0 +1,52 @@
+{% extends 'backend/dashboard/main.html' %}
+{% load static %}
+
+{% block title %}
+{{ block.super }}: {{ title }}
+{% endblock title %}
+    
+{% block body %} 
+    <div class="page-heading">
+        <h1 class="page-title">Add FAQ Post</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'dashboard' %}"><i class="bx bx-home bx-sm font-20"></i></a>
+            </li>
+            <li class="breadcrumb-item"><a href="{% url 'view-faq' %}">View FAQ Posts</a></li>
+            <li class="breadcrumb-item">Add FAQ Post</li>
+        </ol>
+    </div>
+    <div class="page-content fade-in-up">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                <!-- START OF MESSAGE -->
+                {% include 'backend/partials/messages.html' %}
+                <!-- END OF MESSAGE -->
+                <div class="ibox">
+                    <div class="ibox-head">
+                        <div class="ibox-title">Add FAQ Post</div>
+                    </div>
+                    <div class="ibox-body">
+                        <form action="" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form.media }}
+
+                            <div class="form-group">
+                                <label for="title" class="required">FAQ Title:</label>
+                                {{ form.title }}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="body" class="required">FAQ Content:</label>
+                                <p class="m-0 p-0">{{ form.body }}</p>
+                            </div>
+
+                            <input type="submit" value="Add FAQ Post" class="btn btn-primary mt-3 p-2">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+    

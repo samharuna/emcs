@@ -1,0 +1,23 @@
+{% load static %}
+
+<!-- Start of Subscriber -->    
+<div class="newsletter-section">
+    <div class="container">
+        <h3 class="py-3"></h3>
+        <div class="row align-items-center">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xlg-6" data-aos="zoom-in-left">
+                <h2>NEWSLETTER</h2>
+                <p>Subscribe to our newsletter and get the latest updates!</p>
+            </div>
+            
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xlg-6" data-aos="zoom-in-right">
+            <form action="{% url 'newsletter' %}" method="POST" class="d-flex" id="newsletterForm">
+                {% csrf_token %}
+                <input type="email" name="email" id="email" class="newsletter-input" placeholder="Enter your Email Address to Subscribe" required>
+                <button type="submit" class="home-btn text-white">Subscribe</button>
+            </form>
+            </div>
+        </div>
+    </div>
+</div> 
+<!-- End of Subscriber -->

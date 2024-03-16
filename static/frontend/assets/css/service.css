@@ -1,0 +1,60 @@
+.service-details {
+  margin: 0px;
+  padding: 0px;
+  line-height: 1.2rem;
+}
+
+.service-details h2{
+  font-size: 22px;
+  color: #011238;
+  font-family: Oswald;
+  font-weight: 600;
+  text-align: center;
+}
+
+.service-details h3{
+  font-size: 22px;
+  color: #011238;
+  font-family: Oswald;
+  font-weight: 600;
+  text-align: left;
+}
+
+.service-details p{
+  font-family: Open Sans;
+  font-size: 16px;
+  text-align: justify;
+  font-weight: 400;
+  line-height: 1rem;
+}
+
+.media {
+  margin: 0px 10px 5px 10px;
+}
+
+.media img {
+  width: 150px;
+  height: auto;
+}
+
+.media-body {
+  margin: 0px;
+  padding: 0px;
+}
+
+.media-body h5 {
+  font-family: Oswald;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.media-body p {
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 400;
+  color: black;
+  text-align: left;
+}
+
+
+

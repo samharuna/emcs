@@ -1,0 +1,77 @@
+{% extends 'backend/dashboard/main.html' %}
+{% load static %}
+
+{% block title %}
+{{ block.super }}: {{ title }}
+{% endblock title %}
+    
+{% block body %} 
+    <div class="page-heading">
+        <h1 class="page-title">Add User</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'dashboard' %}"><i class="bx bx-home bx-sm font-20"></i></a>
+            </li>
+            <li class="breadcrumb-item"><a href="{% url 'all-user' %}">View All Users</a></li>
+            <li class="breadcrumb-item">Add User</li>
+        </ol>
+    </div>
+    <div class="page-content fade-in-up">
+        
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                <!-- START OF MESSAGE -->
+                {% include 'backend/partials/messages.html' %}
+                <!-- END OF MESSAGE -->
+                <div class="ibox">
+                    <div class="ibox-head">
+                        <div class="ibox-title">Add User</div>
+                    </div>
+                    <div class="ibox-body">
+                        <form action="" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="username" class="required">Username</label>
+                                {{ form.username }}
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-12 col-lg-6">
+                                    <label for="first_name" class="required">First Name</label>
+                                    {{ form.first_name }}
+                                </div>
+                                
+                                <div class="form-group col-12 col-lg-6">
+                                    <label for="last_name" class="required">Last Name</label>
+                                    {{ form.last_name }}
+                                </div>
+                            </div>
+                          
+                            <div class="form-group">
+                                <label for="email" class="required">Email Address</label>
+                                {{ form.email }}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password1" class="required">Password</label>
+                                {{ form.password1 }}
+                            </div>
+                          
+                            <div class="form-group">
+                                <label for="password2" class="required">Confirm Password</label>
+                                {{ form.password2 }}
+                            </div>
+
+                            <div class="font-weight-bold">Super User: <span>{{ form.is_superuser }}</span></div>
+                            <div class="font-weight-bold">Staff User: <span>{{ form.is_staff }}</span></div>
+                            <div class="font-weight-bold">Active User: <span>{{ form.is_active }}</span></div>
+
+                            <input type="submit" value="Add User" class="btn btn-primary p-2 mt-3">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+    

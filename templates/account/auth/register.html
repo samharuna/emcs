@@ -1,0 +1,96 @@
+{% extends 'account/auth/auth.html' %}
+{% load static %}
+
+{% block title %}
+{{ block.super }} {{ title }}
+{% endblock title %}
+
+{% block body %}
+    <!-- Content -->
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-sm-10 col-md-10 col-lg-6 col-xlg-6 col-xxl-6">
+
+        <div class="authentication-wrapper authentication-basic container-p-y">
+          <div class="authentication-inner">
+            <!-- Register Card -->
+            <div class="card shadow">
+              <div class="card-body">
+                <div class="mt-2"><img src="{% static 'backend/assets/images/logo/favicon.ico' %}" alt="EMCS Logo"></div>
+                <h4 class="card-title mb-0">Sign Up Page!</h4>
+                <p class="mb-3">Please Register Here for a new Account</p>
+                <form id="formAuthentication" class="mb-2" action="" method="POST" autocomplete="on">
+                  {% csrf_token %}
+                  
+                  <div class="mb-2">
+                    <label for="username" class="required">Username</label>
+                    {{ form.username }}
+                  </div>
+
+                  <div class="row g-2">
+                    <div class="col-6 col-lg-6 mb-2">
+                      <label for="first_name" class="required">First Name</label>
+                      {{ form.first_name }}
+                    </div>
+
+                    <div class="col-6 col-lg-6 mb-2">
+                      <label for="last_name" class="required">Last Name</label>
+                      {{ form.last_name }}
+                      </div>
+                  </div>
+
+                  <div class="mb-2">
+                    <label for="email" class="required">Email Address</label>
+                    {{ form.email }}
+                  </div>
+
+                  <div class="mb-2 form-password-toggle">
+                     <label for="password1" class="required">Password</label>
+                    <div class="input-group input-group-merge">
+                      {{ form.password1 }}
+                      <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                    </div>
+                  </div>
+
+                  <div class="mb-2 form-password-toggle">
+                     <label for="password2" class="required">Password Again</label>
+                    <div class="input-group input-group-merge">
+                      {{ form.password2 }}
+                      <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                    </div>
+                  </div>
+
+                  <div class="mb-0">
+                    <span class="errors">{{ form.password2.errors }}</span>
+                  </div>
+
+                  <div class="mb-4">
+                    <div class="form-check">
+                      {{ form.is_active }}
+                      <label class="form-check-label" for="terms-conditions">
+                        I agree to
+                        <a href="{% url 'privacy' %}" target="_blank">Privacy Policy & Terms</a>
+                      </label>
+                    </div>
+                  </div>
+                  
+                  <div class="mb-2">
+                    <input type="submit" value="Sign Up" class="btn btn-primary d-grid w-100">
+                  </div>
+                </form>
+
+                <p class="text-center">
+                  <span>Already have an account?</span><a href="{% url 'sign-in' %}"><span>&nbsp;Sign In Here</span></a>
+                </p>
+                
+              </div>
+            </div>
+            <!-- Register Card -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+    <!-- / Content -->
+{% endblock body %}

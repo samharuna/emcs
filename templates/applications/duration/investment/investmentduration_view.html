@@ -1,0 +1,74 @@
+{% extends 'backend/dashboard/main.html' %}
+{% load static %}
+
+{% block title %}
+{{ block.super }} | {{ key }}
+{% endblock title %}
+
+{% block body %}
+    <!-- START PAGE CONTENT-->
+    <div class="page-heading">
+        <h1 class="page-title">Investment Application</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item mr-2"><a href="{% url 'dashboard' %}"><i class="bx bx-home bx-sm font-20"></i></a></li>
+            <li class="breadcrumb-item mr-2"><a href="{% url 'add-investmentduration' %}">Add Investment Duration</a></li>
+            <li class="breadcrumb-item">View Investment Duration</li>
+        </ol>
+    </div>
+
+    <div class="page-content fade-in-up">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                <!-- START OF MESSAGE -->
+                {% include 'backend/partials/messages.html' %}
+                <!-- END OF MESSAGE -->
+                <div class="ibox">
+                    <div class="ibox-head bg-info">
+                        <div class="ibox-title">View Investment Duration</div>
+                        <div>
+                            <a class="btn btn-dark btn-sm" href="{% url 'add-investmentduration' %}">Add Investment Duration<i class="bx bx-plus-circle ml-1"></i></a>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <div class="ibox-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover table-bordered" id="example-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Investment Duration:</th>
+                                            <th>Date & Time Created</th>
+                                            <th>Date & Time Updated</th>
+                                            <th class="text-center">Action:</th>
+                                            <th class="text-center">Action:</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Investment Duration:</th>
+                                            <th>Date & Time Created</th>
+                                            <th>Date & Time Updated</th>
+                                            <th class="text-center">Action:</th>
+                                            <th class="text-center">Action:</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                    {% for key in duration %}
+                                        <tr>
+                                            <td>{{ key.name }} Month{{ key.name|pluralize }}</td>
+                                            <td>{{ key.date_created }}</td>
+                                            <td>{{ key.date_updated }}</td>
+                                            <td class="text-center"><a href="{% url 'update-investmentduration' key.slug %}" class="btn btn-sm btn-outline-primary">Update<i class="bx bx-edit ml-1"></i></a></td>
+                                            <td class="text-center"><a href="{% url 'delete-investmentduration' key.slug %}" class="btn btn-sm btn-danger">Delete<i class="bx bx-trash ml-1"></i></a></td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END PAGE CONTENT-->
+{% endblock body %}

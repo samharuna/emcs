@@ -1,0 +1,71 @@
+@charset "UTF-8";
+.authentication-wrapper {
+  display: flex;
+  flex-basis: 100%;
+  min-height: 100vh;
+  width: 100%;
+}
+.authentication-wrapper .authentication-inner {
+  width: 100%;
+}
+.authentication-wrapper.authentication-basic {
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.authentication-wrapper.authentication-cover {
+  align-items: flex-start;
+}
+.authentication-wrapper.authentication-cover .authentication-inner {
+  height: 100vh;
+}
+.authentication-wrapper.authentication-basic .authentication-inner {
+  max-width: 440px;
+  position: relative;
+}
+
+.authentication-wrapper.authentication-basic .authentication-inner .card {
+  z-index: 1;
+  border-radius: 0%;
+}
+.authentication-wrapper.authentication-basic .authentication-inner .card .app-brand {
+  margin-bottom: 2.5rem;
+  border-radius: 0%;
+}
+.authentication-wrapper .auth-input-wrapper .auth-input {
+  max-width: 50px;
+  padding-left: 0.4rem;
+  padding-right: 0.4rem;
+  font-size: 150%;
+  border-radius: 0%;
+}
+
+@media (max-width: 575.98px) {
+  .authentication-wrapper .auth-input-wrapper .auth-input {
+    font-size: 1.125rem;
+  }
+}
+.light-style .authentication-wrapper .authentication-bg {
+  background-color: #0c0d0d;
+}
+
+.asteriskField{
+	font-weight: 500;
+	display: inline-block;
+	color: red;
+}
+
+.text-justify {
+  text-align: justify;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.errors ul{
+  font-size: 13px;
+  list-style-type: disc;
+  color: red;
+  font-weight: 700;
+  padding: 0;
+  margin-left: 18px;
+}

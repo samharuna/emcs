@@ -1,0 +1,74 @@
+
+.sidenav {
+  position: absolute;
+  padding-left: 15px;
+  right: 0;
+  width: 0px;
+  display: none;
+  z-index: 999;
+  background: transparent;
+  transition: .5s;
+  /* .flex-column */
+  -webkit-box-orient: vertical!important;
+  -webkit-box-direction: normal!important;
+  -ms-flex-direction: column!important;
+  flex-direction: column!important;
+}
+
+
+.navbar {
+  box-shadow: 0px 0px 3px 1px #011238;
+  width: 100%;
+  height: 60px;
+  margin-bottom: 55px;
+  background-color: transparent;
+}
+.nav-link {
+  color: #011238;
+  text-align: left;
+  transition: .3s;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: Bebas Neue;
+}
+
+.nav-link:hover {
+  color: #ff6600;
+  text-align: left;
+  transition: .3s;
+  font-size: 17px;
+  font-weight: 700;
+  font-family: Bebas Neue;
+}
+
+.navbar-toggler {
+  transition: .5s;
+  border: 2px solid #011238;
+  color: #ff6600;
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.navbar-brand {
+  padding: 1px;
+  margin-bottom: 0px;
+}
+
+.sidenav .nav-link {
+  color: #ffffffba;
+  white-space: nowrap;
+  transition: .3s;
+}
+.sidenav .nav-link:hover {
+  background-color: #a7a7a766;
+  color: #fff;
+}
+
+
+.fa, .fab, .fal, .far, .fas {
+  font-size: 1.25rem;
+}
+
+.icon {
+  margin-right: 5px;
+}

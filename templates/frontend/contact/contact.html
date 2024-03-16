@@ -1,0 +1,110 @@
+{% extends 'frontend/partials/base.html' %}
+{% load static %}
+
+{% block title %}
+{{ block.super }}| {{ key }}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="section-title">
+        <h2>Contact Us</h2>
+        <hr class="center">
+        {% for key in contact_header %}
+        <p class="text-center">{{ key.title }}</p>
+        {% endfor %}
+    </div>
+
+
+    <div class="row justify-content-center">
+
+        <div class="col-11">
+            {% include 'frontend/partials/message.html' %}
+        </div>
+
+        {% for key in detail %}
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xlg-6" data-aos="zoom-in-left">
+            <div class="card card-property">
+                <h2 class="card-header">Our Contact Information</h2>
+                <div class="card-body">
+                    <div class="contact-info">
+                        <h3><span><i class="bx bx-map-pin bx-xs"></i></span>Office Address:</h3>
+                        <p>{{ key.address }}</p>
+
+                        <h3><span><i class="bx bx-map-pin bx-xs"></i></span>Branch Address:</h3>
+                        <p>{{ key.branch }}</p>
+
+                        <h3><span><i class="bx bx-phone-call bx-xs"></i></span>Phone Numbers:</h3>
+                        <p>{{ key.phone }}, {{ key.mobile }}</p>
+
+                        <h3><span><i class="bx bx-envelope bx-xs"></i></span>Email Address:</h3>
+                        <p>{{ key.email }}</p>
+
+                        <h3><span><i class="bx bx-time-five bx-xs"></i></span>Working Hours:</h3>
+                        <p>{{ key.starts }} - {{ key.closes }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xlg-6" data-aos="zoom-in-left">
+            <div class="card card-property">
+                <h2 class="card-header">Get in Touch</h2>
+                <div class="card-body">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="name" class="required">Full Name</label>
+                            {{ contactForm.name }}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="required">Email Address</label>
+                            {{ contactForm.email }}
+                        </div> 
+
+                        <div class="form-group">
+                            <label for="subject" class="required">Mail Subject</label>
+                            {{ contactForm.subject }}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject" class="required">Mail Message</label>
+                            {{ contactForm.body }}
+                        </div>
+
+                        <input type="submit" value="Send Mail Now" class="home-btn text-white mt-1">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-3">
+        <div class="row">
+        {% for key in detail %}
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12" data-aos="zoom-in-up">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <iframe src="{{ key.direction }}" allowfullscreen width="100%" height="500px" style="border: 10px; padding: 0px; margin: 0px;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- Start of Loan Steps -->
+{% include 'frontend/partials/steps.html' %}
+<!-- End of Loan Steps -->
+
+<!-- Start of Subscriber -->
+{% include 'frontend/partials/newsletter.html' %}
+<!-- End of Subscriber -->
+
+{% endblock %}
+

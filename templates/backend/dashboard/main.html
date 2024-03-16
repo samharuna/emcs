@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width initial-scale=1.0">
+
+    <title>
+    {% block title %}
+    Backend
+    {% endblock title %}   
+    </title>
+
+    <link rel="icon" type="image/x-icon" href="{% static 'backend/assets/images/logo/favicon.ico' %}" />
+    <link href="{% static 'backend/assets/vendors/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'backend/assets/vendors/fonts/boxicons.css' %}"  />
+    <link href="{% static 'backend/assets/vendors/DataTables/datatables.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'backend/assets/vendors/select2/dist/css/select2.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'backend/assets/vendors/jquery-minicolors/jquery.minicolors.css' %}" rel="stylesheet" />
+    <link href="{% static 'backend/assets/css/pages/mailbox.css' %}" rel="stylesheet" />
+    <link href="{% static 'backend/assets/vendors/metisMenu/dist/metisMenu.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'backend/assets/css/main.css' %}" rel="stylesheet" />
+</head>
+
+{{ redirect_to_login_immediately }}
+
+<body class="fixed-navbar">
+    <div class="page-wrapper">
+        <!-- START HEADER-->
+        {% include 'backend/partials/headers.html' %}
+        <!-- END HEADER-->
+        <!-- START SIDEBAR-->
+        {% include 'backend/partials/sidebars.html' %}
+        <!-- END SIDEBAR-->
+
+        <div class="content-wrapper">
+            <!-- START PAGE CONTENT-->
+            {% block body %}
+                
+            {% endblock body %}
+            <!-- END PAGE CONTENT-->
+
+        <!-- Start of Modal -->
+        {% include 'backend/partials/modals.html' %}
+        <!-- End of Modal -->
+
+        {% include 'backend/partials/footer.html' %}
+
+        </div>
+    </div>
+   
+
+    <!-- BEGIN PAGA BACKDROPS-->
+        {% include 'backend/partials/preloaders.html' %}
+    <!-- END PAGA BACKDROPS-->
+    
+</body>
+    <script src="{% static 'backend/assets/vendors/jquery/dist/jquery.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'backend/assets/vendors/popper.js/dist/umd/popper.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'backend/assets/vendors/bootstrap/dist/js/bootstrap.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'backend/assets/vendors/metisMenu/dist/metisMenu.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'backend/assets/vendors/jquery-slimscroll/jquery.slimscroll.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'backend/assets/vendors/DataTables/datatables.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'backend/assets/vendors/moment/min/moment.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'backend/assets/vendors/jquery-ui/jquery-ui.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'backend/assets/vendors/select2/dist/js/select2.full.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'backend/assets/vendors/jquery-knob/dist/jquery.knob.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'backend/assets/vendors/jquery-minicolors/jquery.minicolors.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'backend/assets/js/scripts/mailbox.js' %}" type="text/javascript"></script>
+    <script src="{% static 'backend/assets/js/scripts/profile-demo.js' %}" type="text/javascript"></script>
+    <script src="{% static 'backend/assets/js/scripts/dashboard_1_demo.js' %}" type="text/javascript"></script>
+    <script src="{% static 'backend/assets/js/app.min.js' %}" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(function() {
+            $('#example-table').DataTable({
+                pageLength: 10,
+                //"ajax": './{% static 'backend/assets/demo/data/table_data.js' %}on',
+                /*"columns": [
+                    { "data": "name" },
+                    { "data": "office" },
+                    { "data": "extn" },
+                    { "data": "start_date" },
+                    { "data": "salary" }
+                ]*/
+            });
+
+            $('#example-table1').DataTable({
+                pageLength: 10,
+                //"ajax": './{% static 'backend/assets/demo/data/table_data.js' %}on',
+                /*"columns": [
+                    { "data": "name" },
+                    { "data": "office" },
+                    { "data": "extn" },
+                    { "data": "start_date" },
+                    { "data": "salary" }
+                ]*/
+            });
+        })
+    </script>
+</html>

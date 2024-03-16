@@ -1,0 +1,48 @@
+{% extends 'frontend/partials/base.html' %}
+{% load static %}
+
+{% block title %}
+{{ block.super }}| {{ key }}
+{% endblock %}
+
+{% block body %}
+
+<!-- Start of Services -->
+<div class="container">
+    <div class="section-title">
+        <h2>Open Position</h2>
+        <hr class="center">
+        {% for key in career_header %}
+        <p class="text-center">{{ key.title }}</p>
+        {% endfor %}
+    </div>
+    <div class="row">
+        {% for key in career %} 
+        <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xlg-4" data-aos="zoom-in-up">
+            <div class="card mt-2">
+                <img src="{{ key.image.url }}" class="card-img-top" alt="{{ key.position }}">
+                <div class="card-body">
+                    <div class="career-details">
+                        <h2 class="card-title">{{ key.position }}</h2>
+                        <hr class="center">
+                        <p class="card-text">{{ key.description }}</p>
+                        <a href="{% url 'career_detail' key.slug %}" class="home-btn text-white">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %} 
+    </div>
+</div>
+<!-- End of Services -->
+
+
+<!-- Start of Loan Steps -->
+{% include 'frontend/partials/steps.html' %}
+<!-- End of Loan Steps -->
+
+
+<!-- Start of Subscriber -->
+{% include 'frontend/partials/newsletter.html' %}
+<!-- End of Subscriber -->
+{% endblock %}

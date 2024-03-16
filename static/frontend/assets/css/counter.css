@@ -1,0 +1,88 @@
+/* Start of Counter */
+
+.statistic-counter{
+    margin-bottom: 40px;
+    padding: 60px 0px 60px 0px;
+    background: linear-gradient(#011238, #2c4987);
+    background-size: cover;
+	background-repeat: no-repeat;
+	background-position-x: left;
+    margin-bottom: 40px;
+    background-color: transparent;
+}
+
+
+.counter-details{
+    color: #fff;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+}
+
+.counter-details:after{
+    background: transparent;
+    width: 150px;
+    height: 150px;
+    border-top: none;
+    border-right: none;
+    border-radius: 0 0 0 20px;
+    box-shadow: none;
+    top: auto;
+    left: -10px;
+    bottom: -10px;
+    right: auto;
+}
+
+.statistic-counter .counter-icon {
+    font-size: 40px;
+    line-height: 35px;
+    margin: 0 0 15px;
+    transition: all 0.3s ease 0s;
+}
+
+
+.statistic-counter:hover .counter-icon{ 
+    transform: rotateY(360deg); 
+}
+
+
+.statistic-counter .counter-value{
+    color: #fff;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 20px;
+    margin: 0 0 20px;
+    display: block;
+    transition: all 0.3s ease 0s;
+}
+
+.statistic-counter:hover .counter-value {
+    font-size: 30px;
+}
+
+
+.statistic-counter h2{
+    font-size: 18px;
+    text-transform: uppercase;
+    margin: 0 0 5px;
+    font-family: Oswald;
+    font-weight: 500;
+    color: #fff;
+}
+
+.statistic-counter.blue{
+    color: #2c4987;
+    border-color: #2c4987;
+}
+
+.statistic-counter.blue:after{
+    border-bottom-color: #2c4987;
+    border-left-color: #2c4987;
+}
+@media screen and (max-width:990px){
+    .statistic-counter{ margin-bottom: 20px; }
+}
+/* End of Counter */
+

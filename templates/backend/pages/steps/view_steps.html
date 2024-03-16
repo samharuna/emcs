@@ -1,0 +1,78 @@
+{% extends 'backend/dashboard/main.html' %}
+{% load static %}
+
+{% block title %}
+{{ block.super }}: {{ title }}
+{% endblock title %}
+    
+{% block body %} 
+    <div class="page-heading">
+        <h1 class="page-title">View Loan Step Posts</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'dashboard' %}"><i class="bx bx-home bx-sm font-20"></i></a>
+            </li>
+            <li class="breadcrumb-item"><a href="{% url 'add-steps' %}">Add Loan Step Post</a></li>
+            <li class="breadcrumb-item">View Loan Step Posts</li>
+        </ol>
+    </div>
+    <div class="page-content fade-in-up">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                <!-- START OF MESSAGE -->
+                {% include 'backend/partials/messages.html' %}
+                <!-- END OF MESSAGE -->
+                <div class="ibox">
+                    <div class="ibox-head bg-info color-white">
+                        <div class="ibox-title">View Loan Step Post</div>
+                        <div>
+                            <a class="btn btn-dark btn-sm font-weight-bold" href="{% url 'add-steps' %}">Add Loan Step Post<i class="bx bx-plus-circle ml-1"></i></a>
+                        </div>
+                    </div>
+                    <div class="ibox-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>ID:</th>
+                                        <th>Loan Step Details:</th>
+                                        <th>Date Created:</th>
+                                        <th>Date Updated:</th>
+                                        <th>Action:</th>
+                                        <th>Action:</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>ID:</th>
+                                        <th>Loan Step Details:</th>
+                                        <th>Date Created:</th>
+                                        <th>Date Updated:</th>
+                                        <th>Action:</th>
+                                        <th>Action:</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    {% for key in steps %}
+                                    <tr>
+                                        <td>{{ key.id }}</td>
+                                        <td>
+                                            <h4>{{ key.title }}</h4>
+                                            <h6>{{ key.description }}</h6>
+                                        </td>
+                                        <td>{{ key.date_created }}</td>
+                                        <td>{{ key.date_updated }}</td>
+                                        <td><a href="{% url 'edit-steps' key.slug %}" class="btn btn-primary btn-sm">Edit Post</a></td>
+                                        <td><a href="{% url 'delete-steps' key.slug %}" class="btn btn-danger btn-sm">Delete Post</a></td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+    

@@ -1,0 +1,205 @@
+{% load static %}
+
+<nav class="page-sidebar" id="sidebar">
+    <div id="sidebar-collapse">
+        <div class="admin-block d-flex">
+            <div>
+                <img src="{{ user.profile.image.url }}" width="45px" />
+            </div>
+            <div class="admin-info">
+                <div class="font-strong text-capitalize">{{ user.username }}</div><small>{{ user.profile.occupation }}</small>
+            </div>
+        </div>
+        <ul class="side-menu metismenu">
+            <li>
+                <a class="active" href="{% url 'dashboard' %}"><i class="sidebar-item-icon bx bx-grid-alt"></i>
+                    <span class="nav-label">Dashboard</span>
+                </a>
+            </li>
+
+            
+            <li class="heading">SERVICES SECTION</li>
+            <li>
+                <a href="javascript:;"><i class="sidebar-item-icon bx bx-briefcase"></i>
+                    <span class="nav-label">Loan</span><i class="bx bx-chevron-right arrow"></i></a>
+                <ul class="nav-2-level collapse">
+                    <li><a href="{% url 'add-loan' %}">Apply Loan</a></li>
+                    <li><a href="{% url 'applicant-loan' %}">Loan Status</a></li>
+                {% if request.user.is_staff %}
+                    {% if request.user.is_superuser %}
+                    <li><a href="{% url 'view-loanduration' %}">Loan Duration</a></li>
+                    <li><a href="{% url 'approve-loanview' %}">Approve Loan</a></li>
+                    {% endif %}
+                    <li><a href="{% url 'view-loan' %}">Loan Applied</a></li>
+                    <li><a href="{% url 'render-loanpdf-view' %}" target="_blank">Loan Summary</a></li>
+                {% endif %}
+                </ul>
+            </li>
+
+            <li>
+                <a href="javascript:;"><i class="sidebar-item-icon bx bxs-coin-stack"></i>
+                    <span class="nav-label">Investment</span><i class="bx bx-chevron-right arrow"></i></a>
+                <ul class="nav-2-level collapse">
+                    <li><a href="{% url 'add-investment' %}">Apply Investment</a></li>
+                    <li><a href="{% url 'investor-investment' %}">Investment Status</a></li>
+                {% if request.user.is_staff %}
+                    {% if request.user.is_superuser %}
+                    <li><a href="{% url 'view-investmentduration' %}">Investment Duration</a></li>
+                    <li><a href="{% url 'approve-investmentview' %}">Approve Investment</a></li> 
+                    {% endif %}
+                    <li><a href="{% url 'view-investment' %}">Investments Applied</a></li>
+                    <li><a href="{% url 'render-investmentpdf-view' %}" target="_blank">Summary</a></li>
+                {% endif %}
+                </ul>
+            </li>
+
+        
+            <li class="heading">PAGES</li>
+        {% if request.user.is_staff %} 
+            <li>
+                <a href="javascript:;"><i class="sidebar-item-icon bx bxs-file-archive"></i>
+                    <span class="nav-label">About</span><i class="bx bx-chevron-right arrow"></i></a>
+                <ul class="nav-2-level collapse">
+                    <li><a href="{% url 'view-about' %}"><i class="bx bx-file-find bx-xs mr-2"></i>About Posts</a></li>
+                    <li><a href="{% url 'view-statement' %}"><i class="bx bx-file-find bx-xs mr-2"></i>Statement Posts</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="javascript:;"><i class="sidebar-item-icon bx bxs-file-archive"></i>
+                    <span class="nav-label">Services</span><i class="bx bx-chevron-right arrow"></i></a>
+                <ul class="nav-2-level collapse">
+                    <li><a href="{% url 'view-tag' %}"><i class="bx bx-file-find bx-xs mr-2"></i>Tags</a></li>
+                    <li><a href="{% url 'view-category' %}"><i class="bx bx-file-find bx-xs mr-2"></i>Categories</a></li>
+                    <li><a href="{% url 'view-service' %}"><i class="bx bx-file-find bx-xs mr-2"></i>Service Posts</a></li>
+                    <li><a href="{% url 'view-steps' %}"><i class="bx bx-file-find bx-xs mr-2"></i>Loan Steps</a></li>
+                    <li><a href="{% url 'view-requirement' %}"><i class="bx bx-file-find bx-xs mr-2"></i>Requirements</a></li>
+                </ul>
+            </li>
+
+            <!-- <li>
+                <a href="javascript:;"><i class="sidebar-item-icon bx bxs-file-archive"></i>
+                    <span class="nav-label">Posts</span><i class="bx bx-chevron-right arrow"></i></a>
+                <ul class="nav-2-level collapse">
+                    <li><a href="{% url 'add-blog' %}">Add Post</a></li>
+                    <li><a href="{% url 'view-blog' %}">View Posts</a></li>
+                    <li><a href="{% url 'approve-blogview' %}">Approve Posts</a></li>
+                </ul>
+            </li> -->
+
+            <li>
+                <a href="javascript:;"><i class="sidebar-item-icon bx bxs-file-archive"></i>
+                    <span class="nav-label">FAQ</span><i class="bx bx-chevron-right arrow"></i></a>
+                <ul class="nav-2-level collapse">
+                    <li><a href="{% url 'view-faq' %}"><i class="bx bx-file-find bx-xs mr-2"></i>Faq</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="javascript:;"><i class="sidebar-item-icon bx bxs-file-archive"></i>
+                    <span class="nav-label">Advert</span><i class="bx bx-chevron-right arrow"></i></a>
+                <ul class="nav-2-level collapse">
+                    <li><a href="{% url 'view-advert' %}"><i class="bx bx-file-find bx-xs mr-2"></i>Advert</a></li>
+                </ul>
+            </li>
+
+            <!-- <li>
+                <a href="javascript:;"><i class="sidebar-item-icon bx bxs-file-archive"></i>
+                    <span class="nav-label">Career</span><i class="bx bx-chevron-right arrow"></i></a>
+                <ul class="nav-2-level collapse">
+                    <li><a href="{% url 'view-career' %}"><i class="bx bx-file-find bx-xs mr-2"></i>Career</a></li>
+                </ul>
+            </li> -->
+
+            <li>
+                <a href="javascript:;"><i class="sidebar-item-icon bx bx-comment-add"></i>
+                    <span class="nav-label">Testimonials</span><i class="bx bx-chevron-right arrow"></i></a>
+                <ul class="nav-2-level collapse">
+                    <li><a href="{% url 'view-testimonial' %}"><i class="bx bx-file-find bx-xs mr-2"></i>Testimonials</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="javascript:;"><i class="sidebar-item-icon bx bxs-comment-check"></i>
+                    <span class="nav-label">Newsletter</span><i class="bx bx-chevron-right arrow"></i></a>
+                <ul class="nav-2-level collapse">
+                    <li><a href="{% url 'send-message' %}"><i class="bx bxl-telegram bx-xs mr-2"></i>Send Message</a></li>
+                    <li><a href="{% url 'view-message' %}"><i class="bx bx-file-find bx-xs mr-2"></i>Messages</a></li>
+                    <li><a href="{% url 'view-subscriber' %}"><i class="bx bx-file-find bx-xs mr-2"></i>Subscribers</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="javascript:;"><i class="sidebar-item-icon bx bxs-comment"></i>
+                    <span class="nav-label">Contact</span><i class="bx bx-chevron-right arrow"></i></a>
+                <ul class="nav-2-level collapse">
+                    <li><a href="{% url 'view-contact' %}"><i class="bx bx-file-find bx-xs mr-2"></i>Contact</a></li>
+                    <li><a href="{% url 'view-detail' %}"><i class="bx bx-file-find bx-xs mr-2"></i>Contact Detail</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="javascript:;"><i class="sidebar-item-icon bx bxs-file-txt"></i>
+                    <span class="nav-label">Our Privacy</span><i class="bx bx-chevron-right arrow"></i></a>
+                <ul class="nav-2-level collapse">
+                    <li><a href="{% url 'view-privacy' %}"><i class="bx bx-file-find bx-xs mr-2"></i>View Privacy</a></li>
+                </ul>
+            </li>
+
+            
+            
+            <li>
+                <a href="javascript:;"><i class="sidebar-item-icon bx bx-image-add"></i>
+                    <span class="nav-label">Logo & Headers</span><i class="bx bx-chevron-right arrow"></i></a>
+                <ul class="nav-2-level collapse">
+                    <li><a href="{% url 'view-header' %}"><i class="bx bx-image-add bx-xs mr-2"></i>Header Logo</a></li>
+                    <li><a href="{% url 'view-footer' %}"><i class="bx bx-image-add bx-xs mr-2"></i>Footer Logo</a></li>
+                    <hr class="p-0 m-0" style="background-color: aliceblue;">
+                    <li><a href="{% url 'view-news' %}"><i class="bx bx-file-find bx-xs mr-2"></i>Dashboard News</a></li>
+                    <li><a href="{% url 'view-faqheader' %}"><i class="bx bx-file-find bx-xs mr-2"></i>FAQ Header</a></li>
+                    <li><a href="{% url 'view-aboutheader' %}"><i class="bx bx-file-find bx-xs mr-2"></i>About Header</a></li>
+                    <!-- <li><a href="{% url 'view-careerheader' %}"><i class="bx bx-file-find bx-xs mr-2"></i>Career Header</a></li> -->
+                    <li><a href="{% url 'view-contactheader' %}"><i class="bx bx-file-find bx-xs mr-2"></i>Contact Header</a></li>
+                    <li><a href="{% url 'view-serviceheader' %}"><i class="bx bx-file-find bx-xs mr-2"></i>Services Header</a></li>
+                    <li><a href="{% url 'view-testimonialheader' %}"><i class="bx bx-file-find bx-xs mr-2"></i>Testimonials Header</a></li>
+                </ul>
+            </li>
+        {% endif %}
+        
+        {% if request.user.is_staff %} 
+            <li>
+                <a href="javascript:;"><i class="sidebar-item-icon bx bx-group"></i>
+                    <span class="nav-label">Users</span><i class="bx bx-chevron-right arrow"></i></a>
+                <ul class="nav-2-level collapse">
+                {% if request.user.is_superuser %}
+                    <li><a href="{% url 'view-superuser' %}"><i class="bx bxs-group bx-xs mr-2"></i>Super Users</a></li>
+                {% endif %}
+                    <li><a href="{% url 'view-staffuser' %}"><i class="bx bxs-group bx-xs mr-2"></i>Staff Users</a></li>
+                    <li><a href="{% url 'view-user' %}"><i class="bx bx-group bx-xs mr-2"></i>Regular Users</a></li> 
+                    <li><a href="{% url 'all-user' %}"><i class="bx bx-group bx-xs mr-2"></i>All Users</a></li> 
+                </ul>
+            </li>
+        {% endif %}
+        
+            <li>
+                <a href="javascript:;"><i class="sidebar-item-icon bx bx-cog"></i>
+                    <span class="nav-label">Settings</span><i class="bx bx-chevron-right arrow"></i></a>
+                <ul class="nav-2-level collapse">
+                    <li><a href="{% url 'staffprofiles' %}"><i class="bx bx-user bx-xs mr-2"></i>Staff</a></li>
+                {% if request.user.is_staff %}
+                    <li><a href="{% url 'profiles' %}"><i class="bx bx-user bx-xs mr-2"></i>Customers</a></li>
+                    <li><a href="{% url 'edit-user' %}"><i class="bx bxs-user-account bx-xs mr-2"></i>Edit User</a></li>
+                    <li><a href="{% url 'edit-profile' %}"><i class="bx bx-user bx-xs mr-2"></i>Edit Profile</a></li>
+                {% endif %}
+                    <li><a href="{% url 'change-password' %}"><i class="bx bx-lock bx-xs mr-2"></i>Change Password</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="" data-toggle="modal" data-target="#exampleModal"><i class="sidebar-item-icon bx bx-power-off text-danger"></i>
+                    <span class="nav-label">Logout</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</nav>

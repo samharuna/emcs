@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width initial-scale=1.0">
+    <title>
+    {% block title %}
+    {{ title }}
+    {% endblock title %}
+    </title>
+    <!-- GLOBAL MAINLY STYLES-->
+    <link href="{% static 'backend/assets/vendors/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet" />
+    <!-- THEME STYLES-->
+    <link href="{% static 'backend/assets/css/main.css' %}" rel="stylesheet" />
+</head>
+
+<body class="bg-silver-100">
+    <div class="content">
+        <h1 class="m-t-20">404</h1>
+        <p class="error-title">PAGE NOT FOUND</p>
+        <p class="m-b-20 error-body">Sorry, the page you were looking for could not found. Please you can go back to the <a href="{% url 'home' %}">Home Page</a></p>
+    </div>
+
+    <!-- CORE PLUGINS -->
+    <script src="{% static 'backend/assets/vendors/jquery/dist/jquery.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'backend/assets/vendors/popper.js/dist/umd/popper.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'backend/assets/vendors/bootstrap/dist/js/bootstrap.min.js' %}" type="text/javascript"></script>
+    <!-- CORE SCRIPTS-->
+    <script src="{% static 'backend/assets/js/app.js' %}" type="text/javascript"></script>
+</body>
+
+</html>

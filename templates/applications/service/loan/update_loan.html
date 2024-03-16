@@ -1,0 +1,293 @@
+{% extends 'backend/dashboard/main.html' %}
+{% load static %}
+
+
+{% block title %}
+{{ block.super }} | {{ key }}
+{% endblock title %}
+
+{% block body %}
+    <!-- START PAGE CONTENT-->
+    <div class="page-heading">
+        <h1 class="page-title">Loan Application</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item mr-2"><a href="{% url 'dashboard' %}"><i class="bx bx-home bx-sm font-20"></i></a></li>
+            <li class="breadcrumb-item mr-2"><a href="{% url 'applicant-loan' %}">View Loan Applied</a></li>
+            <li class="breadcrumb-item">Update Loan Form</li>
+        </ol>
+    </div>
+
+    <div class="page-content fade-in-up">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                <!-- START OF MESSAGE -->
+                {% include 'backend/partials/messages.html' %}
+                <!-- END OF MESSAGE -->
+                <div class="ibox">
+                    <div class="ibox-head">
+                        <div class="ibox-title">Loan Application Form</div>
+                    </div>
+                    <div class="ibox-body">
+                        <form action="" method="POST" enctype="multipart/form-data" style="margin: 5px; padding: 10px; line-height: 10px;">
+                            {% csrf_token %}
+
+                            <div class="row justify-content-center">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10 col-xxl-10">
+                                    <div class="ibox">
+                                        <h4 class="ibox-header" style="text-decoration: underline; text-transform: uppercase; font-size: 18px; font-weight: 700;">Applicant Information:</h4>
+                                        <div class="ibox-body" style="border: 4px solid whitesmoke;">
+                                            <div class="form-row">
+                                                <div class="col-12 col-lg-2 form-group">
+                                                    <label for="title" class="required">Title</label>
+                                                    {{ p_form.title }}	
+                                                </div>
+                                                <div class="col-12 col-lg-4 form-group">
+                                                    <label for="last_name" class="required">Surname:</label>
+                                                    {{ u_form.last_name }}	
+                                                </div>
+                                                
+                                                <div class="col-12 col-lg-3 form-group">
+                                                    <label for="middle_name">Middle Name</label>
+                                                    {{ p_form.middle_name }}	
+                                                </div>
+
+                                                <div class="col-12 col-lg-3 form-group">
+                                                    <label for="first_name" class="required">First Name:</label>
+                                                    {{ u_form.first_name }}	
+                                                </div>
+                                            </div>	
+
+                                            <div class="form-row">
+                                                <div class="col-12 col-lg-3 form-group">
+                                                    <label for="date_of_birth" class="required">Date of Birth:</label>
+                                                    {{ p_form.date_of_birth }}	
+                                                </div>
+                                                    <div class="col-12 col-lg-3 form-group">
+                                                    <label for="marital" class="required">Marital Status:</label>
+                                                    {{ p_form.marital }}	
+                                                </div>
+                                                <div class="col-12 col-lg-3 form-group">
+                                                    <label for="gender" class="required">Gender:</label>
+                                                    {{ p_form.gender }}	
+                                                </div>
+                                                <div class="col-12 col-lg-3 form-group">
+                                                    <label for="religion" class="required">Religion:</label>
+                                                    {{ p_form.religion }}	
+                                                </div>
+                                            </div>
+
+                                            <div class="form-row">
+                                                <div class="col-12 col-lg-5 form-group">
+                                                    <label for="email" class="required">Email Address:</label>
+                                                    {{ u_form.email }}	
+                                                </div>
+                                                <div class="col-12 col-lg-4 form-group">
+                                                    <label for="phone" class="required">Applicant Mobile Number:</label>
+                                                    {{ p_form.phone }}	
+                                                </div>
+                                                <div class="col-12 col-lg-3 form-group">
+                                                    <label for="occupation" class="required">Occupation:</label>
+                                                    {{ p_form.occupation }}	
+                                                </div>
+                                            </div>
+
+                                            <div class="form-row">
+                                                <div class="col-12 col-lg-9 form-group">
+                                                    <label for="address" class="required">Residential Address:</label>
+                                                    {{ p_form.address }}	
+                                                </div>
+                                                <div class="col-12 col-lg-3 form-group">
+                                                    <label for="busstop" class="required">Nearest Bus Stop:</label>
+                                                    {{ p_form.busstop }}	
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-row">
+                                                <div class="col-12 col-lg-4 form-group">
+                                                    <label for="spousephone" class="required">Spouse Phone Number:</label>
+                                                    {{ p_form.spousephone }}	
+                                                </div>
+                                                
+                                                <div class="col-12 col-lg-8 form-group">
+                                                    <label for="office" class="required">Office Address:</label>
+                                                    {{ p_form.office }}	
+                                                </div>
+                                            </div>	
+
+                                            	
+                                            
+                                            <div class="form-row">
+                                                <div class="col-12 col-lg-2 form-group">
+                                                    <label for="country" class="required">Country:</label>
+                                                    {{ p_form.country }}	
+                                                </div>
+                                                <div class="col-12 col-lg-3 form-group">
+                                                    <label for="state" class="required">State of Origin:</label>
+                                                    {{ p_form.state }}	
+                                                </div>
+                                                <div class="col-12 col-lg-4 form-group">
+                                                    <label for="lga" class="required">LGA of Origin:</label>
+                                                    {{ p_form.lga }}	
+                                                </div>
+                                                <div class="col-12 col-lg-3 form-group">
+                                                    <label for="home" class="required">Home Town:</label>
+                                                    {{ p_form.home }}	
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-10 col-sm-12 col-md-12 col-lg-2 col-xl-2 col-xxl-2">
+                                    <div class="ibox">
+                                        <div class="ibox-body">
+                                            <div class="m-t-20 text-center">
+                                                <img class="img-thumbnail img-responsive" src="{{ user.profile.image.url }}" alt="{{ user.get_full_name }}" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                                    <div class="ibox">
+                                        <h4 class="ibox-header" style="text-decoration: underline; text-transform: uppercase; font-size: 18px; font-weight: 700;">Guarantor Information:</h4>
+                                        <div class="ibox-body" style="border: 4px solid whitesmoke;">
+                                                
+                                            <div class="form-row">
+                                                <div class="col-12 col-lg-12 form-group">
+                                                <label for="guarantor" class="required">Guarantor Full Name:</label>
+                                                    {{ form.guarantor }}	
+                                                </div>
+                                            </div>
+
+                                            <div class="form-row">
+                                                <div class="col-12 col-lg-3 form-group">
+                                                <label for="guarantor_marital" class="required">Guarantor Marital Status:</label>
+                                                    {{ form.guarantor_marital }}	
+                                                </div>
+                                                <div class="col-12 col-lg-2 form-group">
+                                                <label for="guarantor_gender" class="required">Guarantor Gender:</label>
+                                                    {{ form.guarantor_gender }}	
+                                                </div>
+                                                <div class="col-12 col-lg-3 form-group">
+                                                <label for="guarantor_occupation" class="required">Guarantor Occupation:</label>
+                                                    {{ form.guarantor_occupation }}
+                                                </div>
+                                                <div class="col-12 col-lg-4 form-group">
+                                                <label for="guarantor_mobile" class="required">Guarantor Mobile Number:</label>
+                                                    {{ form.guarantor_mobile }}	
+                                                </div>
+                                            </div>
+
+                                            <div class="form-row">
+                                                <div class="col-12 col-lg-4 form-group">
+                                                <label for="guarantor_email" class="required">Guarantor Email Address:</label>
+                                                    {{ form.guarantor_email }}	
+                                                </div>
+                                                <div class="col-12 col-lg-8 form-group">
+                                                <label for="guarantor_address" class="required">Guarantor Residential Address:</label>
+                                                    {{ form.guarantor_address }}	
+                                                </div>
+                                            </div>
+
+    
+                                            <div class="form-row">
+                                                <div class="col-12 col-lg-5 form-group">
+                                                <label for="guarantor_office" class="required">Guarantor Office Address:</label>
+                                                    {{ form.guarantor_office }}	
+                                                </div>
+
+                                                <div class="col-12 col-lg-3 form-group">
+                                                <label for="relationship" class="required">Applicant Relationship:</label>
+                                                    {{ form.relationship }}	
+                                                </div>
+
+                                                <div class="col-12 col-lg-4 form-group">
+                                                <label for="years_known" class="required">Years of Relationship with Applicant:</label>
+                                                    {{ form.years_known }}	
+                                                </div>
+                                            </div>
+
+                                            <div class="form-row">
+                                                <div class="col-12 col-lg-2 form-group">
+                                                <label for="guarantor_country" class="required">Guarantor Country:</label>
+                                                    {{ form.guarantor_country }}	
+                                                </div>
+                                                <div class="col-12 col-lg-3 form-group">
+                                                <label for="guarantor_state" class="required">Guarantor State of Origin:</label>
+                                                    {{ form.guarantor_state }}	
+                                                </div>
+                                                <div class="col-12 col-lg-4 form-group">
+                                                <label for="guarantor_lga" class="required">Guarantor LGA of Origin:</label>
+                                                    {{ form.guarantor_lga }}	
+                                                </div>
+                                                <div class="col-12 col-lg-3 form-group">
+                                                <label for="guarantor_home" class="required">Guarantor Home Town:</label>
+                                                    {{ form.guarantor_home }}	
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-12 col-lg-12 form-group">
+                                                <label for="picture" class="required">Upload Guarantor Passport:</label><br/>
+                                                    {{ form.picture }}	
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                                    <div class="ibox">
+                                        <h4 class="ibox-header" style="text-decoration: underline; text-transform: uppercase; font-size: 18px; font-weight: 700;">Loan Details:</h4>
+                                        <div class="ibox-body" style="border: 4px solid whitesmoke;">
+                                            <div class="form-row">
+                                                <div class="col-12 col-lg-9 form-group">
+                                                <label for="purpose" class="required">Purpose of Applying for the Loan:</label>
+                                                    {{ form.purpose }}	
+                                                </div>
+                                                <div class="col-12 col-lg-3 form-group">
+                                                <label for="purpose" class="required">Loan Duration:</label>
+                                                    {{ form.duration }}	
+                                                </div>
+                                            </div>
+
+                                            <div class="form-row">
+                                                <div class="col-12 col-lg-4 form-group">
+                                                <label for="amount" class="required">Amount Applying for (Figure):</label>
+                                                    {{ form.amount }}	
+                                                </div>
+
+                                                <div class="col-12 col-lg-5 form-group">
+                                                <label for="words" class="required">Amount Applying for (Words):</label>
+                                                    {{ form.words }}	
+                                                </div>
+
+                                                <div class="col-12 col-lg-3 form-group">
+                                                <label for="plan" class="required">Loan Payment Plan:</label>
+                                                    {{ form.plan }}	
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="text-center">
+                                    <input type="submit" value="Submit Loan Application" class="btn btn-primary btn-block">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <div>
+    </div>
+    <!-- END PAGE CONTENT-->
+{% endblock body %}

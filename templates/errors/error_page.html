@@ -1,0 +1,33 @@
+{% extends 'backend/dashboard/main.html' %}
+{% load static %}
+
+{% block title %}
+{{ block.super }}: Authorization
+{% endblock title %}
+    
+{% block body %} 
+    <div class="page-heading">
+        <h1 class="page-title">Authorization</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'dashboard' %}"><i class="bx bx-home bx-sm font-20"></i></a>
+            </li>
+            <li class="breadcrumb-item">Authorization</li>
+        </ol>
+    </div>
+    <div class="page-content fade-in-up">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                <div class="ibox">
+                    <div class="ibox-head bg-danger color-white">
+                        <div class="ibox-title">Authorization</div>
+                    </div>
+                    <div class="ibox-body">
+                        <h5>Dear {{ request.user.get_full_name }} !!!, you are not authorized to view or take action on this web page section</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+    

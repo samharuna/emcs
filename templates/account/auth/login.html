@@ -1,0 +1,87 @@
+{% extends 'account/auth/auth.html' %}
+{% load static %}
+
+{% block title %}
+{{ block.super }} {{ title }}
+{% endblock title %}
+
+{% block body %}
+    <!-- Content -->
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-sm-10 col-md-10 col-lg-6 col-xlg-6 col-xxl-6">
+
+        <div class="authentication-wrapper authentication-basic container-p-y">
+          <div class="authentication-inner">
+            <div class="my-0">
+              {% if messages %}
+                {% for message in messages %}
+                  <div class="alert alert-{{ message.tags }} text-dark d-flex align-items-center" role="alert">
+                    {{ message }}
+                  </div>
+                {% endfor %}
+              {% endif %}
+            </div>
+            <!-- Register -->
+            <div class="card shadow">
+              <div class="card-body">
+                <div class="mt-2"><img src="{% static 'backend/assets/images/logo/favicon.ico' %}" alt="EMCS Logo"></div>
+                <h4 class="card-title mb-0">Login Page! </h4>
+                <p class="mb-4">Please sign in to your account</p>
+                <hr>
+                <form id="formAuthentication" class="mb-2" action="" method="POST" autocomplete="on">
+                  {% csrf_token %}
+                  <div class="mb-3">
+                    <label for="email" class="required">Email Address</label>
+                    {{ form.email }}
+                  </div>
+                  <div class="mb-4 form-password-toggle">
+                    <label for="password" class="required">Password</label>
+                    <div class="input-group input-group-merge">
+                     {{ form.password }}
+                      <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                    </div>
+                  </div>
+
+                  <div class="mb-1">
+                    <input type="submit" value="Log In" class="btn btn-primary d-grid w-100">
+                  </div>
+       
+
+                  <div class="text-center my-3">
+                    <span>Forgot Password?</span>
+                    <a href="{% url 'reset' %}">
+                      <span class="text-danger">Click Here</span>
+                    </a>
+                  </div>
+
+                  <hr>
+
+                  <div class="text-center mb-0">
+                    <span>To create an Account</span>
+                    <a href="{% url 'sign-up' %}">
+                      <span>Click Here</span>
+                    </a>
+                  </div>
+
+                  <div class="text-center mb-3">
+                    <span>Go to Home </span>
+                    <a href="{% url 'home' %}">
+                      <span class="text-info">Click Here</span>
+                    </a>
+                  </div>
+                </form>
+
+              </div>
+            </div>
+            <!-- /Register -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+    
+  </div>
+    <!-- / Content -->  
+{% endblock body %}
+  

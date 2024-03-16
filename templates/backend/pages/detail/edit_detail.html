@@ -1,0 +1,124 @@
+{% extends 'backend/dashboard/main.html' %}
+{% load static %}
+
+{% block title %}
+{{ block.super }}: {{ title }}
+{% endblock title %}
+    
+{% block body %} 
+    <div class="page-heading">
+        <h1 class="page-title">Edit Contact Detail Post</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'dashboard' %}"><i class="bx bx-home bx-sm font-20"></i></a>
+            </li>
+            <li class="breadcrumb-item"><a href="{% url 'view-detail' %}">View Contact Detail Posts</a></li>
+            <li class="breadcrumb-item">Edit Contact Detail Post</li>
+        </ol>
+    </div>
+    <div class="page-content fade-in-up">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                <!-- START OF MESSAGE -->
+                {% include 'backend/partials/messages.html' %}
+                <!-- END OF MESSAGE -->
+                <div class="ibox">
+                    <div class="ibox-head">
+                        <div class="ibox-title">Edit Contact Detail Post</div>
+                    </div>
+                    <div class="ibox-body">
+                        <form action="" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+
+                            <div class="form-group">
+                                <label for="address" class="required">Office Address:</label>
+                                {{ form.address }}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="branch" class="required">Branch Address:</label>
+                                {{ form.branch }}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="description" class="required">Office Description:</label>
+                                {{ form.description }}
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-6">
+                                    <label for="starts" class="required">Office Resumption Time:</label>
+                                    {{ form.starts }}
+                                </div>
+
+                                 <div class="form-group col-6">
+                                    <label for="closes" class="required">Office Closing Time:</label>
+                                    {{ form.closes }}
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-6">
+                                    <label for="email" class="required">Office Email Address:</label>
+                                    {{ form.email }}
+                                </div>
+
+                                <div class="form-group col-3">
+                                    <label for="phone" class="required">Office Phone Number:</label>
+                                    {{ form.phone }}
+                                </div>
+
+                                <div class="form-group col-3">
+                                    <label for="mobile" class="required">Office Mobile Number:</label>
+                                    {{ form.mobile }}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="direction" class="required">Office Direction Map URL:</label>
+                                {{ form.direction }}
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-4">
+                                    <label for="facebook" class="required">Office Facebook URL:</label>
+                                    {{ form.facebook }}
+                                </div>
+
+                                <div class="form-group col-4">
+                                    <label for="twitter" class="required">Office Twitter URL:</label>
+                                    {{ form.twitter }}
+                                </div>
+
+                                <div class="form-group col-4">
+                                    <label for="instagram" class="required">Office Instagram URL:</label>
+                                    {{ form.instagram }}
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-4">
+                                    <label for="linkedin" class="required">Office Linkedin URL:</label>
+                                    {{ form.linkedin }}
+                                </div>
+
+                                <div class="form-group col-4">
+                                    <label for="whatsapp" class="required">Office WhatsApp URL:</label>
+                                    {{ form.whatsapp }}
+                                </div>
+
+                                <div class="form-group col-4">
+                                    <label for="youtube" class="required">Office Youtube URL:</label>
+                                    {{ form.youtube }}
+                                </div>
+                            </div>
+                            
+                            <input type="submit" value="Edit Contact Detail Post" class="btn btn-primary mt-3 p-2">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+    

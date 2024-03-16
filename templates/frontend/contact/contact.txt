@@ -1,0 +1,12 @@
+{% load static %}
+
+<body style="background-color: darkgrey; padding: 50px 100px 50px 100px;">
+    <center>
+        <div style="background-color: white; width: auto; height: auto; border-radius: 5px; color: black; padding: 50px; box-shadow: 2px 4px #000;">
+            <div style="font-size: 20px;" class="m-0">Hello {{ name }}, </div>
+            <div style="font-size: 14px; margin-bottom: 20px;" class="m-0">We received a request via this email address: {{ email }}</div>
+            <hr>
+            <p style="font-size: 14px; text-align: justify;">{{ body }}</p>
+        </div>
+    </center>
+</body>

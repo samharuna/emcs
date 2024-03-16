@@ -1,0 +1,195 @@
+{% extends 'backend/dashboard/main.html' %}
+{% load static %}
+
+{% block title %}
+{{ block.super }}: {{ title }}
+{% endblock title %}
+    
+{% block body %} 
+    <!-- START PAGE CONTENT-->
+    <div class="page-heading">
+        <h1 class="page-title">Profile</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'dashboard' %}"><i class="bx bx-home bx-sm font-20"></i></a>
+            </li>
+            <li class="breadcrumb-item">Profile</li>
+        </ol>
+    </div>
+    
+    <div class="page-content fade-in-up">
+        
+        <!-- START OF MESSAGE -->
+        {% include 'backend/partials/messages.html' %}
+        <!-- END OF MESSAGE -->
+    
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 col-xxl-2">
+                <div class="ibox">
+                    <div class="ibox-body text-center">
+
+                        <div class="m-t-20">
+                            <img class="img-thumbnail img-responsive" src="{{ profile.image.url }}" alt="{{ profile.user.get_full_name }}" />
+                        </div>
+
+                        <div class="mt-2">
+                            <a href="" class="btn btn-sm btn-info" data-toggle="modal" data-target="#pictureModal">Upload Passport</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10 col-xxl-10">
+                <div class="ibox">
+                    <div class="ibox-head">
+                        <div class="ibox-title">Edit User Profile</div>
+                    </div>
+                    <div class="ibox-body">
+                        <form action="" method="POST" enctype="multipart/form-data">
+                            
+                            {% csrf_token %}
+                            {{ form.media }}
+                            <div class="form-row">
+                                 <div class="form-group col-12 col-lg-4">
+                                    <label for="title" class="required">Title:</label>
+                                    {{ form.title }}
+                                </div>
+
+                                <div class="form-group col-12 col-lg-8">
+                                    <label for="middle_name">Middle Name:</label>
+                                    {{ form.middle_name }}
+                                </div>
+                            </div>
+
+
+                            <div class="form-row">
+                                <div class="form-group col-12 col-lg-3">
+                                    <label for="gender" class="required">Gender:</label>
+                                    {{ form.gender }}
+                                </div>
+
+                                <div class="form-group col-12 col-lg-3">
+                                    <label for="religion" class="required">Religion:</label>
+                                    {{ form.religion }}
+                                </div>
+
+                                <div class="form-group col-12 col-lg-3">
+                                    <label for="marital" class="required">Marital Status:</label>
+                                    {{ form.marital }}
+                                </div>
+
+                                <div class="form-group col-12 col-lg-3">
+                                    <label for="date_of_birth" class="required">Date of Birth:</label>
+                                    {{ form.date_of_birth }}
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-12 col-lg-3">
+                                    <label for="phone" class="required">Mobile Number:</label>
+                                    {{ form.phone }}
+                                </div>
+                                
+                                <div class="form-group col-12 col-lg-3">
+                                    <label for="spousephone" class="required">Spouse Phone Number:</label>
+                                    {{ form.spousephone }}
+                                </div>
+
+                                <div class="form-group col-12 col-lg-3">
+                                    <label for="occupation" class="required">Occupation:</label>
+                                    {{ form.occupation }}
+                                </div>
+
+                                <div class="form-group col-12 col-lg-3">
+                                    <label for="busstop" class="required">Nearest Bus Stop:</label>
+                                    {{ form.busstop }}
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-12 col-lg-6">
+                                    <label for="office" class="required">Office Address:</label>
+                                    {{ form.office }}
+                                </div>
+
+                                <div class="form-group col-12 col-lg-6">
+                                    <label for="address" class="required">Residential Address:</label>
+                                    {{ form.address }}
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-12 col-lg-12">
+                                    <label for="bio" class="required">Brief Biography:</label>
+                                    {{ form.bio }}
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-12 col-lg-4">
+                                    <label for="facebook" class="required">Facebook Url:</label>
+                                    {{ form.facebook }}
+                                </div>
+
+                                <div class="form-group col-12 col-lg-4">
+                                    <label for="twitter" class="required">Twitter Url:</label>
+                                    {{ form.twitter }}
+                                </div>
+
+                                <div class="form-group col-12 col-lg-4">
+                                    <label for="instagram" class="required">Instagram Url:</label>
+                                    {{ form.instagram }}
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-12 col-lg-4">
+                                    <label for="linkedin" class="required">Linkedin Url:</label>
+                                    {{ form.linkedin }}
+                                </div>
+
+                                <div class="form-group col-12 col-lg-4">
+                                    <label for="youtube" class="required">Youtube Url:</label>
+                                    {{ form.youtube }}
+                                </div>
+
+                                <div class="form-group col-12 col-lg-4">
+                                    <label for="whatsapp" class="required">WhatsApp Url:</label>
+                                    {{ form.whatsapp }}
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-12 col-lg-3">
+                                    <label for="country" class="required">Country:</label>
+                                    {{ form.country }}
+                                </div>
+
+                                <div class="form-group col-12 col-lg-3">
+                                    <label for="state" class="required">State of Origin:</label>
+                                    {{ form.state }}
+                                </div>
+
+                                <div class="form-group col-12 col-lg-3">
+                                    <label for="lga" class="required">LGA of Origin:</label>
+                                    {{ form.lga }}
+                                </div>
+                                
+                                <div class="form-group col-12 col-lg-3">
+                                    <label for="home" class="required">Home Town:</label>
+                                    {{ form.home }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 col-lg-12 mt-3">
+                                    <input type="submit" value="Edit Profile" class="btn btn-primary p-2 mt-3">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

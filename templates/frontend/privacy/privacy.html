@@ -1,0 +1,32 @@
+{% extends 'frontend/partials/base.html' %}
+{% load static %}
+
+{% block title %}
+{{ block.super }}| {{ key }}
+{% endblock %}
+
+{% block body %}
+<!-- Start of Our Privacy -->
+<div class="container">
+    <div class="row">
+    {% for key in privacy %}
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12" data-aos="zoom-in-up">
+            <div class="about p-3"> 
+                <h2>{{ key.title }}</h2>
+                <hr class="left">
+                <p>{{ key.body|safe }}</p>
+            </div>  
+        </div>
+    {% endfor %}
+    </div>
+</div>
+<!-- End of Our Privacy -->
+
+<!-- Start of How It Work -->
+{% include 'frontend/partials/steps.html' %}
+<!-- End of How It Work -->
+
+<!-- Start of Subscriber -->
+{% include 'frontend/partials/newsletter.html' %}
+<!-- End of Subscriber -->
+{% endblock %}

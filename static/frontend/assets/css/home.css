@@ -1,0 +1,157 @@
+/* Carousal */
+
+.carousel{
+  background: #ddd;
+  margin-top: -55px;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 40px;
+}
+
+.carousel-inner {
+  width: 100%;
+  height: auto;
+}
+
+.carousel,
+.carousel-item,
+.active {
+  height: auto;
+}
+
+.carousel-caption{
+    position: absolute;
+    top: auto;
+    bottom: 10%;
+    text-align: center;
+    color: #FFF;
+}
+
+.carousel-caption h2 {
+    text-transform: uppercase;
+    margin: 0px 0px 8px 0px;
+    color: #FFF;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: Oswald;
+}
+
+.carousel-caption p {
+    margin: 0px 0px 5px 0px;
+    color: #FFF;
+    font-size: 16px;
+    font-family: Roboto;
+    font-weight: 400;
+    text-align: center;
+}
+
+.carousel-caption a {
+    text-transform: none;
+    color: #FF8C00;
+    font-family: Roboto;
+    margin-left: 5px;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.carousel-img img{
+  width: 100%;
+  height: 100%;
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -o-background-size: cover;
+}
+
+
+.carousel-img:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: linear-gradient(to bottom right, #060606, #2c4987);
+  opacity: 0.7;
+}
+
+
+.carousel-indicators {
+  position: absolute;
+  right: 0;
+  bottom: 20px;
+  left: 0;
+  z-index: 15;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding-left: 0;
+  margin-right: 15%;
+  margin-left: 15%;
+  list-style: none;
+}
+
+.carousel-indicators li {
+  position: relative;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  width: 30px;
+  height: 7px;
+  margin-right: 3px;
+  margin-left: 3px;
+  text-indent: -999px;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255);
+  border: 1px solid #2c4987;
+}
+
+.carousel-indicators .active {
+  background-color: #ff6600;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 15%;
+  color: #fff;
+  text-align: center;
+  opacity: 0.5;
+  display: none;
+}
+
+
+
+@media (max-width: 480px) {
+  .carousel .carousel-img{
+    width: 100%;
+    height: auto;
+  }
+}
+
+
+/* @media only screen and (max-width: 481px) {
+.carousel {
+  width: auto;
+  height: 700px;
+} 
+} */
+
+@media (min-width: 1281px) {
+  .carousel .carousel-img{
+    width: 100%;
+    height: 720px;
+  }
+}
+
+

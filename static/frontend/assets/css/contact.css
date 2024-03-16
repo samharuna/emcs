@@ -1,0 +1,149 @@
+/* Contact */
+
+.form-group {
+  padding: 0px;
+  margin-bottom: 6px;
+  width: 100%;
+}
+
+.form-group label {
+  font-size: 16px;
+  font-family: Roboto;
+  font-weight: 600;
+}
+
+.form-group .form-control {
+  outline: #2c4987;
+  box-shadow: none;
+  border: 1px solid #000;
+  width: 100%;
+  height: 38px;
+  font-size: 16px;
+  font-family: Roboto;
+  font-weight: 400;
+  color: #011238;
+  background: #fff;
+  border-radius: 1px;
+}
+
+.form-group .form-control.form-xl {
+  outline: #2c4987;
+  box-shadow: none;
+  border: 1px solid #000;
+  width: 100%;
+  height: 38px;
+  font-size: 16px;
+  font-family: Roboto;
+  font-weight: 400;
+  color: #011238;
+  background: #fff;
+  border-radius: 1px;
+}
+
+.form-group textarea.form-control {
+  height: 95px;
+  font-size: 16px;
+  border: 1px solid #000;
+  width: 100%;
+  font-size: 16px;
+  font-family: Roboto;
+  font-weight: 400;
+  color: #011238;
+}
+
+.form-group textarea.form-control.form-xl {
+  height: 95px;
+  font-size: 16px;
+  border: 1px solid #000;
+  width: 100%;
+  font-size: 16px;
+  font-family: Roboto;
+  font-weight: 400;
+  color: #011238;
+}
+
+.form-group .input-focus-effect {
+    width: 0 !important;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    -webkit-transition: ease all 0.3s;
+    transition: ease all 0.3s;
+    height: 2px;
+}
+
+.form-group textarea:focus:not([readonly]) + span.input-focus-effect,
+.form-group input:focus:not([readonly]) + span.input-focus-effect,
+.form-group select:focus:not([readonly]) + span.input-focus-effect {
+    width: 100% !important;
+}
+
+.asteriskField{
+	font-weight: 500;
+	display: inline-block;
+	color: red;
+}
+
+
+.contact-info {
+  margin: 0;
+  padding: 0;
+}
+
+.contact-info h3 {
+  margin: 0;
+  padding: 0;
+  font-size: 15px;
+  text-transform: uppercase;
+  font-family: Oswald;
+  font-weight: 700;
+  color: #2c4987;
+}
+
+.card h2 {
+  font-size: 18px;
+  text-transform: uppercase;
+  font-family: Oswald;
+  font-weight: 700;
+  color: #2c4987;
+}
+
+.contact-info p {
+  margin-top: 5px;
+  font-size: 16px;
+  font-weight: 400;
+  margin-left: 32px;
+  text-align: justify;
+  font-family: Roboto;
+  color: #011238;
+}
+
+.contact-info span{
+  font-size: 15px;
+  font-weight: 300;
+  margin-right: 7px;
+  color: #ff6600;
+}
+
+
+.contact-social {
+  margin: 0;
+  padding: 0;
+}
+
+.contact-social p {
+  margin-top: 3px;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: left;
+}
+
+.contact-social span{
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.map-property {
+  margin: 0px;
+  padding: 0px;
+}

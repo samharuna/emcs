@@ -1,0 +1,47 @@
+{% extends 'backend/dashboard/main.html' %}
+{% load static %}
+
+{% block title %}
+{{ block.super }}: {{ title }}
+{% endblock title %}
+    
+{% block body %}
+    <!-- START PAGE CONTENT-->
+    <div class="page-heading">
+        <h1 class="page-title">Mail View</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'dashboard' %}"><i class="bx bx-home bx-sm font-20"></i></a>
+            </li>
+            <li class="breadcrumb-item">Mail View</li>
+        </ol>
+    </div>
+
+    <div class="page-content fade-in-up">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+            {% if mail %}
+                <div class="ibox p-3" id="mailbox-container">
+                    <div class=""><a href="{% url 'view-mails' %}" class="btn btn-sm btn-info" title="Go back to Inbox">Back to Inbox</a></div>
+                    <div class="mailbox-header d-flex justify-content-between" style="border-bottom: 1px solid #e8e8e8;">
+                        <div>
+                            <h5 class="inbox-title">{{ mail.subject }}</h5>
+                            <div class="m-t-5 font-13">
+                                <span class="font-strong">{{ mail.sender.get_full_name }}</span>
+                                <a class="text-muted m-l-5" href="javascript:;">{{ mail.sender.email }}</a>
+                            </div>
+                            <div class="p-r-10 font-13">{{ mail.date_created }}</div>
+                        </div>
+                        <div class="inbox-toolbar m-l-20">
+                            <a href="{% url 'delete-mails' mail.slug %}" class="btn btn-default btn-sm" title="Click to Delete"><i class="fa fa-trash-o"></i></a>
+                        </div>
+                    </div>
+                    <div class="mailbox-body">
+                        <p style="text-align: justify;">{{ mail.body|safe }}</p>
+                    </div>
+                </div>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock body %}

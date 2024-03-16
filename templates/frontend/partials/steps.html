@@ -1,0 +1,20 @@
+{% load static %}
+
+<div class="worksarea">
+    <div class="container">
+        <div class="row">
+        {% for key in steps %}
+            <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xlg-4" data-aos="zoom-in-left">
+                <div class="steps-details wow fadeInUp" data-wow-duration="1s" data-wow-delay=".4s">
+                    <span>{{ key.serial_number }}</span>
+                    <h2>{{ key.title }}</h2>
+                    <p>{{ key.description }}</p>
+                </div>
+            </div>
+        {% endfor %}
+            <div class="ml-2">
+            <a href="{% url 'sign-up' %}" target="_blank" class="home-btn text-white">Create Account<i class="bx bx-chevrons-right bx-xs"></i></a>
+            </div>
+        </div>
+    </div>
+</div>

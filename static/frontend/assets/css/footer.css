@@ -1,0 +1,82 @@
+footer{
+    background: #011238;
+    background: linear-gradient(#011238, #011238);
+    padding: 60px 20px 5px 20px;
+}
+
+figure.footer-logo img{
+    width: 200px;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+.footer-col h5{
+    color: #FFF;
+    margin-bottom: 20px;
+    font-family: Oswald;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+
+.footer-col p{
+    color: #FFF;
+    font-size: 14px;
+    line-height: 0.8rem;
+    font-family: Roboto;
+    font-weight: 400;
+}
+
+.footer-col .list-group-item {
+    position: relative;
+    display: block;
+    padding: 0.27rem 0rem;
+    margin-bottom: -1px;
+    background-color: transparent;
+    border: 0px solid rgba(242, 242, 242);
+    font-size: 14px;
+    font-family: Roboto; 
+    color: #FFF;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    font-weight: 400;
+}
+
+.footer-col .list-group-item a:link {
+    text-decoration: none;
+    color: #FFF;
+    transition: 0.3s;
+}
+
+.footer-col .list-group-item a:visited {
+    text-decoration: none;
+    color: #FFF;
+}
+
+.footer-col .list-group-item a:hover {
+    text-decoration: none;
+    color: #ff6600;
+}
+
+.footer-col .list-group-item a:active {
+    text-decoration: none;
+    color: #FFF;
+}
+
+
+.copyright{
+    text-align: center;
+    margin-top: 40px;
+}
+
+.copyright p{
+    margin: 0;
+    color: #FFF;
+    font-size: 12px;
+    text-align: center;
+    font-family: Roboto;
+    font-weight: 400;
+}
+

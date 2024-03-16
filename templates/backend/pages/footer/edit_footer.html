@@ -1,0 +1,52 @@
+{% extends 'backend/dashboard/main.html' %}
+{% load static %}
+
+{% block title %}
+{{ block.super }}: {{ title }}
+{% endblock title %}
+    
+{% block body %} 
+    <div class="page-heading">
+        <h1 class="page-title">Update Footer Post</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'dashboard' %}"><i class="bx bx-home bx-sm font-20"></i></a>
+            </li>
+            <li class="breadcrumb-item"><a href="{% url 'view-footer' %}">View Footer Posts</a></li>
+            <li class="breadcrumb-item">Update Footer Post</li>
+        </ol>
+    </div>
+    <div class="page-content fade-in-up">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                <!-- START OF MESSAGE -->
+                {% include 'backend/partials/messages.html' %}
+                <!-- END OF MESSAGE -->
+                <div class="ibox">
+                    <div class="ibox-head">
+                        <div class="ibox-title">Update Footer Post</div>
+                    </div>
+                    <div class="ibox-body">
+                        <form action="" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form.media }}
+
+                            <div class="form-group">
+                                <label for="image" class="required">Footer Image:</label><br/>
+                                {{ form.image }}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="title" class="required">Footer Title:</label>
+                                {{ form.title }}
+                            </div>
+
+                            <input type="submit" value="Update Footer Post" class="btn btn-primary mt-3 p-2">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+    

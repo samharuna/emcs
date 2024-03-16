@@ -1,0 +1,95 @@
+{% extends 'backend/dashboard/main.html' %}
+{% load static %}
+
+{% block title %}
+{{ block.super }} | {{ key }}
+{% endblock title %}
+
+{% block body %}
+    <!-- START PAGE CONTENT-->
+    <div class="page-heading">
+        <h1 class="page-title">Investment Application</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item mr-2"><a href="{% url 'dashboard' %}"><i class="bx bx-home bx-sm font-20"></i></a></li>
+            <li class="breadcrumb-item mr-2"><a href="{% url 'view-investment' %}">View Investments</a></li>
+            <li class="breadcrumb-item">Confirmation of Investment</li>
+        </ol>
+    </div>
+
+    <div class="page-content fade-in-up">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                <!-- START OF MESSAGE -->
+                {% include 'backend/partials/messages.html' %}
+                <!-- END OF MESSAGE -->
+                <div class="ibox">
+                    <div class="ibox-head">
+                        <div class="ibox-title">Confirmation of Investment</div>
+                    </div>
+                    <div class="ibox-body">
+                        <form action="" method="POST" enctype="multipart/form-data" style="margin: 5px; padding: 10px; line-height: 10px;">
+                            {% csrf_token %}
+                            <fieldset class="border border-dark p-3 mb-3">
+                                <legend class="w-auto h5">Investment Information</legend>	
+                                <div class="form-row">
+                                    <div class="col-12 col-lg-12 form-group">
+                                    <label for="investor" class="required">Investor Full Name:</label>
+                                        {{ form.investor }}	
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-12 col-lg-4 form-group">
+                                    <label for="amount" class="required">Amount Invested:</label>
+                                        {{ form.amount }}	
+                                    </div>
+                                    <div class="col-12 col-lg-4 form-group">
+                                    <label for="interest" class="required">Investment Interest:</label>
+                                        {{ form.interest }}	
+                                    </div>
+                                    <div class="col-12 col-lg-4 form-group">
+                                    <label for="total_amount" class="required">Total Amount:</label>
+                                        {{ form.total_amount }}	
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-12 col-lg-4 form-group">
+                                    <label for="percent" class="required">Investment Percent (%):</label>
+                                        {{ form.percent }}	
+                                    </div>
+                                    <div class="col-12 col-lg-4 form-group">
+                                    <label for="investment_starts" class="required">Investment Starts:</label>
+                                        {{ form.investment_starts }}	
+                                    </div>
+                                    <div class="col-12 col-lg-4 form-group">
+                                    <label for="investment_ends" class="required">Investment Ends:</label>
+                                        {{ form.investment_ends }}	
+                                    </div>
+                                    
+                                </div>
+
+
+                                <div class="form-row">
+                                    <div class="col-12 col-lg-6 form-group">
+                                    <label for="description" class="required">Investment Description:</label>
+                                        {{ form.description }}	
+                                    </div>
+                                    <div class="col-12 col-lg-6 form-group">
+                                    <label for="director_name" class="required">Director Full Name:</label>
+                                        {{ form.director_name }}	
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <div class="form-row">
+                                <input type="submit" value="Post Confirmation" class="btn btn-primary btn-md btn-block mt-3">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END PAGE CONTENT-->
+{% endblock body %}

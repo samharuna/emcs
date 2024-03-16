@@ -1,0 +1,42 @@
+{% extends 'backend/dashboard/main.html' %}
+{% load static %}
+
+{% block title %}
+{{ block.super }}: {{ title }}
+{% endblock title %}
+    
+{% block body %} 
+    <!-- START PAGE CONTENT-->
+    <div class="page-heading">
+        <h1 class="page-title">Profiles</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'dashboard' %}"><i class="bx bx-home bx-sm font-20"></i></a>
+            </li>
+            <li class="breadcrumb-item">Profiles</li>
+        </ol>
+    </div>
+    <div class="page-content fade-in-up">
+        <!-- START OF MESSAGE -->
+        {% include 'backend/partials/messages.html' %}
+        <!-- END OF MESSAGE -->
+        <div class="row">
+        {% for key in profiles %}
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3 col-xxl-3">
+                <div class="ibox">
+                    <div class="ibox-body">
+                        <div class="card">
+                            <img class="card-img-top" src="{{ key.profile.image.url }}" />
+                            <div class="card-body">
+                                <h5 class="card-title">{{ key.get_full_name }}</h5>
+                                <h6 class="card-subtitle">{{ key.profile.occupation }}</h6>
+                                <a href="{% url 'profile' key.username %}" class="btn btn-primary btn-sm">Read more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock body %}

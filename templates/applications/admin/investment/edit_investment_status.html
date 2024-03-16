@@ -1,0 +1,74 @@
+{% extends 'backend/dashboard/main.html' %}
+{% load static %}
+
+{% block title %}
+{{ block.super }} | {{ key }}
+{% endblock title %}
+
+{% block body %}
+    <!-- START PAGE CONTENT-->
+    <div class="page-heading">
+        <h1 class="page-title">Investment Application</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item mr-2"><a href="{% url 'dashboard' %}"><i class="bx bx-home font-20 bx-sm"></i></a></li>
+            <li class="breadcrumb-item mr-2"><a href="{% url 'view-investment' %}">View Investments</a></li>
+            <li class="breadcrumb-item">Edit Investment Status</li>
+        </ol>
+    </div>
+
+    <div class="page-content fade-in-up">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                <!-- START OF MESSAGE -->
+                {% include 'backend/partials/messages.html' %}
+                <!-- END OF MESSAGE -->
+                <div class="ibox">
+                    <div class="ibox-head">
+                        <div class="ibox-title">Edit Investment Status</div>
+                    </div>
+                    <div class="ibox-body">
+                        <form action="" method="POST" style="margin: 5px; padding: 10px; line-height: 10px;">
+                            {% csrf_token %}
+                            <fieldset class="border border-dark p-3 mb-3">
+                                <legend class="w-auto h5"> Edit Investment Status Information</legend>	
+                                <div class="form-row">
+                                    <div class="col-12 col-lg-12 form-group">
+                                        <label for="investor" class="required">Investor Full Name:</label>
+                                        {{ form.investor }}	
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-12 col-lg-12 form-group">
+                                        <label for="next_of_kin" class="required">Next of Kin Full Name:</label>
+                                        {{ form.next_kin }}	
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-12 col-lg-12 form-group">
+                                        <label for="amount" class="required">Total Amount on Investment:</label>
+                                        {{ form.total_amount }}	
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-12 col-lg-12 form-group">
+                                        <label for="status" class="required">Investment Status:</label>
+                                        {{ form.status }}	
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <div class="form-row">
+                                <input type="submit" value="Post Investment Status" class="btn btn-primary btn-md btn-block mt-3">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <div>
+    </div>
+    
+    <!-- END PAGE CONTENT-->
+{% endblock body %}

@@ -1,0 +1,55 @@
+{% extends 'backend/dashboard/main.html' %}
+{% load static %}
+
+{% block title %}
+{{ block.super }} | {{ key }}
+{% endblock title %}
+
+{% block body %}
+    <!-- START PAGE CONTENT-->
+    <div class="page-heading">
+        <h1 class="page-title">Loan Application</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item mr-2"><a href="{% url 'dashboard' %}"><i class="bx bx-home bx-sm font-20"></i></a></li>
+            <li class="breadcrumb-item mr-2"><a href="{% url 'view-loanduration' %}">View Loan Duration</a></li>
+            <li class="breadcrumb-item">Add Loan Duration</li>
+        </ol>
+    </div>
+
+    <div class="page-content fade-in-up">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                <!-- START OF MESSAGE -->
+                {% include 'backend/partials/messages.html' %}
+                <!-- END OF MESSAGE -->
+                <div class="ibox">
+                    <div class="ibox-head">
+                        <div class="ibox-title">Add Loan Duration</div>
+                    </div>
+                    <div class="ibox-body">
+                        <form action="" method="POST" enctype="multipart/form-data" style="margin: 5px; padding: 10px; line-height: 10px;">
+                            {% csrf_token %}
+
+                            <fieldset class="border border-dark p-3 mb-3">
+                                <legend class="w-auto h5">Loan Duration Form</legend>
+
+                                <div class="form-row">
+                                    <div class="col-12 col-lg-12 form-group">
+                                        <label for="name" class="required">Loan Duration:</label>
+                                        {{ form.name }}	
+                                    </div>
+                                </div>	
+
+                            </fieldset>
+                        
+                            <div class="form-row">
+                                <input type="submit" value="Submit Loan Duration" class="btn btn-primary btn-block mt-3">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <div>
+    </div>
+    <!-- END PAGE CONTENT-->
+{% endblock body %}

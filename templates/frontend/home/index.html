@@ -1,0 +1,246 @@
+{% extends 'frontend/partials/base.html' %}
+{% load static %}
+
+{% block title %}
+{{ block.super }} | {{ key }}
+{% endblock %}
+
+{% block body %}
+    <!-- Start of Home Page -->
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">  
+        <ol class="carousel-indicators">
+        {% for key in home|slice:4 %}
+          {% if forloop.counter == 1 %}
+              <li data-target="#carouselExampleIndicators" data-slide-to="{{ forloop.counter }}" class="active"></li>  
+          {% else %}
+              <li data-target="#carouselExampleIndicators" data-slide-to="{{ forloop.counter }}"></li> 
+          {% endif %} 
+        {% endfor %}
+
+        </ol>  
+        <div class="carousel-inner">  
+          {% for key in home|slice:4 %}
+            {% if forloop.counter == 1 %}
+              <div class="carousel-item active">  
+                <div class="carousel-img">
+                  <img src="{{ key.image.url }}" alt="{{ key.category.name }}" /> 
+                </div>
+                  <div class="carousel-caption">  
+                      <h2 data-aos="zoom-in-up">{{ key.category.name }} Package</h2>  
+                      <p>{{ key.description|truncatechars:"150" }}<a href="{% url 'service-detail' key.slug %}">Read More<i class="bx bx-chevrons-right bx-xs"></i></a></p>
+                  </div>  
+              </div>
+            {% else %}
+              <div class="carousel-item">  
+                <div class="carousel-img">
+                  <img src="{{ key.image.url }}" alt="{{ key.category.name }}" /> 
+                </div>
+                  <div class="carousel-caption">  
+                      <h2 data-aos="zoom-in-up">{{ key.category.name }} Package</h2>  
+                      <p>{{ key.description|truncatechars:"150" }} <a href="{% url 'service-detail' key.slug %}">Read More<i class="bx bx-chevrons-right bx-xs"></i></a></p>
+                  </div> 
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>  
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">  
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>  
+            <span class="sr-only">Previous</span>  
+        </a>  
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">  
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>  
+            <span class="sr-only">Next</span>  
+        </a>  
+    </div> 
+    <!-- End of Home Page -->
+    
+
+    <!-- Start of Services -->
+    <div class="container">
+        <div class="row">
+        {% for key in service|slice:"3" %}
+          <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xlg-4"  data-aos="zoom-in-up">
+            <div class="card">
+                <img src="{{ key.image.url }}" class="card-img-top" alt="{{ key.category }}">
+                <div class="card-body">
+                    <div class="service-details">
+                        <h2 class="card-title">{{ key.category }} Package</h2>
+                        <hr class="center">
+                        <p class="card-text">{{ key.description }}</p>
+                        <a href="{% url 'service-detail' key.slug %}" class="home-btn text-white">Read More<i class="bx bx-chevrons-right bx-xs"></i></a>
+                    </div>
+                </div>
+            </div>
+          </div>
+        {% endfor %}
+        </div>
+    </div>
+    <!-- End of Services -->
+
+    <!-- Start of How It Work -->
+    {% include 'frontend/partials/steps.html' %}
+    <!-- End of How It Work -->
+
+    <!-- Start of Statistic Counter -->
+    {% include 'frontend/partials/counter.html' %}
+    <!-- End of Statistic Counter -->
+
+    <!-- Start of Blog Post -->
+    {% comment %}
+      <div class="container">
+            <div class="section-title">
+              <h2>Recent Posts</h2>
+              <hr class="center">
+              <p class="text-center">leap into electronic typesetting, remaining essentially unchanged</p>
+            </div>
+          <div class="row">
+            {% for key in latest_post|slice:3 %}
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xlg-4" data-aos="zoom-in-up">
+                <div class="single-blog">
+                    <div class="blog-image">
+                        <a class="image-scale" href="{% url 'post_detail' key.slug %}"><img src="{{ key.image.url }}" alt="{{ key.title }}" width="100%"></a>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="admin-type"><i class="bx bx-user icons"></i> <a href="{% url 'blog_profile' key.author.username %}" target="_blank">{{ key.author.username }}</a></span>
+                            <span class="date-type"><i class="bx bx-calendar icons"></i> {{ key.date_created|date }}</span>
+                            <span class="comments-type"><i class="bx bx-tag icons"></i> {{ key.tags }}</span>
+                        </div>
+
+                        <a href="{% url 'post_detail' key.slug %}">
+                            <h4>{{ key.title }}</h4>
+                        </a>
+                        <p>{{ key.description }}</p>
+                        <a class="home-btn text-white" href="{% url 'post_detail' key.slug %}"> Read more<i class="bx bx-chevrons-right bx-xs"></i></a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+          </div>
+      </div>
+    {% endcomment %}
+    <!-- End of Blog Post -->
+
+    <!-- Start of Frequent Asked Question -->
+    <div class="container">
+        <div class="section-title">
+          <h2>Frequent Asked Questions</h2>
+          <hr class="center">
+          {% for key in faq_header %}
+          <p class="text-center">{{ key.title }}</p>
+          {% endfor %}
+        </div>
+
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12" data-aos="zoom-in-down">
+          <div class="accordion" id="accordionExample">
+          {% for key in faq %}
+          {% if forloop.counter == 1 %}
+            <div class="card">
+              <div class="card-header" id="heading-1">
+                <h5 class="mb-0 card-header-title"> <a class="btn-link text-left collapsed" role="button" data-toggle="collapse" data-target="#collapse-1" aria-expanded="false" aria-controls="collapse-1">{{ key.title }}</a> </h5>
+              </div>
+              <div id="collapse-1" class="collapse" data-parent="#accordionExample" aria-labelledby="heading-1">
+                <div class="card-body body-card">{{ key.body|safe }} </div>
+              </div>
+            </div>
+          {% endif %}
+          {% endfor %}
+          
+          {% for key in faq %}
+          {% if forloop.counter == 2 %}
+            <div class="card mb-1">
+              <div class="card-header" id="heading-2">
+                <h5 class="mb-0 card-header-title"> <a class="btn-link text-left collapsed" role="button" data-toggle="collapse" data-target="#collapse-2" aria-expanded="false" aria-controls="collapse-2">{{ key.title }}</a> </h5>
+              </div>
+              <div id="collapse-2" class="collapse" data-parent="#accordionExample" aria-labelledby="heading-2">
+                <div class="card-body body-card">{{ key.body|safe }}</div>
+              </div>
+            </div>
+          {% endif %}
+          {% endfor %}
+
+          {% for key in faq %}
+          {% if forloop.counter == 3 %}
+            <div class="card mb-1">
+              <div class="card-header" id="heading-3">
+                <h5 class="mb-0 card-header-title"> <a class="btn-link text-left collapsed" role="button" data-toggle="collapse" data-target="#collapse-3" aria-expanded="false" aria-controls="collapse-3">{{ key.title }}</a> </h5>
+              </div>
+              <div id="collapse-3" class="collapse" data-parent="#accordionExample" aria-labelledby="heading-3">
+                <div class="card-body body-card">{{ key.body|safe }}</div>
+              </div>
+            </div>
+          {% endif %}
+          {% endfor %}
+
+          {% for key in faq %}
+          {% if forloop.counter == 4 %}
+            <div class="card mb-1">
+              <div class="card-header" id="heading-4">
+                <h5 class="mb-0 card-header-title"> <a class="btn-link text-left collapsed" role="button" data-toggle="collapse" data-target="#collapse-4" aria-expanded="false" aria-controls="collapse-4">{{ key.title }}</a> </h5>
+              </div>
+              <div id="collapse-4" class="collapse" data-parent="#accordionExample" aria-labelledby="heading-4">
+                <div class="card-body body-card">{{ key.body|safe }}</div>
+              </div>
+            </div>
+          {% endif %}
+          {% endfor %}
+
+          {% for key in faq %}
+          {% if forloop.counter == 5 %}
+            <div class="card mb-1">
+              <div class="card-header" id="heading-5">
+                <h5 class="mb-0 card-header-title"> <a class="btn-link text-left collapsed" role="button" data-toggle="collapse" data-target="#collapse-5" aria-expanded="false" aria-controls="collapse-5">{{ key.title }}</a> </h5>
+              </div>
+              <div id="collapse-5" class="collapse" data-parent="#accordionExample" aria-labelledby="heading-5">
+                <div class="card-body body-card">{{ key.body|safe }}</div>
+              </div>
+            </div>
+          {% endif %}
+          {% endfor %}
+
+          {% for key in faq %}
+          {% if forloop.counter == 6 %}
+            <div class="card mb-1">
+              <div class="card-header" id="heading-6">
+                <h5 class="mb-0 card-header-title"> <a class="btn-link text-left collapsed" role="button" data-toggle="collapse" data-target="#collapse-6" aria-expanded="false" aria-controls="collapse-6">{{ key.title }}</a> </h5>
+              </div>
+              <div id="collapse-6" class="collapse" data-parent="#accordionExample" aria-labelledby="heading-6">
+                <div class="card-body body-card">{{ key.body|safe }}</div>
+              </div>
+            </div>
+          {% endif %}
+          {% endfor %}
+
+          {% for key in faq %}
+          {% if forloop.counter == 7 %}
+            <div class="card mb-1">
+              <div class="card-header" id="heading-7">
+                <h5 class="mb-0 card-header-title"> <a class="btn-link text-left collapsed" role="button" data-toggle="collapse" data-target="#collapse-7" aria-expanded="false" aria-controls="collapse-7">{{ key.title }}</a> </h5>
+              </div>
+              <div id="collapse-7" class="collapse" data-parent="#accordionExample" aria-labelledby="heading-7">
+                <div class="card-body body-card">{{ key.body|safe }}</div>
+              </div>
+            </div>
+          {% endif %}
+          {% endfor %}
+          
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+    <!-- End of Frequent Asked Question -->
+
+    <!-- Start of Testimonial -->
+    {% include 'frontend/partials/testimonial.html' %}
+    <!-- End of Testimonial -->
+
+    <!-- Start of Subscriber -->
+    {% include 'frontend/partials/newsletter.html' %}
+    <!-- End of Subscriber -->
+
+{% endblock %}
+

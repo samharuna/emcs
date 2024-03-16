@@ -1,0 +1,57 @@
+{% extends 'backend/dashboard/main.html' %}
+{% load static %}
+
+{% block title %}
+{{ block.super }}: {{ title }}
+{% endblock title %}
+    
+{% block body %} 
+    <div class="page-heading">
+        <h1 class="page-title">Edit Loan Step Post</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'dashboard' %}"><i class="bx bx-home bx-sm font-20"></i></a>
+            </li>
+            <li class="breadcrumb-item"><a href="{% url 'view-steps' %}">View Loan Step Posts</a></li>
+            <li class="breadcrumb-item">Edit Loan Step Post</li>
+        </ol>
+    </div>
+    <div class="page-content fade-in-up">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                <!-- START OF MESSAGE -->
+                {% include 'backend/partials/messages.html' %}
+                <!-- END OF MESSAGE -->
+                <div class="ibox">
+                    <div class="ibox-head">
+                        <div class="ibox-title">Edit Loan Step Post</div>
+                    </div>
+                    <div class="ibox-body">
+                        <form action="" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form.media }}
+                            
+                            <div class="form-group">
+                                <label for="serial_number" class="required">Serial Number:</label>
+                                {{ form.serial_number }}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="title" class="required">Title:</label>
+                                {{ form.title }}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="description" class="required">Description:</label>
+                                {{ form.description }}
+                            </div>
+
+                            <input type="submit" value="Edit Loan Step Post" class="btn btn-primary p-2 mt-3">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+    

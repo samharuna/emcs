@@ -1,0 +1,186 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+    {% block title %}
+       {{ key }}
+    {% endblock title %}
+    </title>
+
+    <link rel="icon" type="image/x-icon" href="{% static 'backend/assets/images/logo/favicon.ico' %}" />
+    <link href="{% static 'backend/assets/vendors/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet" />
+
+    <style type="text/css">
+      
+
+        body{
+            background-color: #fff;
+            line-height: 15px;
+            font-family: Helvetica;
+            font-size: 14px;
+        }
+
+        @page{
+            size: A4 portrait;
+            margin: 1.5cm;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .table th, td{
+            padding: 4px;
+            text-align: center;
+        }
+
+        .card {
+            border: #3d405c;
+            border: none;
+            -webkit-box-shadow: 0px 1px 2px 1px rgba(154, 154, 204, 0.22);
+            -moz-box-shadow: 0px 1px 2px 1px rgba(154, 154, 204, 0.22);
+            box-shadow: 0px 1px 2px 1px rgba(154, 154, 204, 0.22);
+        }
+
+        .card-header {
+            background-color: #fff;
+            border-bottom: 1px solid #e6e6f2;
+            padding: 20px;
+        }
+
+        .title{
+            font-size: 20px;
+            font-weight: bolder;
+            text-transform: uppercase;
+            margin-top: 20px;
+        }
+    </style>
+    
+</head>
+<body>
+     <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 padding">
+                <div class="card border-info p-4">
+                    <div class="card-body">
+                        <div class="row my-3">
+                            <div class="mb-3" style="font-size: 12px;">
+                                <div style="margin-bottom: 3px;">
+                                    <img src="media/images/logo.png" alt="" class="img-fluid" >
+                                </div>
+                                <div style="margin-left: 45px;"><span class="text-dark mr-2" style="font-weight: bold; font-size: 10px;">HEAD OFFICE:</span>Number 7, Abdul Razaq Afolabi Street, Off Ailegun Road, Ejigbo, Lagos State</div>
+                                <div style="margin-left: 45px;"><span class="text-dark mr-2" style="font-weight: bold; font-size: 10px;">EMAIL ADDRESS:</span>emcs247online@gmail.com</div>
+                                <div style="margin-left: 45px;"><span class="text-dark mr-2" style="font-weight: bold; font-size: 10px;">TELEPHONE:</span>08033152762, 09031926026</div>
+                                <div style="margin-left: 45px;"><span class="text-dark mr-2" style="font-weight: bold; font-size: 10px;">BRANCH OFFICE:</span>Shop 33, Rauf Aregbesola Model Market, Egbeda, Gowon Estate, Lagos State</div>
+                            </div>
+
+                            <hr style="margin-top: 10px; margin-bottom: 20px;">
+                        </div>
+
+                    
+                        <div style="margin-bottom: 30px;">{{ investment.investment_starts }}</div>
+                        <div style="margin-bottom: 15px; font-weight: bold;" class="title">Dear {{ investment.investor.last_name }}, {{ investment.investor.first_name }} {{ investment.investor.profile.middle_name }}</div>
+                        <div style="margin-bottom: 20px; font-weight: bold; text-decoration:underline;" class="title">RE: <span style="text-decoration: line-through;">N</span>{{ investment.amount }} FIXED DEPOSIT INVESTMENT CONFIRMATION ADVICE</div>
+                        
+                        <div style="margin-top: 20px; margin-bottom: 10px;">Your fixed deposit of <span style="text-decoration: line-through;">N</span>{{ investment.amount }} has been under the following terms and conditions;</div>
+            
+                        <div style="margin-top: 10px; margin-bottom: 30px;">
+                            <table class="table1 table-striped table-dark">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 30%; text-align: left; padding-left: 5px;">Investor Full Name:</th>
+                                        <td style="width: 70%; text-align: left;">{{ investment.investor.last_name }}, {{ investment.investor.first_name }} {{ investment.investor.profile.middle_name }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th style="width: 30%; text-align: left; padding-left: 5px;">Transaction Description:</th>
+                                        <td style="width: 70%; text-align: left;">{{ investment.description }}</td>
+                                    </tr>
+                    
+                                    <tr>
+                                        <th style="width: 30%; text-align: left; padding-left: 5px;">Deposit Date:</th>
+                                        <td style="width: 70%; text-align: left;">{{ investment.investment_starts }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th style="width: 30%; text-align: left; padding-left: 5px;">Maturity Date:</th>
+                                        <td style="width: 70%; text-align: left;">{{ investment.investment_ends }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th style="width: 30%; text-align: left; padding-left: 5px;">Deposit Terms:</th>
+                                        <td style="width: 70%; text-align: left;">{{ investment.duration.name }} Month{{ investment.duration.name|pluralize }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th style="width: 30%; text-align: left; padding-left: 5px;">Percentage Rate:</th>
+                                        <td style="width: 70%; text-align: left;">{{ investment.percent }} %</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th style="width: 30%; text-align: left; padding-left: 5px;">Deposit Amount:</th>
+                                        <td style="width: 70%; text-align: left;"><span style="text-decoration: line-through;">N</span>{{ investment.amount }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th style="width: 30%; text-align: left; padding-left: 5px;">Accrued Interest:</th>
+                                        <td style="width: 70%; text-align: left;"><span style="text-decoration: line-through;">N</span>{{ investment.interest }} (Payable @ Maturity)</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th style="width: 30%; text-align: left; padding-left: 5px;">Total Amount:</th>
+                                        <td style="width: 70%; text-align: left;"><span style="text-decoration: line-through;">N</span>{{ investment.total_amount }}</td>
+                                    </tr>
+
+                                </thead>
+                            </table>
+                        </div>
+               
+
+                        <div class="row mt-1">
+                            <div class="col-12 col-sm-12 col-lg-12">
+                                <p class="text-justify" style="margin-top: 30px;">
+                                    Please note that any pre - mature termination will attract a penal charge of 25% on the accrued interest earned. Also note that, if 
+                                    we do not hear from you in three (3) working days to maturity, we will roll over the investment at prevailing interest rate at the 
+                                    same tenor.
+                                </p>
+                                <p class="text-justify" style="margin-top: 15px;">
+                                    While we assure you of our best services at all times, we count on your continued patronage, and please take this as <span style="font-weight: bold;">evidence of your investment</span>
+                                </p>
+                                <p class="text-justify" style="margin-top: 15px;">
+                                    <span style="font-weight: bold;">Thank you for choosing Empower Multipurpose Cooperative Society</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row my-4">
+                            <div class="col-12 col-sm-12 col-lg-12">
+                                <p style="margin-top: 90px;">
+                                    <span style="font-weight: bold;" class="mr-3"> -------------------------------------------------- </span><br>
+                                    <span style="font-weight: bold;" class="text-dark text-uppercase">{{ investment.director_name }}</span><br>
+                                    <span style="font-weight: lighter;">Director's Signature & Date</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+    <script src="{% static 'backend/assets/vendors/jquery/dist/jquery.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'backend/assets/vendors/popper.js/dist/umd/popper.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'backend/assets/vendors/bootstrap/dist/js/bootstrap.min.js' %}" type="text/javascript"></script>
+</html>

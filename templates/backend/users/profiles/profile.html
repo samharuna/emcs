@@ -1,0 +1,135 @@
+{% extends 'backend/dashboard/main.html' %}
+{% load static %}
+
+{% block title %}
+{{ block.super }}: {{ title }}
+{% endblock title %}
+    
+{% block body %} 
+    <!-- START PAGE CONTENT-->
+    <div class="page-heading">
+        <h1 class="page-title">Profile</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'dashboard' %}"><i class="bx bx-home bx-sm font-20"></i></a>
+            </li>
+            <li class="breadcrumb-item text-uppercase text-black">Profile of {{ account.profile.title }} {{ account.last_name }}, {{ account.profile.middle_name }} {{ account.first_name }}</li>
+        </ol>
+    </div>
+    <div class="page-content fade-in-up">
+        
+        <!-- START OF MESSAGE -->
+        {% include 'backend/partials/messages.html' %}
+        <!-- END OF MESSAGE -->
+      
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 col-xxl-3">
+                <div class="ibox">
+                    <div class="ibox-body text-center">
+                        <div class="m-t-20">
+                            <img class="img-thumbnail img-responsive" src="{{ account.profile.image.url }}" alt="{{ account.get_full_name }}" />
+                        </div>
+                        <h5 class="font-strong m-b-10 m-t-10">{{ account.profile.title }} {{ account.get_full_name }}</h5>
+                        <div class="m-b-20 text-muted">{{ account.profile.occupation }}</div>
+                        <div class="profile-social m-b-20">
+                            {% if account.profile.facebook %}
+                            <a href="{{ account.profile.facebook }}" title="Facebook Profile Page" target="_blank"><i class="bx bxl-facebook text-primary bx-xs"></i></a>
+                            {% endif %}
+
+                            {% if account.profile.twitter %}
+                            <a href="{{ account.profile.twitter }}" title="Twitter Profile Page" target="_blank"><i class="bx bxl-twitter text-primary bx-xs"></i></a>
+                            {% endif %}
+
+                            {% if account.profile.instagram %}
+                            <a href="{{ account.profile.instagram }}" title="Instagram Profile Page" target="_blank"><i class="bx bxl-instagram bx-xs text-danger"></i></a>
+                            {% endif %}
+
+                            {% if account.profile.linkedin %}
+                            <a href="{{ account.profile.linkedin }}" title="Linkedin Profile Page" target="_blank"><i class="bx bxl-linkedin text-primary bx-xs"></i></a>
+                            {% endif %}
+
+                            {% if account.profile.whatsapp %}
+                            <a href="{{ account.profile.whatsapp }}" title="WhatsApp Profile Page" target="_blank"><i class="bx bxl-whatsapp bx-xs text-success"></i></a>
+                            {% endif %}
+
+                            {% if account.profile.youtube %}
+                            <a href="{{ account.profile.youtube }}" title="Youtube Profile Page" target="_blank"><i class="bx bxl-youtube bx-xs text-danger"></i></a>
+                            {% endif %}
+                        </div>
+                        {% if request.user.slug != account.slug %}
+                        <div>
+                            <a href="{% url 'send-mails' account.slug %}" class="btn btn-primary btn-sm m-b-5">Send Message</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="ibox">
+                    <div class="ibox-body">
+                        <div class="row text-center">
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                                <div class="font-24 profile-stat-count">{{ account.applicant.count }}</div>
+                                <div class="text-muted"><i class="bx bx-briefcase mr-1"></i>Loan{{ account.applicant.count|pluralize }}</div>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                                <div class="font-24 profile-stat-count">{{ account.investor.count }}</div>
+                                <div class="text-muted"><i class="bx bx-coin-stack mr-1"></i>Investment{{ account.investor.count|pluralize }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-12 col-md-8 col-lg-9 col-xl-9 col-xxl-9">
+                <div class="ibox">
+                    <div class="ibox-body">
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="tab-1">
+                                <div class="row">
+                                    <div class="col-12 col-lg-12">
+                                        <h5 class="text-info m-b-20 m-t-10 text-uppercase font-weight-bold" style="text-decoration: underline;">Biography of {{ account.profile.title }} {{ account.last_name }}, {{ account.profile.middle_name }} {{ account.first_name }}</h5>
+                                        
+                                        <ul class="list-group list-group-full list-group-divider">
+                                            <li class="list-group-item font-weight-bold">Date of Birth: <br/>
+                                                <span class="pull-right text-info">{{ account.profile.date_of_birth }}</span>
+                                            </li>
+
+                                            <li class="list-group-item font-weight-bold">Gender: <br/>
+                                                <span class="pull-right text-info">{{ account.profile.gender }}
+                                            </li>
+
+                                            <li class="list-group-item font-weight-bold">Religion: <br/>
+                                                <span class="pull-right text-info">{{ account.profile.religion }}</span>
+                                            </li>
+
+                                            <li class="list-group-item font-weight-bold">Email Address: <br/>
+                                                <span class="pull-right text-info">{{ account.email }}</span>
+                                            </li>
+
+                                            <li class="list-group-item font-weight-bold">Mobile Phone: <br/>
+                                                <span class="pull-right text-info">{{ account.profile.phone }}</span>
+                                            </li>
+
+
+                                            <li class="list-group-item font-weight-bold">Location: <br/>
+                                                <span class="pull-right text-info">{{ account.profile.address }}</span>
+                                            </li>
+
+                                            <li class="list-group-item font-weight-bold">Office Address: <br/>
+                                                <span class="pull-right text-info">{{ account.profile.office }}</span>
+                                            </li>
+                                            {% if request.user.is_staff %}
+                                            <li class="list-group-item font-weight-bold">About Me: <br/>
+                                                <span class="pull-right text-info text-justify">{{ account.profile.bio|safe }}</span>
+                                            </li>
+                                            {% endif %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

@@ -1,0 +1,63 @@
+/* Start of How our Loan Works */
+
+.worksarea {
+  padding: 50px 10px 5px 10px;
+  background: #F5FBFF;
+  background-color: #2c4987;
+  background: linear-gradient(#011238, #2c4987);
+  background-size: cover;
+	background-repeat: no-repeat;
+	background-position: bottom;
+}
+
+.worksarea .steps-details span {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 0%;
+  border: 2px solid #ff6600;
+  background: #2c4987;
+  color: #fff;
+  text-align: center;
+  line-height: 45px;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: Oswald;
+  margin-bottom: 20px;
+}
+
+.worksarea .steps-details h2 {
+  text-transform: uppercase;
+  font-size: 20px;
+  color: #fff;
+  margin-bottom: 15px;
+  font-family: Oswald;
+  font-weight: 600;
+}
+
+.worksarea .steps-details p {
+  margin: 0px;
+  padding: 0px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  font-family: Raleway;
+}
+
+@media (max-width: 767px) {
+  /* .worksarea {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  } */
+}
+
+@media (min-width: 991px) {
+  /* .worksarea .single_works {
+    padding-right: 25px;
+  } */
+}
+
+/* End of How our Loan Works */

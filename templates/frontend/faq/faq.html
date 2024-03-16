@@ -1,0 +1,166 @@
+{% extends 'frontend/partials/base.html' %}
+{% load static %}
+
+{% block title %}
+{{ block.super }}| {{ key }}
+{% endblock %}
+
+{% block body %}
+  <div class="container">
+      <div class="section-title">
+        <h2>Frequent Asked Questions</h2>
+        <hr class="center">
+      {% for key in faq_header %}
+        <p class="text-center">{{ key.title }}</p>
+      {% endfor %}
+      </div>
+
+    <div class="row">
+      <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xlg-12" data-aos="zoom-in-up">
+        <div class="accordion" id="accordionExample">
+        {% for key in faq %}
+        {% if forloop.counter == 1 %}
+          <div class="card">
+            <div class="card-header" id="heading-1">
+              <h5 class="mb-0 card-header-title"> <a class="btn-link text-left collapsed" role="button" data-toggle="collapse" data-target="#collapse-1" aria-expanded="false" aria-controls="collapse-1">{{ key.title }}</a> </h5>
+            </div>
+            <div id="collapse-1" class="collapse" data-parent="#accordionExample" aria-labelledby="heading-1">
+              <div class="card-body body-card">{{ key.body|safe }} </div>
+            </div>
+          </div>
+        {% endif %}
+        {% endfor %}
+        
+        {% for key in faq %}
+        {% if forloop.counter == 2 %}
+          <div class="card mb-1">
+            <div class="card-header" id="heading-2">
+              <h5 class="mb-0 card-header-title"> <a class="btn-link text-left collapsed" role="button" data-toggle="collapse" data-target="#collapse-2" aria-expanded="false" aria-controls="collapse-2">{{ key.title }}</a> </h5>
+            </div>
+            <div id="collapse-2" class="collapse" data-parent="#accordionExample" aria-labelledby="heading-2">
+              <div class="card-body body-card">{{ key.body|safe }}</div>
+            </div>
+          </div>
+        {% endif %}
+        {% endfor %}
+
+        {% for key in faq %}
+        {% if forloop.counter == 3 %}
+          <div class="card mb-1">
+            <div class="card-header" id="heading-3">
+              <h5 class="mb-0 card-header-title"> <a class="btn-link text-left collapsed" role="button" data-toggle="collapse" data-target="#collapse-3" aria-expanded="false" aria-controls="collapse-3">{{ key.title }}</a> </h5>
+            </div>
+            <div id="collapse-3" class="collapse" data-parent="#accordionExample" aria-labelledby="heading-3">
+              <div class="card-body body-card">{{ key.body|safe }}</div>
+            </div>
+          </div>
+        {% endif %}
+        {% endfor %}
+
+        {% for key in faq %}
+        {% if forloop.counter == 4 %}
+          <div class="card mb-1">
+            <div class="card-header" id="heading-4">
+              <h5 class="mb-0 card-header-title"> <a class="btn-link text-left collapsed" role="button" data-toggle="collapse" data-target="#collapse-4" aria-expanded="false" aria-controls="collapse-4">{{ key.title }}</a> </h5>
+            </div>
+            <div id="collapse-4" class="collapse" data-parent="#accordionExample" aria-labelledby="heading-4">
+              <div class="card-body body-card">{{ key.body|safe }}</div>
+            </div>
+          </div>
+        {% endif %}
+        {% endfor %}
+
+        {% for key in faq %}
+        {% if forloop.counter == 5 %}
+          <div class="card mb-1">
+            <div class="card-header" id="heading-5">
+              <h5 class="mb-0 card-header-title"> <a class="btn-link text-left collapsed" role="button" data-toggle="collapse" data-target="#collapse-5" aria-expanded="false" aria-controls="collapse-5">{{ key.title }}</a> </h5>
+            </div>
+            <div id="collapse-5" class="collapse" data-parent="#accordionExample" aria-labelledby="heading-5">
+              <div class="card-body body-card">{{ key.body|safe }}</div>
+            </div>
+          </div>
+        {% endif %}
+        {% endfor %}
+
+        {% for key in faq %}
+        {% if forloop.counter == 6 %}
+          <div class="card mb-1">
+            <div class="card-header" id="heading-6">
+              <h5 class="mb-0 card-header-title"> <a class="btn-link text-left collapsed" role="button" data-toggle="collapse" data-target="#collapse-6" aria-expanded="false" aria-controls="collapse-6">{{ key.title }}</a> </h5>
+            </div>
+            <div id="collapse-6" class="collapse" data-parent="#accordionExample" aria-labelledby="heading-6">
+              <div class="card-body body-card">{{ key.body|safe }}</div>
+            </div>
+          </div>
+        {% endif %}
+        {% endfor %}
+
+        {% for key in faq %}
+        {% if forloop.counter == 7 %}
+          <div class="card mb-1">
+            <div class="card-header" id="heading-7">
+              <h5 class="mb-0 card-header-title"> <a class="btn-link text-left collapsed" role="button" data-toggle="collapse" data-target="#collapse-7" aria-expanded="false" aria-controls="collapse-7">{{ key.title }}</a> </h5>
+            </div>
+            <div id="collapse-7" class="collapse" data-parent="#accordionExample" aria-labelledby="heading-7">
+              <div class="card-body body-card">{{ key.body|safe }}</div>
+            </div>
+          </div>
+        {% endif %}
+        {% endfor %}
+
+        {% for key in faq %}
+        {% if forloop.counter == 8 %}
+          <div class="card mb-1">
+            <div class="card-header" id="heading-8">
+              <h5 class="mb-0 card-header-title"> <a class="btn-link text-left collapsed" role="button" data-toggle="collapse" data-target="#collapse-8" aria-expanded="false" aria-controls="collapse-8">{{ key.title }}</a> </h5>
+            </div>
+            <div id="collapse-8" class="collapse" data-parent="#accordionExample" aria-labelledby="heading-8">
+              <div class="card-body body-card">{{ key.body|safe }}</div>
+            </div>
+          </div>
+        {% endif %}
+        {% endfor %}
+
+        {% for key in faq %}
+        {% if forloop.counter == 9 %}
+          <div class="card mb-1">
+            <div class="card-header" id="heading-9">
+              <h5 class="mb-0 card-header-title"> <a class="btn-link text-left collapsed" role="button" data-toggle="collapse" data-target="#collapse-9" aria-expanded="false" aria-controls="collapse-9">{{ key.title }}</a> </h5>
+            </div>
+            <div id="collapse-9" class="collapse" data-parent="#accordionExample" aria-labelledby="heading-9">
+              <div class="card-body body-card">{{ key.body|safe }}</div>
+            </div>
+          </div>
+        {% endif %}
+        {% endfor %}
+
+        {% for key in faq %}
+        {% if forloop.counter == 10 %}
+          <div class="card mb-1">
+            <div class="card-header" id="heading-10">
+              <h5 class="mb-0 card-header-title"> <a class="btn-link text-left collapsed" role="button" data-toggle="collapse" data-target="#collapse-10" aria-expanded="false" aria-controls="collapse-10">{{ key.title }}</a> </h5>
+            </div>
+            <div id="collapse-10" class="collapse" data-parent="#accordionExample" aria-labelledby="heading-10">
+              <div class="card-body body-card">{{ key.body|safe }}</div>
+            </div>
+          </div>
+        {% endif %}
+        {% endfor %}
+
+
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- Start of Loan Steps -->
+  {% include 'frontend/partials/steps.html' %}
+  <!-- End of Loan Steps -->
+  
+  
+  <!-- Start of Subscriber -->
+  {% include 'frontend/partials/newsletter.html' %}
+  <!-- End of Subscriber -->
+{% endblock %}

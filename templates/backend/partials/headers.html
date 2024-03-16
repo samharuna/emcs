@@ -1,0 +1,46 @@
+{% load static %}
+<header class="header">
+    <div class="page-brand">
+        <a class="link" href="{% url 'dashboard' %}">
+            <span class="brand">EM
+                <span class="brand-tip">CS</span>
+            </span>
+            <span class="brand-mini">EM</span>
+        </a>
+    </div>
+    <div class="flexbox flex-1">
+        <!-- START TOP-LEFT TOOLBAR-->
+        <ul class="nav navbar-toolbar">
+            <li>
+                <a class="nav-link sidebar-toggler js-sidebar-toggler"><i class="bx bx-menu bx-sm"></i></a>
+            </li>
+        </ul>
+        <!-- END TOP-LEFT TOOLBAR-->
+        <!-- START TOP-RIGHT TOOLBAR-->
+        <ul class="nav navbar-toolbar">
+            <li class="dropdown dropdown-inbox">
+                <a href="{% url 'view-mails' %}"><i class="bx bx-envelope"></i>
+                    <span class="badge badge-primary envelope-badge">{{ mails_count }}</span>
+                </a>
+            </li>
+
+            <li class="dropdown dropdown-user">
+                <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
+                    <img src="{{ user.profile.image.url }}" />
+                    <span class="text-black font-weight-bold">{{ user.get_full_name }}</span><i class="bx bx-chevron-down bx-sm m-l-5"></i></a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="{% url 'staffprofiles' %}"><i class="bx bxs-group"></i>Our Staff</a>
+                {% if request.user.is_staff %}
+                    <a class="dropdown-item" href="{% url 'profiles' %}"><i class="bx bx-group"></i>Customers</a>
+                    <a class="dropdown-item" href="{% url 'edit-user' %}"><i class="bx bxs-user-account"></i>Edit User</a>
+                    <a class="dropdown-item" href="{% url 'edit-profile' %}"><i class="bx bx-user"></i>Edit Profile</a>
+                {% endif %}
+                    <a class="dropdown-item" href="{% url 'change-password' %}"><i class="bx bx-lock"></i>Change Password</a>
+                    <li class="dropdown-divider"></li>
+                    <a class="dropdown-item" href="" data-toggle="modal" data-target="#exampleModal"><i class="bx bx-power-off"></i>Logout</a>
+                </ul>
+            </li>
+        </ul>
+        <!-- END TOP-RIGHT TOOLBAR-->
+    </div>
+</header>

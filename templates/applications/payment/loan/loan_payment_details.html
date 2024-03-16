@@ -1,0 +1,109 @@
+{% extends 'backend/dashboard/main.html' %}
+{% load static %}
+
+{% block title %}
+{{ block.super }} | {{ key }}
+{% endblock %}
+
+{% block body %}
+    <!-- START PAGE CONTENT-->
+    <div class="page-heading">
+        <h1 class="page-title">Loan Application</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item mr-2"><a href="{% url 'dashboard' %}"><i class="bx bx-home bx-sm font-20"></i></a></li>
+            <li class="breadcrumb-item mr-2"><a href="{% url 'view-loan' %}">View Loan Applied</a></li>
+            <li class="breadcrumb-item">Loan Payment Details</li>
+        </ol>
+    </div>
+    <div class="page-content fade-in-up">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                <!-- START OF MESSAGE -->
+                {% include 'backend/partials/messages.html' %}
+                <!-- END OF MESSAGE -->
+                <div class="ibox">
+                    <div class="ibox-head">
+                        <div class="ibox-title">Loan Payment Details</div>
+                    </div>
+                    <div class="ibox-body">
+                        <form action="" method="POST" style="margin: 5px; padding: 10px; line-height: 10px;">
+                            {% csrf_token %}
+                            <fieldset class="border border-dark p-3 mb-3">
+                                <legend class="w-auto h5"> Loan Payment Information: </legend>	
+                                <div class="form-row">
+                                    <div class="col-12 col-lg-12 form-group">
+                                    <label for="applicant" class="required">Applicant Full Name:</label>
+                                        {{ form.applicant}}	
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-12 col-lg-4 form-group">
+                                    <label for="amount" class="required">Loan Amount:</label>
+                                        {{ form.amount }}	
+                                    </div>
+
+                                    <div class="col-12 col-lg-4 form-group">
+                                    <label for="interest" class="required">Loan Interest:</label>
+                                        {{ form.interest }}	
+                                    </div>
+
+                                    <div class="col-12 col-lg-4 form-group">
+                                    <label for="total_amount" class="required">Total Loan Granted:</label>
+                                        {{ form.total_amount }}	
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-12 col-lg-3 form-group">
+                                    <label for="percent" class="required">Loan Percent:</label>
+                                        {{ form.percent }}	
+                                    </div>
+
+                                    <div class="col-12 col-lg-3 form-group">
+                                    <label for="percent" class="required">Loan Duration:</label>
+                                        {{ form.duration }}	
+                                    </div>
+                                    
+                                    <div class="col-12 col-lg-3 form-group">
+                                    <label for="plan" class="required">Loan Payment Plan:</label>
+                                        {{ form.plan }}	
+                                    </div>
+                                    
+                                    <div class="col-12 col-lg-3 form-group">
+                                    <label for="repayment" class="required">Loan Repayment:</label>
+                                        {{ form.repayment }}	
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-12 col-lg-12 form-group">
+                                    <label for="payment_period" class="required">Loan Payment Periods:</label>
+                                        {{ form.payment_period }}	
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-12 col-lg-6 form-group">
+                                    <label for="payment_starts" class="required">Loan Payment Starts On:</label>
+                                        {{ form.payment_starts }}	
+                                    </div>
+                                    <div class="col-12 col-lg-6 form-group">
+                                    <label for="payment_ends" class="required">Loan Payment Ends On:</label>
+                                        {{ form.payment_ends }}	
+                                    </div>
+                                </div>
+
+                            </fieldset>
+
+                            <div class="form-row">
+                                <input type="submit" value="Submit Payment Advice" class="btn btn-primary btn-md btn-block mt-3">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END PAGE CONTENT-->
+{% endblock %}

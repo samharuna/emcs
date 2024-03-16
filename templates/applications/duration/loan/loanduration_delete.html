@@ -1,0 +1,46 @@
+{% extends 'backend/dashboard/main.html' %}
+{% load static %}
+
+{% block title %}
+{{ block.super }} | {{ key }}
+{% endblock title %}
+
+{% block body %}
+    <!-- START PAGE CONTENT-->
+    <div class="page-heading">
+        <h1 class="page-title">Loan Application</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item mr-2"><a href="{% url 'dashboard' %}"><i class="bx bx-home bx-sm font-20"></i></a></li>
+            <li class="breadcrumb-item mr-2"><a href="{% url 'view-loanduration' %}">View Loan Duration</a></li>
+            <li class="breadcrumb-item">Delete Loan Duration</li>
+        </ol>
+    </div>
+
+    <div class="page-content fade-in-up">
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                <!-- START OF MESSAGE -->
+                {% include 'backend/partials/messages.html' %}
+                <!-- END OF MESSAGE -->
+                <div class="ibox my-5">
+                    <div class="ibox-head">
+                        <div class="ibox-title">Delete {{ item }} Loan Duration?</div>
+                    </div>
+
+                    <div class="ibox-body p-2">
+                        <p class="text-center mx-3 mt-3">Are you sure you want to delete <b>"{{ item }}"</b> from the loan duration?</p>
+                        <form action="{% url 'delete-loanduration' item.slug %}" method="POST" style="margin: 5px; padding: 5px; line-height: 5px;">
+                            {% csrf_token %}
+                            
+                            <div class="text-center my-3">
+                                <a href="{% url 'view-loanduration' %}" class="btn btn-primary btn-md">Cancel</a>
+                                <input type="submit" value="Confirm" class="btn btn-danger btn-md">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END PAGE CONTENT-->
+{% endblock body %}

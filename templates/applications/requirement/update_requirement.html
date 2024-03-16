@@ -1,0 +1,66 @@
+{% extends 'backend/dashboard/main.html' %}
+{% load static %}
+
+{% block title %}
+{{ block.super }} | {{ key }}
+{% endblock title %}
+
+{% block body %}
+    <!-- START PAGE CONTENT-->
+    <div class="page-heading">
+        <h1 class="page-title">Service Application</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item mr-2"><a href="{% url 'dashboard' %}"><i class="bx bx-home bx-sm font-20"></i></a></li>
+            <li class="breadcrumb-item mr-2"><a href="{% url 'view-requirement' %}">View Service Requirements</a></li>
+            <li class="breadcrumb-item">Update Service Requirement</li>
+        </ol>
+    </div>
+
+    <div class="page-content fade-in-up">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                <!-- START OF MESSAGE -->
+                {% include 'backend/partials/messages.html' %}
+                <!-- END OF MESSAGE -->
+                <div class="ibox">
+                    <div class="ibox-head">
+                        <div class="ibox-title">Update Service Requirement</div>
+                    </div>
+                    <div class="ibox-body">
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            {{ form.media }}
+                            
+                            <div class="form-group">
+                                <label for="title" class="required">Requirement Title:</label>
+                                {{ form.title }}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="link" class="required">Service Link:</label>
+                                {{ form.link }}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="link_caption" class="required">Service Link Caption:</label>
+                                {{ form.link_caption }}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="body" class="required">Requirement Content:</label>
+                                <p class="m-0 p-0">{{ form.body }}</p>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="text-center">
+                                    <input type="submit" value="Update Now" class="btn btn-primary btn-block mt-3">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <div>
+    </div>
+    <!-- END PAGE CONTENT-->
+{% endblock body %}

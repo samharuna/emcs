@@ -1,0 +1,47 @@
+{% load static %}
+<header>
+    <nav class="navbar navbar-expand-md font-weight-bold">
+        <a class="navbar-brand nav-link" href="{% url 'home' %}">
+            {% for key in header %}
+                <img src="{{ key.image.url }}" alt="{{ key.title }}">
+            {% endfor %} 
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bx bx-menu"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about' %}">About Us</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'service' %}">Services</a>
+                </li>
+                <!--
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'career' %}">Career</a>
+                </li>
+                -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'faq' %}">FAQ</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'contact-us' %}">Contact Us</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'sign-in' %}" target="_blank"><i class="bx bx-log-in-circle bx-xs icon"></i>Login Here</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <nav class="sidenav"></nav>
+</header>

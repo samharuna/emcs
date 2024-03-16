@@ -1,0 +1,44 @@
+./* Start of FAQ */
+
+.card-header h5 > a {
+    display: block;
+    position: relative;
+    font-size: 20px;
+    font-weight: 400;
+    font-family: Oswald;
+}
+
+.card-header a {
+    display: block;
+    position: relative;
+    font-size: 18px;
+    font-weight: 400;
+    font-family: Oswald;
+}
+
+.card-header a:hover {
+    cursor: pointer;
+}
+.card-header-title > a:after {
+    content: "\203A";
+    font-weight: 900;
+    position: absolute;
+    right: 20px;
+    transform: rotate(90deg);
+}
+.card-header-title > a[aria-expanded="true"]:after {
+    content: "\2039";
+    right: 20px;
+    transform: rotate(90deg);
+}
+
+.body-card{
+    padding: 25px 40px 0px 40px;
+    font-size: 15px;
+    text-align: justify;
+    font-family: Open Sans;
+    font-weight: 500;
+    line-height: 2;
+}
+
+/* End of FAQ *

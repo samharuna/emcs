@@ -1,0 +1,47 @@
+{% load static %}
+
+<div class="statistic-counter">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xlg-3">
+                <div class="counter-details">
+                    <div class="counter-icon">
+                        <i class="bx bx-group bx-sm"></i>
+                        <h2>Client{{ total_regular|pluralize }}</h2>
+                    </div>
+                    <span class="counter-value">{{ total_regular }}</span>
+                </div>
+            </div>
+
+            <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xlg-3">
+                <div class="counter-details">
+                    <div class="counter-icon">
+                        <i class="bx bxs-group bx-sm"></i>
+                        <h2>Staff{{ total_staff|pluralize }}</h2>
+                    </div>
+                    <span class="counter-value">{{ total_staff }}</span>
+                </div>
+            </div>
+
+            <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xlg-3">
+                <div class="counter-details">
+                    <div class="counter-icon">
+                        <i class="bx bx-briefcase bx-sm"></i>
+                        <h2>Loan{{ total_loan_approved|pluralize }}</h2>
+                    </div>
+                    <span class="counter-value">{{ total_loan_approved }}</span>
+                </div>
+            </div>
+            <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xlg-3">
+                <div class="counter-details">
+                    <div class="counter-icon">
+                        <i class="bx bxs-coin-stack bx-sm"></i>
+                        <h2>Investment{{ total_investment_approved|pluralize }}</h2>
+                    </div>
+                    <span class="counter-value">{{ total_investment_approved }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

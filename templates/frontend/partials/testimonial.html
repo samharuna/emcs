@@ -1,0 +1,34 @@
+{% load static %}
+
+<div class="testimonial-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-10 col-xlg-10 text-center mx-auto">
+            <div class="section-title">
+                <h2 class="text-white">Client Testimonials</h2>
+                <hr class="center">
+                {% for key in testimonial_header %}
+                <p class="text-center  text-white">{{ key.title }}</p>
+                {% endfor %}
+            </div>
+            </div>
+        </div>
+
+        <div class="owl-slide owl-carousel owl-testimonial" data-aos="zoom-in-up">
+        {% for key in testimonials|slice:"10" %}
+            <div class="testimonial-details">
+                <div class="testimonial-vcard d-flex align-items-center">
+                    <img src="{{ key.image.url }}" alt="{{ key.name }}" class="img-fluid mr-3">
+                    <div class="testimonial-detail">
+                        <h2>{{ key.name }}</h2>
+                        <h3>{{ key.occupation }}</h3>
+                    </div>
+                </div>
+                <div>
+                    <p>{{ key.body|safe }}</p>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+{% extends 'backend/dashboard/main.html' %}
+{% load static %}
+
+{% block title %}
+{{ block.super }}: {{ title }}
+{% endblock title %}
+    
+{% block body %}
+    <!-- START PAGE CONTENT-->
+    <div class="page-heading">
+        <h1 class="page-title">Mailbox</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'dashboard' %}"><i class="bx bx-home bx-sm font-20"></i></a>
+            </li>
+            <li class="breadcrumb-item">Mailbox</li>
+        </ol>
+    </div>
+
+    <div class="page-content fade-in-up">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                <div class="ibox pt-5 pb-3 px-4" id="mailbox-container">
+                    <div class="mailbox clf">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-inbox" id="example-table">
+                                <thead>
+                                    <tr>
+                                        <th>Sender:</th>
+                                        <th>Subject:</th>
+                                        <th>Date/Time:</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="rowlinkx" data-link="row">
+                                {% for key in mails %}
+                                    {% if key.is_read == False %}
+                                    <tr class="unread" data-id="1">
+                                    {% else %}
+                                    <tr data-id="2">
+                                    {% endif %}
+                                        <td>
+                                            <a href="{% url 'detail-mails' key.slug %}">{{ key.sender.get_full_name }}</a>
+                                        </td>
+                                        <td class="mail-message"><a href="{% url 'detail-mails' key.slug %}">{{ key.subject|truncatechars:'80' }}</a></td>
+                                        <td>{{ key.date_created }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- END PAGE CONTENT-->
+{% endblock body %}
+            

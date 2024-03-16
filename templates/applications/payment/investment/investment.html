@@ -1,0 +1,304 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+    {% block title %}
+       {{ key }}
+    {% endblock title %}
+    </title>
+
+    <link rel="icon" type="image/x-icon" href="{% static 'backend/assets/images/logo/favicon.ico' %}" />
+    <link href="{% static 'backend/assets/vendors/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet" />
+
+    <style type="text/css">
+      
+
+        body{
+            background-color: #fff;
+            line-height: 1.1;
+            font-size: 14px;
+            font-family: Roboto;
+        }
+
+        @page{
+            size: A4 portrait;
+            margin: 1cm;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+            max-width: 100%;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            text-align: center;
+            font-size: 14px;
+            font-family: Roboto;
+            font-weight: bold;
+        }
+
+
+        thead th {
+            font-family: Roboto;
+            font-size: 14px;
+            font-weight: 900;
+            padding: 3px 0px 3px 2px;
+            align-items: center;
+        }
+
+
+         thead td {
+            font-family: Roboto;
+            font-size: 14px;
+            font-weight: 400;
+            padding: 3px 0px 3px 5px;
+            align-items: center;
+        }
+
+
+        .card {
+            border: #3d405c;
+            border: none;
+            -webkit-box-shadow: 0px 1px 2px 1px rgba(154, 154, 204, 0.22);
+            -moz-box-shadow: 0px 1px 2px 1px rgba(154, 154, 204, 0.22);
+            box-shadow: 0px 1px 2px 1px rgba(154, 154, 204, 0.22);
+        }
+
+   
+        .name{
+            font-size: 18px;
+            font-weight: bolder;
+            text-transform: uppercase;
+            margin-top: 20px;
+        }
+
+        .snumber {
+            text-align: right;
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="card border-info">
+        <div class="card-body">
+            <div class="style="font-size: 12px;">
+                <div style="margin-bottom: 3px;">
+                    <img src="media/images/logo.png" alt="" class="img-fluid" >
+                </div>
+                <div style="margin-left: 45px;"><span class="text-dark mr-2" style="font-weight: bold; font-size: 10px;">HEAD OFFICE:</span>Number 7, Abdul Razaq Afolabi Street, Off Ailegun Road, Ejigbo, Lagos State</div>
+                <div style="margin-left: 45px;"><span class="text-dark mr-2" style="font-weight: bold; font-size: 10px;">EMAIL ADDRESS:</span>emcs247online@gmail.com</div>
+                <div style="margin-left: 45px;"><span class="text-dark mr-2" style="font-weight: bold; font-size: 10px;">TELEPHONE:</span>08033152762, 09031926026</div>
+                <div style="margin-left: 45px;"><span class="text-dark mr-2" style="font-weight: bold; font-size: 10px;">BRANCH OFFICE:</span>Shop 33, Rauf Aregbesola Model Market, Egbeda, Gowon Estate, Lagos State</div>
+            </div>
+
+            <hr style="margin-top: 10px; margin-bottom: 10px;">
+
+            <div class="snumber">
+                <p><span class="text-dark mr-2" style="font-weight: bold;">Application Form Number:</span> {{ investment.id }}</p>
+            </div>
+    
+            <div style="margin-top: 20px;"><img src="{{ investment.investor.profile.image.path }}" alt="{{ investment.investor.get_full_name }}" style="width: 140px; height: 140px;"></div>
+                
+            <div style="margin-top: 30px; margin-bottom: 10px; font-weight: bold; text-decoration:underline; font-size: 16px;">APPLICANT INFORMATION:</div>
+                <table class="table table-striped table-dark">
+                    <thead>
+                        <tr>
+                            <th style="width: 35%; text-align: left; ">Full Name:</th>
+                            <td style="width: 65%; text-align: left;">{{ investment.investor.profile.title }} {{ investment.investor.last_name }}, {{ investment.investor.first_name }} {{ investment.investor.profile.middle_name }}</td>
+                        </tr>
+
+                        <tr>
+                            <th style="width: 35%; text-align: left; ">Date of Birth:</th>
+                            <td style="width: 65%; text-align: left;">{{ investment.investor.profile.date_of_birth }}</td>
+                        </tr>
+
+                        <tr>
+                            <th style="width: 35%; text-align: left; ">Email Address:</th>
+                            <td style="width: 65%; text-align: left;">{{ investment.investor.email }}</td>
+                        </tr>
+
+                        <tr>
+                            <th style="width: 35%; text-align: left; ">Phone Number:</th>
+                            <td style="width: 65%; text-align: left;">{{ investment.investor.profile.phone }}</td>
+                        </tr>
+
+                        <tr>
+                            <th style="width: 35%; text-align: left; ">Gender:</th>
+                            <td style="width: 65%; text-align: left;">{{ investment.investor.profile.gender }}</td>
+                        </tr>
+
+                        <tr>
+                            <th style="width: 35%; text-align: left; ">Religion:</th>
+                            <td style="width: 65%; text-align: left;">{{ investment.investor.profile.religion }}</td>
+                        </tr>
+
+                        <tr>
+                            <th style="width: 35%; text-align: left; ">Marital Status:</th>
+                            <td style="width: 65%; text-align: left;">{{ investment.investor.profile.marital }}</td>
+                        </tr>
+
+                        <tr>
+                            <th style="width: 35%; text-align: left; ">Spouse Phone Number:</th>
+                            <td style="width: 65%; text-align: left;">{{ investment.investor.profile.spousephone }}</td>
+                        </tr>
+
+                        <tr>
+                            <th style="width: 35%; text-align: left; ">Nearest Bus Stop:</th>
+                            <td style="width: 65%; text-align: left;">{{ investment.investor.profile.busstop }}</td>
+                        </tr>
+
+                        <tr>
+                            <th style="width: 35%; text-align: left; ">Residential Address:</th>
+                            <td style="width: 65%; text-align: left;">{{ investment.investor.profile.address }}</td>
+                        </tr>
+
+                        <tr>
+                            <th style="width: 35%; text-align: left; ">Office Address:</th>
+                            <td style="width: 65%; text-align: left;">{{ investment.investor.profile.office }}</td>
+                        </tr>
+
+                        <tr>
+                            <th style="width: 35%; text-align: left; ">Occupation:</th>
+                            <td style="width: 65%; text-align: left;">{{ investment.investor.profile.occupation }}</td>
+                        </tr>
+
+                        <tr>
+                            <th style="width: 35%; text-align: left; ">Country:</th>
+                            <td style="width: 65%; text-align: left;">{{ investment.investor.profile.country }}</td>
+                        </tr>
+
+                        <tr>
+                            <th style="width: 35%; text-align: left; ">State:</th>
+                            <td style="width: 65%; text-align: left;">{{ investment.investor.profile.state }}</td>
+                        </tr>
+
+                        <tr>
+                            <th style="width: 35%; text-align: left; ">LGA:</th>
+                            <td style="width: 65%; text-align: left;">{{ investment.investor.profile.lga }}</td>
+                        </tr>
+
+                        <tr>
+                            <th style="width: 35%; text-align: left; ">Home Town:</th>
+                            <td style="width: 65%; text-align: left;">{{ investment.investor.profile.home }}</td>
+                        </tr>
+                    </thead>
+                </table>
+
+        
+            <div style="margin-top: 30px; margin-bottom: 10px; font-weight: bold; text-decoration:underline; font-size: 16px;">INVESTMENT INFORMATION:</div>
+                <table class="table table-striped table-dark">
+                    <thead>
+                        <tr>
+                            <th style="width: 35%; text-align: left; ">Amount Investing (Figure):</th>
+                            <td style="width: 65%; text-align: left;"><span style="text-decoration: line-through;">N</span>{{ investment.amount }}</td>
+                        </tr>
+
+                        <tr>
+                            <th style="width: 35%; text-align: left; ">Amount Investing (Words):</th>
+                            <td style="width: 65%; text-align: left;">{{ investment.words }}</td>
+                        </tr>
+        
+                        <tr>
+                            <th style="width: 35%; text-align: left; ">Investment Cycle:</th>
+                            <td style="width: 65%; text-align: left;">{{ investment.duration.name }} Month{{ investment.duration.name|pluralize }}</td>
+                        </tr>
+
+                        <tr>
+                            <th style="width: 35%; text-align: left; ">Investment Percent:</th>
+                            <td style="width: 65%; text-align: left;">{{ investment.percent }}%</td>
+                        </tr>
+
+                        <tr>
+                            <th style="width: 35%; text-align: left; ">Investment Interest:</th>
+                            <td style="width: 65%; text-align: left;">{{ investment.interest }}</td>
+                        </tr>
+
+                        <tr>
+                            <th style="width: 35%; text-align: left; ">Total Amount:</th>
+                            <td style="width: 65%; text-align: left;">{{ investment.total_amount }}</td>
+                        </tr>
+
+                        <tr>
+                            <th style="width: 35%; text-align: left; ">Date Applied:</th>
+                            <td style="width: 65%; text-align: left;">{{ investment.date_created }}</td>
+                        </tr>
+
+                        <tr>
+                            <th style="width: 35%; text-align: left; ">Date Invested:</th>
+                            <td style="width: 65%; text-align: left;">{{ investment.investment_starts }}</td>
+                        </tr>
+
+                        <tr>
+                            <th style="width: 35%; text-align: left; ">Maturity Date:</th>
+                            <td style="width: 65%; text-align: left;">{{ investment.investment_ends }}</td>
+                        </tr>
+                    </thead>
+                </table>
+                   
+                
+            <div style="margin-top: 30px; margin-bottom: 10px; font-weight: bold; text-decoration:underline; font-size: 16px;">NEXT OF KIN'S INFORMATION:</div>
+                <div style="margin-bottom: 20px;"><img src="{{ investment.picture.path }}" alt="{{ investment.guarantor }}" style="width: 140px; height: 140px;"></div>
+                <table class="table table-striped table-dark">
+                    <thead>
+                        <tr>
+                            <th style="width: 35%; text-align: left; ">Full Name:</th>
+                            <td style="width: 65%; text-align: left;">{{ investment.next_kin }}</td>
+                        </tr>
+
+                        <tr>
+                            <th style="width: 35%; text-align: left; ">Phone Number:</th>
+                            <td style="width: 65%; text-align: left;">{{ investment.next_kin_mobile }}</td>
+                        </tr>
+        
+                        <tr>
+                            <th style="width: 35%; text-align: left; ">Email Address:</th>
+                            <td style="width: 65%; text-align: left;">{{ investment.next_kin_email }}</td>
+                        </tr>
+
+                        <tr>
+                            <th style="width: 35%; text-align: left; ">Relationship with Next of Kin:</th>
+                            <td style="width: 65%; text-align: left;">{{ investment.relationship }}</td>
+                        </tr>
+
+                        <tr>
+                            <th style="width: 35%; text-align: left; ">Occupation:</th>
+                            <td style="width: 65%; text-align: left;">{{ investment.next_kin_occupation }}</td>
+                        </tr>
+
+                        <tr>
+                            <th style="width: 35%; text-align: left; ">Residential Address:</th>
+                            <td style="width: 65%; text-align: left;">{{ investment.next_kin_address }}</td>
+                        </tr>
+
+                        <tr>
+                            <th style="width: 35%; text-align: left; ">Office Address:</th>
+                            <td style="width: 65%; text-align: left;">{{ investment.next_kin_office }}</td>
+                        </tr>
+                    </thead>
+                </table>
+                
+                <p style="margin-top: 90px;">
+                    <span style="font-weight: bold;" class="mr-3"> ---------------------------------------------------- </span><br>
+                    <span>Applicant's Signature & Date</span><br>
+                    <span style="font-weight: bold; text-transform: uppercase;">{{ investment.investor.last_name }}, {{ investment.investor.first_name }} {{ investment.investor.profile.middle_name }}</span>
+                </p>   
+
+            <div>
+                <p style="margin-top: 80px;">
+                    <span style="font-weight: bold;" class="mr-3"> ---------------------------------------------------- </span><br>
+                    <span >Next of Kin's Signature & Date</span><br>
+                    <span style="font-weight: bold;">{{ investment.next_kin }}</span>
+                </p>  
+            </div>
+        </div>
+    </div>
+</body>
+    <script src="{% static 'backend/assets/vendors/jquery/dist/jquery.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'backend/assets/vendors/popper.js/dist/umd/popper.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'backend/assets/vendors/bootstrap/dist/js/bootstrap.min.js' %}" type="text/javascript"></script>
+</html>

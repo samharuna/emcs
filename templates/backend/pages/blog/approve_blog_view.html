@@ -1,0 +1,130 @@
+{% extends 'backend/dashboard/main.html' %}
+{% load static %}
+
+{% block title %}
+{{ block.super }}: {{ title }}
+{% endblock title %}
+    
+{% block body %} 
+    <div class="page-content fade-in-up">
+        
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3 col-xxl-3">
+                <a href="{% url 'view-blog' %}">
+                    <div class="ibox bg-info color-white widget-stat">
+                        <div class="ibox-body">
+                            <h2 class="m-b-5 font-strong">{{ total_blog }}</h2>
+                            <div class="m-b-5 text-uppercase font-strong">TOTAL POST{{ total_blog|pluralize }}</div><i class="fa fa-file-zip-o widget-stat-icon"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3 col-xxl-3">
+                <a href="{% url 'blog-pending' %}">
+                    <div class="ibox bg-warning color-white widget-stat">
+                        <div class="ibox-body">
+                            <h2 class="m-b-5 font-strong">{{ blog_pending }}</h2>
+                            <div class="m-b-5 text-uppercase font-strong">PENDING POST{{ blog_pending|pluralize }}</div><i class="fa fa-file-zip-o widget-stat-icon"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3 col-xxl-3">
+                <a href="{% url 'blog-approve' %}">
+                    <div class="ibox bg-success color-white widget-stat">
+                        <div class="ibox-body">
+                            <h2 class="m-b-5 font-strong">{{ blog_approved }}</h2>
+                            <div class="m-b-5 text-uppercase font-strong">APPROVED POST{{ blog_approved|pluralize }}</div><i class="fa fa-file-zip-o widget-stat-icon"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3 col-xxl-3">
+                <a href="{% url 'blog-disapprove' %}">
+                    <div class="ibox bg-danger color-white widget-stat">
+                        <div class="ibox-body">
+                            <h2 class="m-b-5 font-strong">{{ blog_disapproved }}</h2>
+                            <div class="m-b-5 text-uppercase font-strong">DISAPPROVED POST{{ blog_disapproved|pluralize }}</div><i class="fa fa-file-zip-o widget-stat-icon"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                <!-- START OF MESSAGE -->
+                {% include 'backend/partials/messages.html' %}
+                <!-- END OF MESSAGE -->
+                <div class="ibox">
+                    <div class="ibox-head bg-info color-white">
+                        <div class="ibox-title">View Approve Posts</div>
+                        <div>
+                            <a class="btn btn-dark btn-sm" href="{% url 'add-blog' %}">Add Post</a>
+                        </div>
+                    </div>
+                    <div class="ibox-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>ID:</th>
+                                        <th style="width: 70px;">Image:</th>
+                                        <th>Post Details:</th>
+                                        <th class="text-center">Action</th>
+                                        <th class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>ID:</th>
+                                        <th style="width: 70px;">Image:</th>
+                                        <th>Post Details:</th>
+                                        <th class="text-center">Action</th>
+                                        <th class="text-center">Action</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    {% for key in blog %}
+                                    <tr>
+                                        <td>{{ key.id }}</td>
+                                        <td style="width: 70px;"><img src="{{ key.image.url }}" alt="{{ key.title }}"> </td>
+                                        <td>
+                                            <h5>{{ key.title }}</h5>
+                                            <h6>By <a href="{% url 'profile' key.author.username %}">{{ key.author.username }}</a></h6>
+                                            <h6 class="mt-2"><span class="badge badge-info">{{ key.category.tags.name }}</span> <span class="badge badge-dark mr-2">{{ key.category.name }}</span>Posted on {{ key.date_created }}</h6>
+                                        </td>
+
+                                        <td class="text-center">
+                                            {% if key.status == 0 %}
+                                            <a href="" class="btn btn-sm btn-warning disabled">Pending Approval</a>
+                                            {% elif key.status == 1 %}
+                                            <a href="{% url 'status-blog' key.slug %}" class="btn btn-sm btn-info">Edit Post Status</a>
+                                            {% else %}
+                                            <a href="{% url 'status-blog' key.slug %}" class="btn btn-sm btn-info">Edit Post Status</a>
+                                            {% endif %}
+                                        </td>
+
+                                        <td class="text-center">
+                                            {% if key.status == 0 %}
+                                            <a href="{% url 'approve-blog' key.slug %}" class="btn btn-sm btn-success">Approve</a>
+                                            <a href="{% url 'disapprove-blog' key.slug %}" class="btn btn-sm btn-danger">Disapprove</a>
+                                            {% elif key.status == 1 %}
+                                            <a href="" class="btn btn-sm btn-success disabled">Approved</a>
+                                            {% else %}
+                                            <a href="" class="btn btn-sm btn-danger disabled">Disapprove</a>
+                                            {% endif %}
+                                        </td>
+                                        
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+    
